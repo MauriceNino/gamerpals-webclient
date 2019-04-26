@@ -1,0 +1,32 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/functions";
+
+:host {
+    display: block;
+    width: 100%;
+    height: 80px;
+    position: relative;
+    z-index: 5;
+
+    @include no-select();
+
+    background-color: $main_dark_gray;
+    @include boxShadowLevel(4);
+    
+    text-align: center;
+    white-space: nowrap;
+
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.25em;
+    }
+
+}
+
+#gp_main_header_items_wrapper{
+    display: inline-block;
+    vertical-align: middle;
+}

@@ -7,8 +7,23 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <meta name="google-signin-client_id" content="533079699939-156l7gmrnfnqhbrsjpm5n6gjcvccp147.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <div class="g-signin2" data-width="360" data-height="38" data-onsuccess="onSignIn" style="display: none"></div>
+  <script>
+    function onSignIn(googleUser) {
+        onGoogleSignIn(googleUser)
+    }
+    function signOut() {
+        onGoogleSignOut()
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>
+
+  <script src="assets/js/electron-controlls.js"></script>
 </body>
 </html>

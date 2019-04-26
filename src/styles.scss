@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/scss/variables";
+@import "assets/scss/functions";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: $main_light_gray;
+    overflow: auto;
+}
+
+body {
+    margin: 0px;
+    min-height: 100%;
+    width: 100%;
+    background-color: $main_middark_gray;
+}
+
+app-root {
+    margin: 0px;
+    min-height: 100%;
+    width: 100%;
+    background-color: $main_middark_gray;
+}
+
+::-webkit-scrollbar {
+    z-index: 100;
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    z-index: 100;
+    border: 1px solid #686868;
+}
+
+::-webkit-scrollbar-thumb {
+    z-index: 100;
+    background: #3a3a3a;
+}
+
+::-webkit-scrollbar-track-piece{
+    z-index: 100;
+    background: #7c7c7c;
+    border: 1px solid #3a3a3a;
+}
+
+::-moz-selection, ::selection {
+    z-index: 100;
+    background: #7c7c7c;
+    text-shadow: none;
+}

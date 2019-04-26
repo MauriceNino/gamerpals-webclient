@@ -1,0 +1,161 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/functions";
+
+:host{display: block;}
+
+#gp_login_container{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+
+    #gp_login_base{
+        max-width: 400px;
+        //height: 300px;
+        height: 400px;
+        margin: auto;
+        margin-top: 200px;
+        @include boxShadowLevel(2);
+        transition: box-shadow 0.4s, transform 0.4s, height 0.2s;
+        position: relative;
+
+        background-color: $main_dark_gray;
+
+        //transform: scale(0);
+        /*
+        &.register{
+            height: 560px;
+    
+            #input_username{
+                margin-top: 130px;
+                margin-left: 5%;
+            }
+            
+            #input_password{
+                margin-top: 210px;
+                margin-left: 5%;
+            }
+
+        }*/
+
+        #input_email{
+            display: none;
+            margin-top: 50px;
+            margin-left: 5%;
+        }
+        #input_password_repeat{
+            display: none;
+            margin-top: 290px;
+            margin-left: 5%;
+        }
+
+        #input_username{
+            margin-top: 50px;
+            margin-left: 5%;
+        }
+        
+        #input_password{
+            margin-top: 130px;
+            margin-left: 5%;
+        }
+        .input_text{
+            opacity: 1;
+            position: absolute;
+            width: 90%;
+            input{
+                width: 100%;
+                display: block;
+                border: none;
+                border-bottom: 1px solid #757575;
+                font-size: 18px;
+                outline: none;
+                padding: 5px;
+
+                &:focus, &:valid{
+                    border: none;
+
+                    +.label{
+                        top: -24;
+                        left: 3px;
+                        font-size: 14px;
+                        color: $main_light_gray;
+                    }
+                }
+            }
+            .label{
+                position: absolute;
+                top: 7px;
+                left: 10px;
+                pointer-events: none;
+
+                transition: top 0.2s, left 0.1s, font-size 0.2s;
+            }
+        }
+        #login_button{
+            position: absolute;
+            bottom: 130px;
+            width: 90%;
+            padding-top: 10px; 
+            padding-bottom: 10px; 
+            left: 5%;
+            text-align: center;
+            background-color: #336633;
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+
+            &:hover{
+                @include boxShadowLevel(2);
+            }
+        }
+        #create_button{
+            position: absolute;
+            bottom: 180px;
+            width: 90%;
+            left: 5%;
+            text-align: center;
+            color: $main_light_gray;
+
+            #create_acc{
+                color: #336633;
+                cursor: pointer;
+            }
+        }
+
+        .gp_spacer{
+            height: 30px;
+            width: 100%;
+            position: absolute;
+            bottom: 80px;
+            text-align: center;
+
+            .gp_spacer_heading{
+                color: white;
+                z-index: 999;
+                position: relative;
+                background-color: $main_dark_gray;
+                margin: auto;
+                margin-top: 7px;
+                width: 50px;
+                //padding: 5px;
+            }
+            .gp_spacer_backline{
+                z-index: 100;
+                height: 3px;
+                width: 90%;
+                left: 5%;
+                top: calc(50% - 1.5px);
+                position: absolute;
+                background-color: $main_middark_gray;
+            }
+        }
+
+        .g-signin2{
+            position: absolute;
+            bottom: 20px;
+            left: 5%;
+        }
+    }
+}

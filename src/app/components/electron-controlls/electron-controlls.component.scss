@@ -1,0 +1,59 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/functions";
+
+
+:host {
+    display: block;
+    position: relative;
+    height: 20px;
+    width: calc(100% - 2px); /*Compensate for body 1px border*/
+    background: $main_darker_gray;
+    color: #FFF;
+}
+
+#drag-region {
+    width: 100%;
+    height: 100%;
+    -webkit-app-region: drag;
+
+    #window-controls {
+        display: grid;
+        grid-template-columns: repeat(3, 46px);
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        font-size: 10px;
+
+        .button {
+            grid-row: 1 / span 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            -webkit-app-region: no-drag;
+
+            i{
+                font-size: 15px;
+            }
+        }
+        .button:hover {
+            background-color: $main_dark_gray;
+        }
+        #close-button:hover{
+            background-color: rgb(255, 89, 67);
+        }
+
+        #min-button {
+            grid-column: 1;
+        }
+        #max-button, #restore-button {
+            grid-column: 2;
+        }
+        #close-button {
+            grid-column: 3;
+        }
+    }
+}
