@@ -1,9 +1,9 @@
-<app-electron-controlls [ngStyle]="{'display': showElectronControlls == true? 'block' : 'none'}"></app-electron-controlls>
-<app-header></app-header>
+<app-electron-controls [ngStyle]="{'display': showElectronControls == true? 'block' : 'none'}" class="status-barBG"></app-electron-controls>
+<app-header class="app-barBG"></app-header>
 
-<div id="gp_main_content" [ngStyle]="{'height': showElectronControlls == true? 'calc(100% - 100px)' : 'calc(100% - 80px)'}">
-    <div [@routeAnimations]="prepareRoute(outlet)">
-        <router-outlet #outlet="outlet"></router-outlet>
+<div id="gp_main_content" [ngStyle]="{'height': showElectronControls == true? 'calc(100% - 100px)' : 'calc(100% - 80px)'}">
+    <div>
+        <router-outlet></router-outlet>
     </div>
 </div>
 

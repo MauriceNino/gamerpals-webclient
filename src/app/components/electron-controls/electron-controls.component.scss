@@ -1,13 +1,12 @@
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/functions";
+@import "variables";
+@import "functions";
 
 
 :host {
     display: block;
     position: relative;
     height: 20px;
-    width: calc(100% - 2px); /*Compensate for body 1px border*/
-    background: $main_darker_gray;
+    width: 100%; /*Compensate for body 1px border*/
     color: #FFF;
 }
 
@@ -38,12 +37,6 @@
             i{
                 font-size: 15px;
             }
-        }
-        .button:hover {
-            background-color: $main_dark_gray;
-        }
-        #close-button:hover{
-            background-color: rgb(255, 89, 67);
         }
 
         #min-button {

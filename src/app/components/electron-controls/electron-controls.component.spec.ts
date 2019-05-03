@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ElectronControllsComponent } from './electron-controlls.component';
+import { ElectronControlsComponent } from './electron-controls.component';
 
-describe('ElectronControllsComponent', () => {
-  let component: ElectronControllsComponent;
-  let fixture: ComponentFixture<ElectronControllsComponent>;
+describe('ElectronControlsComponent', () => {
+  let component: ElectronControlsComponent;
+  let fixture: ComponentFixture<ElectronControlsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ElectronControllsComponent ]
+      declarations: [ ElectronControlsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ElectronControllsComponent);
+    fixture = TestBed.createComponent(ElectronControlsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

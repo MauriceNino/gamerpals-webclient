@@ -1,5 +1,5 @@
-@import "../../../../assets/scss/variables";
-@import "../../../../assets/scss/functions";
+@import "variables";
+@import "functions";
 
 :host{display: block;}
 
@@ -10,7 +10,6 @@
     position: absolute;
     right: 20px;
     float: none;
-    color: white;
     font-family: Arial;
     cursor: pointer;
     text-decoration: none;

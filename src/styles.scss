@@ -1,7 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-@import "assets/scss/variables";
-@import "assets/scss/functions";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "variables";
+@import "functions";
+@import "~@angular/material/theming";
+
+// Default Theme
+//@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+.dark-theme {
+    @import "themes/dark-theme";
+    @include angular-material-theme($dark-theme);
+    @include generate-theme-classes($dark-theme);
+}
+
+.light-theme {
+    @import "themes/light-theme";
+    @include angular-material-theme($light-theme);
+    @include generate-theme-classes($light-theme);
+}
 
 
 * {
@@ -13,7 +29,6 @@ html {
     margin: 0px;
     height: 100%;
     width: 100%;
-    background-color: $main_light_gray;
     overflow: auto;
 }
 
@@ -21,14 +36,12 @@ body {
     margin: 0px;
     min-height: 100%;
     width: 100%;
-    background-color: $main_middark_gray;
 }
 
 app-root {
     margin: 0px;
     min-height: 100%;
     width: 100%;
-    background-color: $main_middark_gray;
 }
 
 ::-webkit-scrollbar {

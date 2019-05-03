@@ -1,5 +1,5 @@
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/functions";
+@import "variables";
+@import "functions";
 
 :host {
     display: block;
@@ -9,8 +9,6 @@
     z-index: 5;
 
     @include no-select();
-
-    background-color: $main_dark_gray;
     @include boxShadowLevel(4);
     
     text-align: center;
