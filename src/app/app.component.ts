@@ -15,6 +15,6 @@ export class AppComponent {
   }
   
   ngOnInit(): void {
-    this.showElectronControls = !this.platformInfo.isCurrentPlatformElectron();
+    this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
   }
 }
