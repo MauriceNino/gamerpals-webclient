@@ -8,6 +8,7 @@
     height: 22px;
     width: 100%;
     color: #FFF;
+    @include no-select();
 
     background-color: var(--status-bar-color);
 }
