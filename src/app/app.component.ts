@@ -9,6 +9,8 @@ import {
   animateChild
 } from '@angular/animations';
 import { PlatformInfoService } from './services/PlatformInfoService/platform-info.service';
+import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
+import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 
 @Component({
   selector: 'app-root',
@@ -40,10 +42,18 @@ export class AppComponent {
   title = 'GamerPalsWebsite';
   showElectronControls = false;
 
-  constructor(private platformInfo: PlatformInfoService) {
+  constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
+    private gpHelperMethods: GamerPalsHelperMethodService) {
   }
   
   ngOnInit(): void {
+    // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
+
+    // init google login
+    this.gLoginService.getSignedInUser().then((user)=>{
+      console.log(GoogleLoginService.googleAuth)
+      console.log(user)
+    });
   }
 }

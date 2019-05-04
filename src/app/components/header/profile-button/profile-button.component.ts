@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
+import { Router } from '@angular/router';
+import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 
 @Component({
   selector: 'app-profile-button',
@@ -6,10 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-button.component.scss']
 })
 export class ProfileButtonComponent implements OnInit {
+  public isUserSignedIn: boolean = false;
+  public userProfilePicUrl: string = "";
 
-  constructor() { }
+  constructor(private gLoginService: GoogleLoginService, private router: Router) { }
 
   ngOnInit() {
+    this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
+      this.isUserSignedIn = isSignedIn
+
+      if(this.isUserSignedIn){
+        this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
+          this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
+        })
+      }
+    })
   }
 
+  public loginProfileClick(): void {
+    this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
+      if(isSignedIn){
+        this.gLoginService.signOutCurrentUser().then(()=>{
+          this.isUserSignedIn = false;
+          this.router.navigateByUrl("/home");
+        })
+      } else {
+        this.gLoginService.signInUser().then((user: gapi.auth2.GoogleUser )=>{
+          this.isUserSignedIn = true;
+          this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
+          this.router.navigateByUrl("/login");
+        })
+      }
+    })
+  }
 }

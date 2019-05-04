@@ -1,4 +1,5 @@
 
-<a id="gp_login" class="gp_main_header_item" routerLink="/login">
-  Login
+<a id="gp_login" class="gp_main_header_item" (click)="loginProfileClick()">
+  {{isUserSignedIn?'Profile':'Login'}}
+  <div *ngIf="isUserSignedIn" class="profilePicture" [ngStyle]="{'background-image': 'url(' + userProfilePicUrl + ')'}"></div>
 </a>
