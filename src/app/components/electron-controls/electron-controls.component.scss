@@ -5,7 +5,7 @@
 :host {
     display: block;
     position: relative;
-    height: 20px;
+    height: 22px;
     width: 100%; /*Compensate for body 1px border*/
     color: #FFF;
 }
@@ -15,6 +15,14 @@
     height: 100%;
     -webkit-app-region: drag;
 
+    #window-title{
+        font-family: Arial;
+        font-weight: bold;
+        font-size: 14px;
+        left: 8px;
+        top: 3px;
+        position: absolute;
+    }
     #window-controls {
         display: grid;
         grid-template-columns: repeat(3, 46px);
