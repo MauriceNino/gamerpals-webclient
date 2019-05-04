@@ -7,10 +7,18 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent},
-  { path: 'short-search', component: ShortSearchPageComponent},
-  { path: 'long-search', component: LongSearchPageComponent},
-  { path: 'login', component: LoginPageComponent}
+  
+  { path: 'home', component: HomePageComponent,
+    data: {animation: 'home'}},
+
+  { path: 'short-search', component: ShortSearchPageComponent,
+    data: {animation: 'short-search'}},
+
+  { path: 'long-search', component: LongSearchPageComponent,
+    data: {animation: 'long-search'}},
+
+  { path: 'login', component: LoginPageComponent,
+    data: {animation: 'login'}},
 ];
 
 @NgModule({

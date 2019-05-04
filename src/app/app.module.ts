@@ -30,6 +30,7 @@ import { ElectronControlsComponent } from './components/electron-controls/electr
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    // Angular Material
     MatButtonModule
   ],
   providers: [],

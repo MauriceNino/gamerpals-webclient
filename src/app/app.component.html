@@ -2,8 +2,9 @@
 <app-header class="app-barBG"></app-header>
 
 <div id="gp_main_content" [ngStyle]="{'height': showElectronControls == true? 'calc(100% - 100px)' : 'calc(100% - 80px)'}">
-    <div>
-        <router-outlet></router-outlet>
+    <div [@routeAnimations]="mainOutlet && mainOutlet.activatedRouteData 
+      && mainOutlet.activatedRouteData['animation']">
+        <router-outlet #mainOutlet="outlet"></router-outlet>
     </div>
 </div>
 
