@@ -31,6 +31,7 @@
 
 
 .gp-home-users-single-base{
+    z-index: 15;
     width: 25%;
     min-width: 250px;
     height: 120px;
@@ -204,6 +205,7 @@
 }
 
 #gp-home-join-now-spinner {
+    z-index: 10;
     position: absolute;
     left: 0;
     right: 0;
