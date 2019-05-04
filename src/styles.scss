@@ -10,15 +10,14 @@
 .dark-theme {
     @import "themes/dark-theme";
     @include angular-material-theme($dark-theme);
-    @include generate-theme-classes($dark-theme);
+    @include generate-theme-vars($dark-theme);
 }
 
 .light-theme {
     @import "themes/light-theme";
     @include angular-material-theme($light-theme);
-    @include generate-theme-classes($light-theme);
+    @include generate-theme-vars($light-theme);
 }
-
 
 * {
     margin: 0;
@@ -36,6 +35,8 @@ body {
     margin: 0px;
     min-height: 100%;
     width: 100%;
+
+    background-color: var(--background-color);
 }
 
 app-root {

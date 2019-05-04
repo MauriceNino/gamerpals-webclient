@@ -12,6 +12,7 @@
     cursor: pointer;
     text-decoration: none;
     @include no-select();
+    color: var(--text-color);
 
     &.active{
         .gp_main_header_item_active{
@@ -30,6 +31,7 @@
         margin-top: 8px;
         height: 2px;
         width: 100%;
+        background-color: var(--text-color);
 
         transition: opacity 0.3s;
     }

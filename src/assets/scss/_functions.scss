@@ -62,340 +62,78 @@
   }
 }
 
-@mixin generate-theme-classes($theme) {
+@mixin generate-theme-vars($theme) {
   //default palette forground/background:
   $foreground-palette: map-get($theme, foreground);
   $background-palette: map-get($theme, background);
 
   /////////////////////////////////////////////////
-  // BACVKGROUND-COLOR
+  // SCSS VARS
   /////////////////////////////////////////////////
-  .primaryBG {
-    background-color: mat-color(map-get($theme, primary));
-  }
-  .accentBG {
-    background-color: mat-color(map-get($theme, accent));
-  }
-  .warnBG {
-    background-color: mat-color(map-get($theme, warn));
-  }
 
-  // FOREGROUND
-  .baseBG {
-    background-color: mat-color($foreground-palette, base);
-  }
-  .dividerBG {
-    background-color: mat-color($foreground-palette, divider);
-  }
-  .dividersBG {
-    background-color: mat-color($foreground-palette, dividers);
-  }
-  .disabledBG {
-    background-color: mat-color($foreground-palette, disabled);
-  }
-  .disabled-buttonBG {
-    background-color: mat-color($foreground-palette, disabled-button);
-  }
-  .disabled-textBG {
-    background-color: mat-color($foreground-palette, disabled-text);
-  }
-  .hint-textBG {
-    background-color: mat-color($foreground-palette, hint-text);
-  }
-  .secondary-textBG {
-    background-color: mat-color($foreground-palette, secondary-text);
-  }
-  .iconBG {
-    background-color: mat-color($foreground-palette, icon);
-  }
-  .iconsBG {
-    background-color: mat-color($foreground-palette, icons);
-  }
-  .textBG {
-    background-color: mat-color($foreground-palette, text);
-  }
-  .slider-offBG {
-    background-color: mat-color($foreground-palette, slider-off);
-  }
-  .slider-off-activeBG {
-    background-color: mat-color($foreground-palette, slider-off-active);
-  }
+  $primary: mat-color(map-get($theme, primary));
+  $accent: mat-color(map-get($theme, accent));
+  $warn: mat-color(map-get($theme, warn));
 
-  // BACKGROUND
-  .status-barBG {
-    background-color: mat-color($background-palette, status-bar);
-  }
-  .app-barBG {
-    background-color: mat-color($background-palette, app-bar);
-  }
-  .backgroundBG {
-    background-color: mat-color($background-palette, background);
-  }
-  .hoverBG {
-    background-color: mat-color($background-palette, hover);
-  }
-  .cardBG {
-    background-color: mat-color($background-palette, card);
-  }
-  .dialogBG {
-    background-color: mat-color($background-palette, dialog);
-  }
-  .disabled-buttonBG {
-    background-color: mat-color($background-palette, disabled-button);
-  }
-  .raised-buttonBG {
-    background-color: mat-color($background-palette, raised-button);
-  }
-  .focused-buttonBG {
-    background-color: mat-color($background-palette, focused-button);
-  }
-  .selected-buttonBG {
-    background-color: mat-color($background-palette, selected-button);
-  }
-  .selected-disabled-buttonBG {
-    background-color: mat-color($background-palette, selected-disabled-button);
-  }
-  .disabled-button-toggleBG {
-    background-color: mat-color($background-palette, disabled-button-toggle);
-  }
+  $base: mat-color($foreground-palette, base);
+  $divider: mat-color($foreground-palette, divider);
+  $dividers: mat-color($foreground-palette, dividers);
+  $disabled: mat-color($foreground-palette, disabled);
+  $disabled-button: mat-color($foreground-palette, disabled-button);
+  $disabled-text: mat-color($foreground-palette, disabled-text);
+  $hint-text: mat-color($foreground-palette, hint-text);
+  $secondary-text: mat-color($foreground-palette, secondary-text);
+  $icon: mat-color($foreground-palette, icon);
+  $icons: mat-color($foreground-palette, icons);
+  $text: mat-color($foreground-palette, text);
+  $slider-off: mat-color($foreground-palette, slider-off);
+  $slider-off-active: mat-color($foreground-palette, slider-off-active);
+  
+  $status-bar: mat-color($background-palette, status-bar);
+  $app-bar: mat-color($background-palette, app-bar);
+  $background: mat-color($background-palette, background);
+  $hover: mat-color($background-palette, hover);
+  $card: mat-color($background-palette, card);
+  $dialog: mat-color($background-palette, dialog);
+  $disabled-button: mat-color($background-palette, disabled-button);
+  $raised-button: mat-color($background-palette, raised-button);
+  $focused-button: mat-color($background-palette, focused-button);
+  $selected-button: mat-color($background-palette, selected-button);
+  $selected-disabled-button: mat-color($background-palette, selected-disabled-button);
+  $disabled-button-toggle: mat-color($background-palette, disabled-button-toggle);
 
   /////////////////////////////////////////////////
-  // COLOR
+  // CSS VARS
   /////////////////////////////////////////////////
-  .primaryColor {
-    color: mat-color(map-get($theme, primary));
-  }
-  .accentColor {
-    color: mat-color(map-get($theme, accent));
-  }
-  .warnColor {
-    color: mat-color(map-get($theme, warn));
-  }
 
-  // FOREGROUND
-  .baseColor {
-    color: mat-color($foreground-palette, base);
-  }
-  .dividerColor {
-    color: mat-color($foreground-palette, divider);
-  }
-  .dividersColor {
-    color: mat-color($foreground-palette, dividers);
-  }
-  .disabledColor {
-    color: mat-color($foreground-palette, disabled);
-  }
-  .disabled-buttonColor {
-    color: mat-color($foreground-palette, disabled-button);
-  }
-  .disabled-textColor {
-    color: mat-color($foreground-palette, disabled-text);
-  }
-  .hint-textColor {
-    color: mat-color($foreground-palette, hint-text);
-  }
-  .secondary-textColor {
-    color: mat-color($foreground-palette, secondary-text);
-  }
-  .iconColor {
-    color: mat-color($foreground-palette, icon);
-  }
-  .iconsColor {
-    color: mat-color($foreground-palette, icons);
-  }
-  .textColor {
-    color: mat-color($foreground-palette, text);
-  }
-  .slider-offColor {
-    color: mat-color($foreground-palette, slider-off);
-  }
-  .slider-off-activeColor {
-    color: mat-color($foreground-palette, slider-off-active);
-  }
+  --primary-color: #{$primary};
+  --accent-color: #{$accent};
+  --warn-color: #{$warn};
 
-  // BACKGROUND
-  .status-barColor {
-    color: mat-color($background-palette, status-bar);
-  }
-  .app-barColor {
-    color: mat-color($background-palette, app-bar);
-  }
-  .backgroundColor {
-    color: mat-color($background-palette, background);
-  }
-  .hoverColor {
-    color: mat-color($background-palette, hover);
-  }
-  .cardColor {
-    color: mat-color($background-palette, card);
-  }
-  .dialogColor {
-    color: mat-color($background-palette, dialog);
-  }
-  .disabled-buttonColor {
-    color: mat-color($background-palette, disabled-button);
-  }
-  .raised-buttonColor {
-    color: mat-color($background-palette, raised-button);
-  }
-  .focused-buttonColor {
-    color: mat-color($background-palette, focused-button);
-  }
-  .selected-buttonColor {
-    color: mat-color($background-palette, selected-button);
-  }
-  .selected-disabled-buttonColor {
-    color: mat-color($background-palette, selected-disabled-button);
-  }
-  .disabled-button-toggleColor {
-    color: mat-color($background-palette, disabled-button-toggle);
-  }
+  --base-color: #{$base};
+  --divider-color: #{$divider};
+  --dividers-color: #{$dividers};
+  --disabled-color: #{$disabled};
+  --disabled-button-color: #{$disabled-button};
+  --disabled-text-color: #{$disabled-text};
+  --hint-text-color: #{$hint-text};
+  --secondary-text-color: #{$secondary-text};
+  --icon-color: #{$icon};
+  --icons-color: #{$icons};
+  --text-color: #{$text};
+  --slider-off-color: #{$slider-off};
+  --slider-off-active-color: #{$slider-off-active};
 
-  /////////////////////////////////////////////////
-  // HOVER BACKGROUND-COLOR
-  /////////////////////////////////////////////////
-  .primaryBG {
-    &:hover {
-      background-color: mat-color(map-get($theme, primary));
-    }
-  }
-  .accentHoverBG {
-    &:hover {
-      background-color: mat-color(map-get($theme, accent));
-    }
-  }
-  .warnHoverBG {
-    &:hover {
-      background-color: mat-color(map-get($theme, warn));
-    }
-  }
-
-  // FOREGROUND
-  .baseHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, base);
-    }
-  }
-  .dividerHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, divider);
-    }
-  }
-  .dividersHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, dividers);
-    }
-  }
-  .disabledHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, disabled);
-    }
-  }
-  .disabled-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, disabled-button);
-    }
-  }
-  .disabled-textHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, disabled-text);
-    }
-  }
-  .hint-textHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, hint-text);
-    }
-  }
-  .secondary-textHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, secondary-text);
-    }
-  }
-  .iconHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, icon);
-    }
-  }
-  .iconsHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, icons);
-    }
-  }
-  .textHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, text);
-    }
-  }
-  .slider-offHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, slider-off);
-    }
-  }
-  .slider-off-activeHoverBG {
-    &:hover {
-      background-color: mat-color($foreground-palette, slider-off-active);
-    }
-  }
-
-  // BACKGROUND
-  .status-barHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, status-bar);
-    }
-  }
-  .app-barHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, app-bar);
-    }
-  }
-  .backgroundHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, background);
-    }
-  }
-  .hoverHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, hover);
-    }
-  }
-  .cardHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, card);
-    }
-  }
-  .dialogHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, dialog);
-    }
-  }
-  .disabled-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, disabled-button);
-    }
-  }
-  .raised-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, raised-button);
-    }
-  }
-  .focused-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, focused-button);
-    }
-  }
-  .selected-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, selected-button);
-    }
-  }
-  .selected-disabled-buttonHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, selected-disabled-button);
-    }
-  }
-  .disabled-button-toggleHoverBG {
-    &:hover {
-      background-color: mat-color($background-palette, disabled-button-toggle);
-    }
-  }
+  --status-bar-color: #{$status-bar};
+  --app-bar-color: #{$app-bar};
+  --background-color: #{$background};
+  --hover-color: #{$hover};
+  --card-color: #{$card};
+  --dialog-color: #{$dialog};
+  --disabled-button-color: #{$disabled-button};
+  --raised-button-color: #{$raised-button};
+  --focused-button-color: #{$focused-button};
+  --selected-button-color: #{$selected-button};
+  --selected-disabled-button-color: #{$selected-disabled-button};
+  --disabled-button-toggle-color: #{$disabled-button-toggle};
 }
