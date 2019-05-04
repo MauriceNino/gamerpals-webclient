@@ -11,17 +11,17 @@ import { Router } from '@angular/router';
 export class HomePageComponent implements OnInit {
   public playerStats: {obj: IPlayerStat, show: boolean}[] = [
     {obj: {gameName: "Counterstrike: GO", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/csgo-logo.png")`)}, show: true},
+      gameImg: (`url("assets/media/images/game-logos/csgo-logo.png")`)}, show: true},
     {obj: {gameName: "Heartstone", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/heartstone-logo.png")`)}, show: true},
+      gameImg: (`url("assets/media/images/game-logos/heartstone-logo.png")`)}, show: true},
     {obj: {gameName: "League of Legends", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/lol-logo.png")`)}, show: true},
+      gameImg: (`url("assets/media/images/game-logos/lol-logo.png")`)}, show: true},
     {obj: {gameName: "Modern Warfare 2", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/mw2-logo.png")`)}, show: true},
+      gameImg: (`url("assets/media/images/game-logos/mw2-logo.png")`)}, show: true},
     {obj: {gameName: "PUBG", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/pubg-logo.png")`)}, show: true},
+      gameImg: (`url("assets/media/images/game-logos/pubg-logo.png")`)}, show: true},
     {obj: {gameName: "Tera", playerCountOnline: 867297, playerCountSearching: 7632, 
-      gameImg: this.sanitizer.bypassSecurityTrustStyle(`url("/assets/media/images/game-logos/tera-logo.png")`)}, show: true}
+      gameImg: (`url("assets/media/images/game-logos/tera-logo.png")`)}, show: true}
   ];
   private showOnlyOneRow: boolean = false;
 
@@ -60,5 +60,5 @@ interface IPlayerStat {
   gameName: string
   playerCountOnline: number
   playerCountSearching: number
-  gameImg: SafeStyle
+  gameImg: string
 }
