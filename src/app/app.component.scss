@@ -1,7 +1,25 @@
 @import "variables";
 @import "functions";
 
+
+app-electron-controls{
+    position: relative;
+    float: left;
+}
+
+app-header{
+    position: relative;
+    float: left;
+}
+
 #gp_main_content{
+    display: block;
     width: 100%;
-    z-index: 1;
+    position: relative;
+    float: left;
+
+    div{
+        height: 100%;
+        width: 100%;
+    }
 }

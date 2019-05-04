@@ -1,2 +1,263 @@
+@import "variables";
+@import "functions";
 
-:host{display: block;}
+:host{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#background-video-container {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: hidden;
+    filter: brightness(20%) blur(5px);
+}
+
+#background-video {
+    height: 100%;
+    width: 177.77777778vh; /* 100 * 16 / 9 */
+    min-width: 100%;
+    min-height: 56.25vw; /* 100 * 9 / 16 */
+    position: absolute;
+    left: 50%; /* % of surrounding element */
+    top: 50%;
+    transform: translate(-50%, -50%); /* % of current element */
+}
+
+
+.gp-home-users-single-base{
+    width: 25%;
+    min-width: 250px;
+    height: 120px;
+    position: absolute;
+    @include boxShadowLevel(2);
+    transition: box-shadow 0.4s, transform 0.4s;
+
+    transform: scale(0);
+    
+    &:nth-child(1) {
+        top: 50px;
+        left: 200px;
+    }
+    
+    &:nth-child(2) {
+        top: 50px;
+        right: 200px;
+    }
+    
+    &:nth-child(3) {
+        bottom: calc(50% - 50px);
+        left: 50px;
+    }
+    
+    &:nth-child(4) {
+        bottom: calc(50% - 50px);
+        right: 50px;
+    }
+    
+    &:nth-child(5) {
+        bottom: 50px;
+        left: 200px;
+    }
+    
+    &:nth-child(6) {
+        bottom: 50px;
+        right: 200px;
+    }
+
+    &.show{
+        transform: scale(0.9);
+    }
+    &:nth-child(odd):hover{
+        transform: translate(-3px, -3px) scale(1);
+        @include boxShadowLevel(3);
+    }
+    &:nth-child(even):hover{
+        transform: translate(3px, -3px) scale(1);
+        @include boxShadowLevel(3);
+    }
+
+    .gp-home-users-single-base-game{
+        height: 40px;
+        width: 100%;
+        background-color: var(--background-color);
+        float: left;
+        color: var(--text-color);
+
+        span{
+            position: relative;
+            top: 15px;
+            left: 15px;
+            font-size: 18px;
+        }
+    }
+
+    .gp-home-users-single-base-game-img{
+        height: 80px;
+        width: 80px;
+        background-color: var(--background-color);
+        border-bottom: var(--primary-color) 2px solid;
+        float: left;
+
+        .gp-home-users-single-base-game-img-logo{
+            height: 50px;
+            width: 50px;
+            margin-top: 15px;
+            margin-left: 15px;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
+
+    .gp-home-users-single-base-stats{
+        position: relative;
+        z-index: 4;
+        height: 80px;
+        width: calc(100% - 80px);
+        float: left;
+        text-align: center;
+
+        .gp-home-users-single-base-stats-online{
+            z-index: 4;
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gp-home-users-single-base-stats-searching{
+            z-index: 4;
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gp-home-users-single-base-stats-bg{
+            position: absolute;
+            z-index: 3;
+            top: 0px;
+            left: 0px;
+            height: 80px;
+            width: 100%;
+            background-color: var(--background-color);
+            border-bottom: var(--primary-color) 2px solid;
+            opacity: 0.5;
+        }
+    }
+}
+
+@keyframes spin-animation {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin-animation {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes spin-animation-reverse {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+@-webkit-keyframes spin-animation-reverse {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+
+#gp-home-join-now-spinner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto auto auto auto;
+    width: 400px;
+    height: 400px;
+    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.align-right{
+        left: unset;
+        right: 50px;
+        top: 0;
+        bottom: 0;
+        margin: unset unset unset unset;
+    }
+
+    #gp-home-join-now-spinner-outerCircle {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+        border-radius: 50%;
+        border: 8px solid #000;
+        border-color: var(--primary-color) transparent var(--primary-color) transparent;
+        -webkit-animation: spin-animation 15s linear infinite;
+        animation: spin-animation 15s linear infinite;
+    }
+    
+    
+    #gp-home-join-now-spinner-innerCircle {
+        position: absolute;
+        width: 70%;
+        height: 70%;
+        top: 15%;
+        left: 15%;
+        border-radius: 50%;
+        border: 8px solid transparent;
+        border-color: transparent var(--accent-color) transparent var(--accent-color);
+        -webkit-animation: spin-animation-reverse 15s linear infinite;
+        animation: spin-animation-reverse 15s linear infinite;
+    }
+
+    #gp-join-now-text{
+        z-index: 10;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 20pt;
+        color: var(--text-color);
+    }
+}

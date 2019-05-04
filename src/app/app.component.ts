@@ -18,17 +18,17 @@ import { PlatformInfoService } from './services/PlatformInfoService/platform-inf
     trigger('routeAnimations', [
       transition('* <=> *', [
         query(':enter, :leave', 
-          style({ position: 'fixed', width: '100%' }), 
+          style({ position: 'absolute'}), 
           { optional: true }),
         group([
           query(':enter',[
             style({ opacity: '0' }),
-            animate('0.2s ease-in-out', 
+            animate('0.3s ease-in-out', 
             style({ opacity: '1' }))
           ], { optional: true }),
           query(':leave', [
             style({ opacity: '1' }),
-            animate('0.2s ease-in-out', 
+            animate('0.3s ease-in-out', 
             style({ opacity: '0' }))
           ], { optional: true }),
         ])

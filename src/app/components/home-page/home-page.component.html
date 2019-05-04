@@ -1,6 +1,36 @@
-<p>
-  home-page works!
-  <button mat-raised-button color="primary">Primary</button>
-  <button mat-raised-button color="accent">Accent</button>
-  <button mat-raised-button color="warn">Warn</button>
-</p>
+<div id="background-video-container">
+  <video autoplay muted loop id="background-video">
+    <source src="assets/media/videos/Halo-Game-4K-Live-Wallpaper.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div id="gp-status-cards-container">
+  <div class="gp-home-users-single-base" [ngClass]="stat.show?'show':'hide'" *ngFor="let stat of playerStats">
+    <div class="gp-home-users-single-base-game">
+      <span>{{stat.obj.gameName}}</span>
+    </div>
+    <div class="gp-home-users-single-base-game-img">
+      <div class="gp-home-users-single-base-game-img-logo" [style.background-image]="stat.obj.gameImg"></div>
+    </div>
+    <div class="gp-home-users-single-base-stats">
+      <div class="gp-home-users-single-base-stats-searching">
+          <span>{{stat.obj.playerCountSearching}}<br>Searching</span>
+      </div>    
+      <div class="gp-home-users-single-base-stats-online">
+          <span>{{stat.obj.playerCountOnline}}<br>Online</span>
+      </div>
+      <div class="gp-home-users-single-base-stats-bg"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="gp-home-join-now-spinner">
+  <div id="gp-home-join-now-spinner-outerCircle"></div>
+  <div id="gp-home-join-now-spinner-innerCircle"></div>
+  <div id="gp-join-now-text" (click)="openLoginPage()">
+    JOIN NOW!
+  </div>
+</div>
