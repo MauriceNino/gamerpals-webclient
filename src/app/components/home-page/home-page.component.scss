@@ -210,6 +210,7 @@
     }
 }
 
+$border-size: 8px;
 #gp-home-join-now-spinner {
     z-index: 10;
     position: absolute;
@@ -238,24 +239,23 @@
         position: absolute;
         width: 80%;
         height: 80%;
-        top: 10%;
-        left: 10%;
+        top: calc(10% - $border-size);
+        left: calc(10% - $border-size);
         border-radius: 50%;
-        border: 8px solid #000;
+        border: $border-size solid #000;
         border-color: var(--primary-color) transparent var(--primary-color) transparent;
         -webkit-animation: spin-animation 15s linear infinite;
         animation: spin-animation 15s linear infinite;
     }
     
-    
     #gp-home-join-now-spinner-innerCircle {
         position: absolute;
         width: 70%;
         height: 70%;
-        top: 15%;
-        left: 15%;
+        top: calc(15% - $border-size);
+        left: calc(15% - $border-size);
         border-radius: 50%;
-        border: 8px solid transparent;
+        border: $border-size solid transparent;
         border-color: transparent var(--accent-color) transparent var(--accent-color);
         -webkit-animation: spin-animation-reverse 15s linear infinite;
         animation: spin-animation-reverse 15s linear infinite;
