@@ -7,22 +7,41 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { 
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full' 
+  },
   
-  { path: 'home', component: HomePageComponent,
-    data: {animation: 'home'}},
+  { 
+    path: 'home',
+    component: HomePageComponent,
+    data: {animation: 'home'}
+  },
 
-  { path: 'short-search', component: ShortSearchPageComponent,
-    data: {animation: 'short-search'}},
+  { 
+    path: 'short-search',
+    component: ShortSearchPageComponent,
+    data: {animation: 'short-search'}
+  },
 
-  { path: 'long-search', component: LongSearchPageComponent,
-    data: {animation: 'long-search'}},
+  { 
+    path: 'long-search',
+    component: LongSearchPageComponent,
+    data: {animation: 'long-search'}
+  },
 
-  { path: 'login', component: LoginPageComponent,
-    data: {animation: 'login'}},
+  { 
+    path: 'login',
+    component: LoginPageComponent,
+    data: {animation: 'login'}
+  },
 
-  { path: 'profile', component: ProfilePageComponent,
-    data: {animation: 'profile'}},
+  { 
+    path: 'profile',
+    component: ProfilePageComponent,
+    data: {animation: 'profile'}
+  },
 ];
 
 @NgModule({

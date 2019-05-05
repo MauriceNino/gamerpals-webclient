@@ -19,7 +19,6 @@ export class ProfileButtonComponent implements OnInit {
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
       this.zone.run(() => {
         this.isUserSignedIn = isSignedIn
-        console.log(`ProfileButton change, isSignedIn: ${this.isUserSignedIn}`)
           
         if(this.isUserSignedIn){
           this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {

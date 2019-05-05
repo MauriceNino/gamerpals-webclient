@@ -58,18 +58,18 @@ app-root {
 
 ::-webkit-scrollbar-thumb {
     z-index: 100;
-    background: #3a3a3a;
+    background: var(--app-bar-color);
 }
 
 ::-webkit-scrollbar-track-piece{
     z-index: 100;
-    background: #7c7c7c;
-    border: 1px solid #3a3a3a;
+    background: var(--card-color);
+    border: 1px solid var(--app-bar-color);
 }
 
 ::-moz-selection, ::selection {
     z-index: 100;
-    background: #7c7c7c;
+    background: var(--card-color);
     text-shadow: none;
 }
 

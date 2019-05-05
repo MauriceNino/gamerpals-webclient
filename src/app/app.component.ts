@@ -65,7 +65,7 @@ export class AppComponent {
 
           this.zone.run(() => {
             //TODO: If user has not completed his pofile yet -> send him to login
-            this.router.navigateByUrl("/login");
+            //this.router.navigateByUrl("/login");
             //TODO: If he has completed it -> send him to home
             //this.router.navigateByUrl("/home");
           });
