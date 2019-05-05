@@ -4,6 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ShortSearchPageComponent } from './components/short-search-page/short-search-page.component';
 import { LongSearchPageComponent } from './components/long-search-page/long-search-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,6 +20,9 @@ const routes: Routes = [
 
   { path: 'login', component: LoginPageComponent,
     data: {animation: 'login'}},
+
+  { path: 'profile', component: ProfilePageComponent,
+    data: {animation: 'profile'}},
 ];
 
 @NgModule({

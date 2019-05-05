@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GamerPalsHelperMethodService } from '../GamerPalsHelperMethodService/gamer-pals-helper-method.service';
+import { GamerPalsRestService } from '../GamerPalsRESTService/gamer-pals-rest.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +10,21 @@ export class GoogleLoginService {
   private static clientId: string = "533079699939-156l7gmrnfnqhbrsjpm5n6gjcvccp147.apps.googleusercontent.com";
   public static googleAuth: gapi.auth2.GoogleAuth;
   
-  constructor(private gpHelperMethods: GamerPalsHelperMethodService) { }
+  constructor(private gpHelperMethods: GamerPalsHelperMethodService,
+    private gpRESTService: GamerPalsRestService,
+    private router: Router) { }
 
   public async initGoogleLogin(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if(GoogleLoginService.googleAuth != null) resolve(GoogleLoginService.googleAuth);
+      if(GoogleLoginService.googleAuth != null) {
+        resolve(GoogleLoginService.googleAuth);
+      }
 
       this.gpHelperMethods.callWhenPropertyAvailable("gapi", () => {
         gapi.load('auth2', () => {
           let auth: gapi.auth2.GoogleAuth = gapi.auth2.init({client_id: GoogleLoginService.clientId});
           GoogleLoginService.googleAuth = auth;
+
           resolve(auth);
         });
       });

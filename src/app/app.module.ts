@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { ShortSearchPageComponent } from './components/short-search-page/short-s
 import { LongSearchPageComponent } from './components/long-search-page/long-search-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { ElectronControlsComponent } from './components/electron-controls/electr
     ShortSearchPageComponent,
     LongSearchPageComponent,
     LoginPageComponent,
-    ElectronControlsComponent
+    ElectronControlsComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     // Angular Material
