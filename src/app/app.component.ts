@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import {
   transition,
   trigger,
@@ -45,7 +45,8 @@ export class AppComponent {
   showElectronControls = false;
 
   constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
-    private gpRESTService: GamerPalsRestService, private router: Router) {
+    private gpRESTService: GamerPalsRestService, private router: Router,
+    private zone: NgZone) {
   }
   
   ngOnInit(): void {
@@ -62,10 +63,12 @@ export class AppComponent {
         this.gpRESTService.sendLoginRequest(0, 1234).subscribe((user: { token: string; user: IUser; }) => {
           this.gpRESTService.setLoggedInUser(user);
 
-          //TODO: If user has not completed his pofile yet -> send him to login
-          this.router.navigateByUrl("/login");
-          //TODO: If he has completed it -> send him to home
-          //this.router.navigateByUrl("/home");
+          this.zone.run(() => {
+            //TODO: If user has not completed his pofile yet -> send him to login
+            this.router.navigateByUrl("/login");
+            //TODO: If he has completed it -> send him to home
+            //this.router.navigateByUrl("/home");
+          });
         });
       }
     });

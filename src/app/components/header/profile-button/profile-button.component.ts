@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -13,17 +13,20 @@ export class ProfileButtonComponent implements OnInit {
   public userProfilePicUrl: string = "";
 
   constructor(private gLoginService: GoogleLoginService, private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar, private zone: NgZone) { }
 
   ngOnInit() {
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
-      this.isUserSignedIn = isSignedIn
-        
-      if(this.isUserSignedIn){
-        this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
-          this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
-        });
-      }
+      this.zone.run(() => {
+        this.isUserSignedIn = isSignedIn
+        console.log(`ProfileButton change, isSignedIn: ${this.isUserSignedIn}`)
+          
+        if(this.isUserSignedIn){
+          this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
+            this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
+          });
+        }
+      });
     });
   }
 
