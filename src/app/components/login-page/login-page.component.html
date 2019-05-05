@@ -1,7 +1,57 @@
 <div id="gp_login_content">
-    <div id="gp_login_container">
-        <div id="gp_login_base">
-            
-        </div>
+    <div id="gp_login_base">
+        <mat-horizontal-stepper linear="true" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>Account Information</ng-template>
+                    <div class="leftSideOfForm">
+                        <mat-form-field>
+                            <input matInput placeholder="Username" formControlName="username" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <textarea id="profileInfo" matInput placeholder="Profile Information"></textarea>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select required>
+                                <mat-option *ngFor="let country of countryList" [value]="selCountry"> 
+                                {{country.Name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="rightSideOfForm">
+                        <div id="imageSelect-container">
+                            <button mat-fab color="primary">
+                                <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+                            </button>
+                            <div id="imageSelect" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"> 
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Fill out your address</ng-template>
+                    <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                    </mat-form-field>
+                    <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
     </div>
 </div>
