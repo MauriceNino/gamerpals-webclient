@@ -72,3 +72,12 @@ app-root {
     background: #7c7c7c;
     text-shadow: none;
 }
+
+.mat-snack-bar-container {
+    background: var(--background-color) !important;
+    color: var(--text-color) !important;
+
+    .mat-simple-snackbar-action{
+        color: var(--primary-color);
+    }
+}
