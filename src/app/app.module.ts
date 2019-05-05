@@ -9,12 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/header/navigation/navigation.component';
 import { ProfileButtonComponent } from './components/header/profile-button/profile-button.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
-import { ShortSearchPageComponent } from './components/short-search-page/short-search-page.component';
-import { LongSearchPageComponent } from './components/long-search-page/long-search-page.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +17,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
     HeaderComponent,
     NavigationComponent,
     ProfileButtonComponent,
-    HomePageComponent,
-    ShortSearchPageComponent,
-    LongSearchPageComponent,
-    LoginPageComponent,
-    ElectronControlsComponent,
-    ProfilePageComponent
+    ElectronControlsComponent
   ],
   imports: [
     BrowserModule,

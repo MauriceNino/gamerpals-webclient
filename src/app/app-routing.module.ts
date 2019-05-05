@@ -15,32 +15,32 @@ const routes: Routes = [
   
   { 
     path: 'home',
-    component: HomePageComponent,
+    loadChildren: './components/home-page/home-page.module#HomePageModule',
     data: {animation: 'home'}
   },
 
   { 
     path: 'short-search',
-    component: ShortSearchPageComponent,
+    loadChildren: './components/short-search-page/short-search-page.module#ShortSearchPageModule',
     data: {animation: 'short-search'}
   },
 
   { 
     path: 'long-search',
-    component: LongSearchPageComponent,
+    loadChildren: './components/long-search-page/long-search-page.module#LongSearchPageModule',
     data: {animation: 'long-search'}
   },
 
   { 
     path: 'login',
-    component: LoginPageComponent,
+    loadChildren: './components/login-page/login-page.module#LoginPageModule',
     data: {animation: 'login'}
   },
 
   { 
     path: 'profile',
-    component: ProfilePageComponent,
-    data: {animation: 'profile'}
+    loadChildren: './components/profile-page/profile-page.module#ProfilePageModule',
+    data: {animation: 'profile', preload: true}
   },
 ];
 
