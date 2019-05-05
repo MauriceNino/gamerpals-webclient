@@ -1,5 +1,5 @@
 
-<a id="gp_login" class="gp_main_header_item" (click)="loginProfileClick()">
-  {{isUserSignedIn?'Profile':'Login'}}
+<div id="gp_login" class="gp_main_header_item" (click)="loginProfileClick()">
+  <p>{{isUserSignedIn?'Profile':'Login'}}</p>
   <div *ngIf="isUserSignedIn" class="profilePicture" [ngStyle]="{'background-image': 'url(' + userProfilePicUrl + ')'}"></div>
-</a>
+</div>
