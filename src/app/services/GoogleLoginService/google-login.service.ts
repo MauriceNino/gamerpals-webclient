@@ -17,10 +17,28 @@ export class GoogleLoginService {
       this.gpHelperMethods.callWhenPropertyAvailable("gapi", () => {
         gapi.load('auth2', () => {
           let auth: gapi.auth2.GoogleAuth = gapi.auth2.init({client_id: GoogleLoginService.clientId});
-          GoogleLoginService.googleAuth = auth
+          GoogleLoginService.googleAuth = auth;
           resolve(auth);
         });
       });
+    });
+  }
+
+  public onSignInAndInitial(callback: (b: boolean)=>any): void {
+    this.isUserSignedIn().then((isSignedIn: boolean) => {
+      callback(isSignedIn);
+    });
+
+    this.isUserSignedInListener().then((signedInListener: gapi.auth2.IsSignedIn)=>{
+      signedInListener.listen((isSignedIn: boolean) => callback(isSignedIn));
+    });
+  }
+  
+  public async isUserSignedInListener(): Promise<gapi.auth2.IsSignedIn> {
+    await this.initGoogleLogin();
+
+    return new Promise((resolve, reject) => {
+      resolve(GoogleLoginService.googleAuth.isSignedIn);
     });
   }
 

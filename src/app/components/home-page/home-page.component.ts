@@ -2,11 +2,14 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Url } from 'url';
 import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ProfileButtonComponent } from '../header/profile-button/profile-button.component';
+import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
+  providers:[ ProfileButtonComponent ]
 })
 export class HomePageComponent implements OnInit {
   public playerStats: {obj: IPlayerStat, show: boolean}[] = [
@@ -24,8 +27,21 @@ export class HomePageComponent implements OnInit {
       gameImg: (`url("assets/media/images/game-logos/tera-logo.png")`)}, show: true}
   ];
   private showOnlyOneRow: boolean = false;
+  public isUserSignedIn: boolean = false;
 
-  constructor(private sanitizer: DomSanitizer, private router: Router) { }
+
+  constructor(private sanitizer: DomSanitizer, private router: Router,
+    private profileButtonComp: ProfileButtonComponent, private gLoginService: GoogleLoginService) { }
+
+  ngOnInit() {
+    // Set the initial values for the resize dependant components in this page
+    this.onResize(undefined, window.innerWidth);
+
+    // Get the login status of the user everytime its updated
+    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
+      this.isUserSignedIn = isSignedIn;
+    })
+  }
 
   @HostListener('window:resize', ['$event'])
   private onResize(event, innerWidth: number): void {
@@ -48,13 +64,8 @@ export class HomePageComponent implements OnInit {
   }
 
   public openLoginPage(): void{
-    this.router.navigateByUrl("/login");
+    this.profileButtonComp.loginProfileClick();
   }
-
-  ngOnInit() {
-    this.onResize(undefined, window.innerWidth);
-  }
-
 }
 interface IPlayerStat {
   gameName: string

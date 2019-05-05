@@ -34,6 +34,6 @@
   <div id="gp-home-join-now-spinner-outerCircle"></div>
   <div id="gp-home-join-now-spinner-innerCircle"></div>
   <div id="gp-join-now-text" (click)="openLoginPage()">
-    JOIN NOW!
+    {{ isUserSignedIn? 'WELCOME BACK!':'JOIN NOW!'}}
   </div>
 </div>

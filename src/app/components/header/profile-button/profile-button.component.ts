@@ -15,13 +15,13 @@ export class ProfileButtonComponent implements OnInit {
   constructor(private gLoginService: GoogleLoginService, private router: Router) { }
 
   ngOnInit() {
-    this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
+    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
       this.isUserSignedIn = isSignedIn
-
+        
       if(this.isUserSignedIn){
         this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
-        })
+        });
       }
     })
   }
@@ -30,12 +30,10 @@ export class ProfileButtonComponent implements OnInit {
     this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
       if(isSignedIn){
         this.gLoginService.signOutCurrentUser().then(()=>{
-          this.isUserSignedIn = false;
           this.router.navigateByUrl("/home");
         })
       } else {
         this.gLoginService.signInUser().then((user: gapi.auth2.GoogleUser )=>{
-          this.isUserSignedIn = true;
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
           this.router.navigateByUrl("/login");
         })
