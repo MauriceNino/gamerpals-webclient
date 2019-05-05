@@ -15,7 +15,13 @@
     width: 100%;
     height: 100%; 
     overflow: hidden;
-    filter: brightness(20%) blur(5px);
+
+    &.dark {
+        filter: brightness(20%) blur(5px);
+    }
+    &.bright {
+        filter: brightness(200%) blur(5px);
+    }
 }
 
 #background-video {

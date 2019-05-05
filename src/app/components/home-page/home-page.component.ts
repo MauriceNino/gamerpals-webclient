@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle } from '@angular/plat
 import { Router } from '@angular/router';
 import { ProfileButtonComponent } from '../header/profile-button/profile-button.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-home-page',
@@ -41,6 +42,14 @@ export class HomePageComponent implements OnInit {
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
       this.isUserSignedIn = isSignedIn;
     })
+
+    // Set the background styling depending on the theme
+    let rootElementClassList: DOMTokenList = document.getElementsByTagName("html")[0].classList;
+
+    if(!rootElementClassList.contains("dark-theme"))
+      document.getElementById("background-video-container").classList.remove("dark")
+    if(rootElementClassList.contains("light-theme"))
+      document.getElementById("background-video-container").classList.add("bright")
   }
 
   @HostListener('window:resize', ['$event'])
