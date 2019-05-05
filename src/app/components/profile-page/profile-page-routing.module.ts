@@ -9,10 +9,10 @@ const routes: Routes = [
     path: '',
     component: ProfilePageComponent,
     children: [
-      /*{
+      {
         path: '',
         redirectTo: 'basic'
-      },*/
+      },
       {
         path: 'basic',
         component: BasicSettingsComponent
@@ -20,11 +20,7 @@ const routes: Routes = [
       {
         path: 'connections',
         component: ConnectionSettingsComponent
-      },
-      {
-        path: '**',
-        redirectTo: ''
-      },
+      }
     ]
   }
 ];
