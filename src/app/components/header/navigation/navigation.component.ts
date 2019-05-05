@@ -19,7 +19,9 @@ export class NavigationComponent implements OnInit {
           allHeaderElements[i].classList.remove("active")
         }
         let currentRoute: string = this.router.url;
-        document.getElementById(`gp_${currentRoute.substr(1)}`).classList.add("active")
+        let currentRouteHeaderItem = document.getElementById(`gp_${currentRoute.substr(1)}`);
+        if(currentRouteHeaderItem != null)
+          currentRouteHeaderItem.classList.add("active");
       }
     });
   }
