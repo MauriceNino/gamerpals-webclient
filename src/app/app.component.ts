@@ -45,8 +45,7 @@ export class AppComponent {
   showElectronControls = false;
 
   constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
-    private gpHelperMethods: GamerPalsHelperMethodService, private gpRESTService: GamerPalsRestService,
-    private router: Router) {
+    private gpRESTService: GamerPalsRestService, private router: Router) {
   }
   
   ngOnInit(): void {

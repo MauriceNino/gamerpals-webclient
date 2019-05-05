@@ -31,6 +31,7 @@ export class ProfileButtonComponent implements OnInit {
         this.router.navigateByUrl("/profile");
       } else {
         this.gLoginService.signInUser().then((user: gapi.auth2.GoogleUser )=>{
+          console.log("sign in user")
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
         });
       }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GamerPalsHelperMethodService } from '../GamerPalsHelperMethodService/gamer-pals-helper-method.service';
-import { GamerPalsRestService } from '../GamerPalsRESTService/gamer-pals-rest.service';
-import { Router } from '@angular/router';
+import { PlatformInfoService } from '../PlatformInfoService/platform-info.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,7 @@ export class GoogleLoginService {
   public static googleAuth: gapi.auth2.GoogleAuth;
   
   constructor(private gpHelperMethods: GamerPalsHelperMethodService,
-    private gpRESTService: GamerPalsRestService,
-    private router: Router) { }
+    private platformInfo: PlatformInfoService) { }
 
   public async initGoogleLogin(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -71,11 +69,19 @@ export class GoogleLoginService {
   public async signInUser(): Promise<any> {
     await this.initGoogleLogin();
 
-    let options = new gapi.auth2.SigninOptionsBuilder();
-    options.setAppPackageName('com.example.app');
-    options.setPrompt('select_account');
-    options.setScope('profile').setScope('email');
-    return GoogleLoginService.googleAuth.signIn(options);
+    if(this.platformInfo.isCurrentPlatformElectron()){
+      return GoogleLoginService.googleAuth.signIn({
+        scope: "profile email",
+        prompt: "select_account",
+        ux_mode: "redirect",
+        redirect_uri: "http://localhost:4200"
+      });
+    }else {
+      let options = new gapi.auth2.SigninOptionsBuilder();
+      options.setPrompt("select_account");
+      options.setScope("profile").setScope("email");
+      return GoogleLoginService.googleAuth.signIn(options);
+    }
   }
 
   public async signOutCurrentUser(): Promise<any> {
