@@ -54,11 +54,6 @@ export class ProfileButtonComponent implements OnInit {
               break;
           }
 
-          console.log({
-            duration: 2000,
-            panelClass: ['themed-snackbar']
-          })
-
           this.snackBar.open(errorText, "Ok", {
             duration: 2000
           });

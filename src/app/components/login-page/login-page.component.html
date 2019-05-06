@@ -1,15 +1,46 @@
 <div id="gp_login_content">
     <div id="gp_login_base">
-        <mat-horizontal-stepper linear="true" #stepper>
+        <mat-horizontal-stepper linear="false" #stepper>
             <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup">
                     <ng-template matStepLabel>Account Information</ng-template>
-                    <div class="leftSideOfForm">
-                        <mat-form-field>
+
+                    <div class="leftSideOfForm" style="width: 65%">
+                        <mat-form-field style="width: 60%">
                             <input matInput placeholder="Username" formControlName="username" required>
                         </mat-form-field>
                         <mat-form-field>
-                            <textarea id="profileInfo" matInput placeholder="Profile Information"></textarea>
+                            <textarea id="profileInfo" matInput placeholder="Profile Information" rows="6"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="rightSideOfForm" style="width: 35%">
+                        <div id="imageSelect-container" (click)="imageUploadClick()">
+                            <button mat-fab color="primary">
+                                <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+                            </button>
+                            <input type='file' id="image-upload" hidden/> 
+                            <div id="imageSelect" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"> 
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button mat-button matStepperNext>Next</button>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" id="personal-information-input">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>Personal Information</ng-template>
+
+                    <div class="leftSideOfForm">
+                        <mat-form-field>
+                            <mat-label>Gender</mat-label>
+                            <mat-select required [(value)]="selGender">
+                                <mat-option *ngFor="let gender of genderList" [value]="gender"> 
+                                {{ gender }}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
                         <mat-form-field>
                             <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday" required>
@@ -18,38 +49,41 @@
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Country</mat-label>
-                            <mat-select required>
-                                <mat-option *ngFor="let country of countryList" [value]="selCountry"> 
-                                {{country.Name}}
+                            <mat-select required [(value)]="selCountry">
+                                <mat-option *ngFor="let country of countryList" [value]="country.Name"> 
+                                {{ country.Name }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
+                    
                     <div class="rightSideOfForm">
-                        <div id="imageSelect-container">
-                            <button mat-fab color="primary">
-                                <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
-                            </button>
-                            <div id="imageSelect" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"> 
-                                
-                            </div>
-                        </div>
+                        <mat-form-field style="width: 75%; float: left;">
+                            <mat-label>Language</mat-label>
+                            <mat-select required [(value)]="selLanguage">
+                                <mat-option *ngFor="let language of languageList" [value]="language.name"> 
+                                {{ language.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <button mat-button color="primary" (click)="addSelectedLanguage()" style="float: right; margin-top: 12px">Add</button> 
+
+                        <div style="color: var(--text-color); width: 100%; float: left; margin-top: 20px;">Selected Languages</div>
+
+                        <mat-list style="height: 120px; width: 100%; float: left; overflow: auto;  margin-top: 5px;">
+                            <mat-list *ngFor="let language of selLanguages">
+                                <mat-list-item> {{ language }} </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </mat-list>
+                            <mat-list *ngIf="selLanguages.length == 0">
+                                <mat-list-item> No Items selected yet!</mat-list-item>
+                            </mat-list>
+                        </mat-list>
                     </div>
-                    <div>
-                        <button mat-button matStepperNext>Next</button>
-                    </div>
-                </form>
-            </mat-step>
-            <mat-step [stepControl]="secondFormGroup">
-                <form [formGroup]="secondFormGroup">
-                    <ng-template matStepLabel>Fill out your address</ng-template>
-                    <mat-form-field>
-                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
-                    </mat-form-field>
-                    <div>
+
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button matStepperNext>Next</button>
-                    </div>
                 </form>
             </mat-step>
         </mat-horizontal-stepper>
