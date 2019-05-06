@@ -32,10 +32,14 @@ export class ProfileButtonComponent implements OnInit {
   public loginProfileClick(): void {
     this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
       if(isSignedIn){
+        //TODO: If user has not completed his pofile yet -> send him to login
+        //this.router.navigateByUrl("/login");
         this.router.navigateByUrl("/profile");
       } else {
         this.gLoginService.signInUser().then((user: gapi.auth2.GoogleUser )=>{
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
+          //TODO: If user has not completed his pofile yet -> send him to login
+          this.router.navigateByUrl("/login");
         }).catch((data: {error: string}) => {
           let errorText: string;
 

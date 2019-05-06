@@ -10,9 +10,9 @@ import {
 } from '@angular/animations';
 import { PlatformInfoService } from './services/PlatformInfoService/platform-info.service';
 import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
-import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -46,7 +46,7 @@ export class AppComponent {
 
   constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
     private gpRESTService: GamerPalsRestService, private router: Router,
-    private zone: NgZone) {
+    private zone: NgZone, private snackBar: MatSnackBar) {
   }
   
   ngOnInit(): void {
@@ -64,12 +64,24 @@ export class AppComponent {
           this.gpRESTService.setLoggedInUser(user);
 
           this.zone.run(() => {
-            //TODO: If user has not completed his pofile yet -> send him to login
-            //this.router.navigateByUrl("/login");
+            //TODO: If user has not completed his pofile yet -> open snackbar to send him to login
+            this.snackBar.open("Please complete your profile!", "Let's Go!", {
+              duration: 60000
+            }).onAction().subscribe(() => {
+              this.router.navigateByUrl("/login");
+            });
             //TODO: If he has completed it -> send him to home
             //this.router.navigateByUrl("/home");
           });
-        });
+        },
+        (error: any) => {
+          console.log(error);
+          this.snackBar.open("GamerPals seems to be (kinda) down at the moment!", "Retry!", {
+            duration: 60000
+          }).onAction().subscribe(() => {
+            window.location.reload();
+          });
+        })
       }
     });
   }
