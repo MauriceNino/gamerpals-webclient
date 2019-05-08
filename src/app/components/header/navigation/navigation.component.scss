@@ -18,6 +18,7 @@
     text-decoration: none;
     @include no-select();
     outline: none !important;
+    transition: opacity 0.15s;
 
     p {
         margin-top: 35px;
@@ -32,7 +33,15 @@
 
     &:hover{
         .gp_main_header_item_active{
-            opacity: 1;
+            opacity: 0.5;
+
+        }
+        
+        &.active{
+            .gp_main_header_item_active{
+                opacity: 1;
+    
+            }
         }
     }
 
