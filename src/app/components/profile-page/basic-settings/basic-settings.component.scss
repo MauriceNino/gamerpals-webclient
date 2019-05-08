@@ -1,0 +1,17 @@
+mat-toolbar{
+    background: none !important;
+}
+
+mat-divider{
+    width: 96%;
+    margin-left: 2%;
+}
+
+mat-list-item{
+    .setting-heading{
+        color: var(--text-color);
+    }
+    .setting-subheading{
+        color: var(--hint-text-color);
+    }
+}

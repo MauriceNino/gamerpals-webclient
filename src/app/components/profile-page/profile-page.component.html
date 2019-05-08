@@ -1,11 +1,18 @@
 <div id="settings-control-panel">
     <div id="settings-button-container">
-        <button mat-button routerLink="basic">Basic</button>
-        <button mat-button routerLink="connections">Connection</button>
+        <button mat-button routerLink="basic" [routerLinkActive]="'active'">Basic</button>
+        <button mat-button routerLink="connections" [routerLinkActive]="'active'">Connection</button>
         <button mat-raised-button color="primary" (click)="onLogout()">Logout</button>
     </div>
 </div>
 
-<div id="settings-router-wrapper">
-    <router-outlet></router-outlet>
+<div id="settings-container">
+    <div id="settings-router-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+         
+    <div id="settings-action-buttons" [class.show]="showButtons">
+        <button mat-stroked-button color="warn" (click)="undoChanges()">Undo</button>
+        <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
+    </div>
 </div>

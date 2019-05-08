@@ -74,7 +74,7 @@
                         <div style="color: var(--text-color); width: 100%; float: left; margin-top: 20px;">Selected Languages</div>
 
                         <mat-list style="height: 120px; width: 100%; float: left; overflow: auto;  margin-top: 5px;">
-                            <mat-list *ngFor="let language of selLanguages">
+                            <mat-list *ngFor="let language of selLanguages" dense >
                                 <mat-list-item> {{ language }} </mat-list-item>
                                 <mat-divider></mat-divider>
                             </mat-list>

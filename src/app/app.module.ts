@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatSnackBarModule, GestureConfig } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,9 @@ import { ElectronControlsComponent } from './components/electron-controls/electr
     MatCardModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

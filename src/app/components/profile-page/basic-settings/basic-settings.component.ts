@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from 'src/app/services/SettingsService/settings.service';
 
 @Component({
   selector: 'app-basic-settings',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicSettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public settings: SettingsService) { }
 
   ngOnInit() {
   }
 
+  
+  formatVolumeSlider(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    return `${value}%`;
+  }
+  
+  public settingChanged(): void{
+    this.settings.notifyUnsavedChanges();
+  }
 }
