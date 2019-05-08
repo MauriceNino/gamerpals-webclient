@@ -6,11 +6,13 @@
                     <ng-template matStepLabel>Account Information</ng-template>
 
                     <div class="leftSideOfForm" style="width: 65%">
-                        <mat-form-field style="width: 60%">
-                            <input matInput placeholder="Username" formControlName="username" required>
+                        <mat-form-field style="width: 60%" appearance="outline">
+                            <mat-label>Pick a Username</mat-label>
+                            <input matInput placeholder=" ..." formControlName="username" required>
                         </mat-form-field>
-                        <mat-form-field>
-                            <textarea id="profileInfo" matInput placeholder="Profile Information" rows="6"></textarea>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Describe yourself</mat-label>
+                            <textarea id="profileInfo" matInput placeholder=" ..." rows="6"></textarea>
                         </mat-form-field>
                     </div>
 
@@ -84,6 +86,20 @@
 
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button matStepperNext>Next</button>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="thirdFormGroup" id="games-input">
+                <form [formGroup]="thirdFormGroup">
+                    <ng-template matStepLabel>Pick your Games!</ng-template>
+
+                    <div class="leftSideOfForm">
+                    </div>
+                    
+                    <div class="rightSideOfForm">
+                    </div>
+
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button matStepperNext color="primary">Finished!</button>
                 </form>
             </mat-step>
         </mat-horizontal-stepper>

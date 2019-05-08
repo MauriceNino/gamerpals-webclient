@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material';
 export class LoginPageComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
   imageUrl: string="";
 
   // Country picker
@@ -49,6 +50,8 @@ export class LoginPageComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       birthday: ['', Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
     });
   }
 
