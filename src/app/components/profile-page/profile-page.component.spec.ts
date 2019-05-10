@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfilePageComponent } from './profile-page.component';
+import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
+import { SettingsService } from 'src/app/services/SettingsService/settings.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -8,7 +11,9 @@ describe('ProfilePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfilePageComponent ]
+      declarations: [ ProfilePageComponent ],
+      providers: [GoogleLoginService, SettingsService],
+      imports: [RouterTestingModule]
     })
     .compileComponents();
   }));

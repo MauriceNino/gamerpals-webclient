@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GamerPalsHelperMethodService } from '../GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { PlatformInfoService } from '../PlatformInfoService/platform-info.service';
-
+import { IGoogleAuth, IIsSignedIn, IGoogleUser } from 'src/app/models/gapiImpl';
+declare var gapi: any;
 @Injectable({
   providedIn: 'root'
 })
 export class GoogleLoginService {
   private static clientId: string = "533079699939-156l7gmrnfnqhbrsjpm5n6gjcvccp147.apps.googleusercontent.com";
-  public static googleAuth: gapi.auth2.GoogleAuth;
+  public static googleAuth: IGoogleAuth;
   
   constructor(private gpHelperMethods: GamerPalsHelperMethodService,
     private platformInfo: PlatformInfoService) { }
@@ -20,7 +21,7 @@ export class GoogleLoginService {
 
       this.gpHelperMethods.callWhenPropertyAvailable("gapi", () => {
         gapi.load('auth2', () => {
-          let auth: gapi.auth2.GoogleAuth = gapi.auth2.init({client_id: GoogleLoginService.clientId});
+          let auth: IGoogleAuth = gapi.auth2.init({client_id: GoogleLoginService.clientId});
           GoogleLoginService.googleAuth = auth;
 
           resolve(auth);
@@ -34,12 +35,12 @@ export class GoogleLoginService {
       callback(isSignedIn);
     });
 
-    this.isUserSignedInListener().then((signedInListener: gapi.auth2.IsSignedIn)=>{
+    this.isUserSignedInListener().then((signedInListener: IIsSignedIn)=>{
       signedInListener.listen((isSignedIn: boolean) => callback(isSignedIn));
     });
   }
   
-  public async isUserSignedInListener(): Promise<gapi.auth2.IsSignedIn> {
+  public async isUserSignedInListener(): Promise<IIsSignedIn> {
     await this.initGoogleLogin();
 
     return new Promise((resolve, reject) => {
@@ -55,11 +56,11 @@ export class GoogleLoginService {
     })
   }
 
-  public async getSignedInUser(): Promise<gapi.auth2.GoogleUser> {
+  public async getSignedInUser(): Promise<IGoogleUser> {
     await this.initGoogleLogin();
 
-    return new Promise<gapi.auth2.GoogleUser>((resolve, reject) => {
-      let user: gapi.auth2.GoogleUser = GoogleLoginService.googleAuth.currentUser.get();
+    return new Promise<IGoogleUser>((resolve, reject) => {
+      let user: IGoogleUser = GoogleLoginService.googleAuth.currentUser.get();
       if(user == null) reject();
 
       resolve(user);

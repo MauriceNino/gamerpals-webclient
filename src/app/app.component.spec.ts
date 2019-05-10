@@ -1,15 +1,34 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
+import { HeaderComponent } from './components/header/header.component';
+import { NavigationComponent } from './components/header/navigation/navigation.component';
+import { ProfileButtonComponent } from './components/header/profile-button/profile-button.component';
+import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        // Angular Material
+        MatButtonModule,
+        MatCardModule,
+        MatSnackBarModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        HeaderComponent,
+        NavigationComponent,
+        ProfileButtonComponent,
+        ElectronControlsComponent
       ],
     }).compileComponents();
   }));
@@ -18,18 +37,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'GamerPalsWebsite'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('GamerPalsWebsite');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to GamerPalsWebsite!');
   });
 });

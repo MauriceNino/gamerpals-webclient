@@ -14,6 +14,7 @@ import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { SettingsService } from './services/SettingsService/settings.service';
+import { IUser } from './models/models';
 
 @Component({
   selector: 'app-root',

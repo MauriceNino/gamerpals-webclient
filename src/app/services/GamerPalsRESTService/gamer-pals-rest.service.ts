@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IUser, IActiveSearch } from 'src/app/models/models';
 
 @Injectable({
   providedIn: 'root'

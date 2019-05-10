@@ -1,4 +1,4 @@
-interface IUser {
+export interface IUser {
     userID: number
     facebookID: number
     googleID: number
@@ -12,7 +12,7 @@ interface IUser {
     languages: number
 }
 
-interface IActiveSearch {
+export interface IActiveSearch {
     activeSearchID: number
     server: string
     searchType: string

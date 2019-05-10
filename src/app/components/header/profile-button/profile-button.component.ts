@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { IGoogleUser } from 'src/app/models/gapiImpl';
 
 @Component({
   selector: 'app-profile-button',
@@ -21,7 +22,7 @@ export class ProfileButtonComponent implements OnInit {
         this.isUserSignedIn = isSignedIn
           
         if(this.isUserSignedIn){
-          this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
+          this.gLoginService.getSignedInUser().then((user: IGoogleUser) => {
             this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
           });
         }
@@ -36,7 +37,7 @@ export class ProfileButtonComponent implements OnInit {
         //this.router.navigateByUrl("/login");
         this.router.navigateByUrl("/profile");
       } else {
-        this.gLoginService.signInUser().then((user: gapi.auth2.GoogleUser )=>{
+        this.gLoginService.signInUser().then((user: IGoogleUser )=>{
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
           //TODO: If user has not completed his pofile yet -> send him to login
           this.router.navigateByUrl("/login");

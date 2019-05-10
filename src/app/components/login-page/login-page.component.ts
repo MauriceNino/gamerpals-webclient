@@ -4,6 +4,7 @@ import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-l
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { IGoogleUser } from 'src/app/models/gapiImpl';
 
 @Component({
   selector: 'app-login-page',
@@ -41,7 +42,7 @@ export class LoginPageComponent implements OnInit {
       this.languageList = languageList;
     })
 
-    this.gLoginService.getSignedInUser().then((user: gapi.auth2.GoogleUser) => {
+    this.gLoginService.getSignedInUser().then((user: IGoogleUser) => {
       this.imageUrl = user.getBasicProfile().getImageUrl();
     });
 
