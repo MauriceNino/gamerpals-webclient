@@ -6,21 +6,20 @@ import { LoginPageRoutingModule } from './login-page-routing.module';
 import { MatStepperModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatIconModule, MatListModule, MatSnackBarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ],
+      declarations: [LoginPageComponent],
       providers: [GoogleLoginService],
       imports: [
         BrowserAnimationsModule,
         CommonModule,
-        LoginPageRoutingModule,
         MatStepperModule,
         MatFormFieldModule,
         MatInputModule,
@@ -33,9 +32,10 @@ describe('LoginPageComponent', () => {
         FormsModule,
         MatSnackBarModule,
         ReactiveFormsModule,
-        HttpClientModule
-    ]})
-    .compileComponents();
+        HttpClientTestingModule
+      ]
+    })
+      .compileComponents();
   }));
 
   beforeEach(() => {
