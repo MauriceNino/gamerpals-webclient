@@ -13,6 +13,7 @@ import { GoogleLoginService } from './services/GoogleLoginService/google-login.s
 import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { SettingsService } from './services/SettingsService/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -46,13 +47,14 @@ export class AppComponent {
 
   constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
     private gpRESTService: GamerPalsRestService, private router: Router,
-    private zone: NgZone, private snackBar: MatSnackBar) {
+    private zone: NgZone, private snackBar: MatSnackBar, private settings: SettingsService) {
   }
   
   ngOnInit(): void {
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
 
+    this.settings.loadSettings(false)
     
     // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
