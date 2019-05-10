@@ -1,0 +1,20 @@
+sudo: required
+addons:
+  chrome: stable
+language: node_js
+node_js:
+- '10'
+#branches:
+#  only:
+#  - master
+before_script:
+- npm install -g @angular/cli
+script:
+- ng build --prod --aot
+- ng test
+deploy:
+  provider: heroku
+  api_key:
+    secure: Di+KH2GDvF76wjov3ZrfsYYhKP08//LjuTd884ntO9yt9gy1jGbRHxtxHynECMyqZ3YXk80ZFNMLo5ck7gY3F4ooYUMpxmOYsA+S1i3sDliM+to7A9oJ6Ofn7gg56uhlcbZl+6orPaLsJK9LcWT0T4z/I22qmJRSqtS3LqBuyFuHXUtdzV62VYQhUFJ37iDed5BHUn7n+oMbgY5IxmrA27sflnPZ9gNY32VQlsDMOZy70yP2a0XWYPenR2K8QPhtFe61cak/ZXFGyi76V96DLNxcmQe6A51C76ymDlhLdkcUWJ/8ZhQVuUkh+/Ar6Mo2IWdtZM0iNbRUriD1SPOdtxFXWZtvQYNG9cmGG3WiDDDcqJrwdwTaYERmvfblVgHdll1+npI8yiZf4FckKCYTS9nrdPe9fjI2z4vKF4p9Yf+Hg+S0sVTIUIPc89FobSBcAAKHPp5IzUNTNS/fcYoKTraFtB7n6tHEPzOzIsQhLWVYscEbR0A5QVa7D9Xrog3SrxsG1cxBHmFcrYBM+4Id384dRBywf/SrxSpd/6ZelKfCJ6+dbFkAuqYXTbRCiqj8TvJZ/sZtjuG5F86MHnwM0AKwTK4oFHczz10qJ4pbSbqMFVmKpn41AsCuIV51QPouhETis0L3UBYDOZZW9El04a9iBuVcpHAx5f8qkiAZpEQ=
+  app: gamerpals-website
+  #on: master
