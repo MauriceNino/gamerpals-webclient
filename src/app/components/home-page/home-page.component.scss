@@ -40,11 +40,14 @@
     transform: translate(-50%, -50%); /* % of current element */
 }
 
+$top_and_bottom_side_distance: 22%;
+$middle_side_distance: 10%;
 
 .gp-home-users-single-base{
     z-index: 15;
     width: 25%;
     min-width: 250px;
+    max-width: 400px;
     height: 120px;
     position: absolute;
     @include boxShadowLevel(2);
@@ -54,32 +57,32 @@
     
     &:nth-child(1) {
         top: 50px;
-        left: 200px;
+        left: $top_and_bottom_side_distance;
     }
     
     &:nth-child(2) {
         top: 50px;
-        right: 200px;
+        right: $top_and_bottom_side_distance;
     }
     
     &:nth-child(3) {
         bottom: calc(50% - 50px);
-        left: 50px;
+        left: $middle_side_distance;
     }
     
     &:nth-child(4) {
         bottom: calc(50% - 50px);
-        right: 50px;
+        right: $middle_side_distance;
     }
     
     &:nth-child(5) {
         bottom: 50px;
-        left: 200px;
+        left: $top_and_bottom_side_distance;
     }
     
     &:nth-child(6) {
         bottom: 50px;
-        right: 200px;
+        right: $top_and_bottom_side_distance;
     }
 
     &.show{
