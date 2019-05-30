@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUser, IActiveSearch } from 'src/app/models/models';
+import { IUser, IActiveSearch, IParameter, IUserGame, IGame } from 'src/app/models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,61 +10,112 @@ export class GamerPalsRestService {
 
   constructor(private http: HttpClient) { }
 
-  private connectionProtocol: string = "http";
-  private connectionEndpoint: string = "localhost";
+  private connectionProtocol: string = 'http';
+  private connectionEndpoint: string = 'localhost';
   private connectionPort: number = 53175;
 
-  private  loggedInUserBearerToken: string;
-  private  loggedInUserData: IUser;
+  private loggedInUserBearerToken: string;
+  private loggedInUserData: IUser;
 
-  private  isLoginRequestPending: boolean = false;
-  private  isLoginAlreadyExecutedOnce: boolean = false;
+  private isLoginRequestPending: boolean = false;
+  private isLoginAlreadyExecutedOnce: boolean = false;
 
-  public  waitForLoginRequest(func: Function, timeout: number): boolean {
-    let step: number = 50; //50 ms recursive steps
+  /////////////////////////////////
+  // Login Stuff
+  /////////////////////////////////
+  public waitForLoginRequest(func: () => void, timeout: number): boolean {
+    const step: number = 50; // 50 ms recursive steps
 
-    if(!this.isLoginRequestPending && this.isLoginAlreadyExecutedOnce) {
+    if (!this.isLoginRequestPending && this.isLoginAlreadyExecutedOnce) {
       func();
       return true;
-    }
-    else if(timeout>=0) {
-      timeout-=step;
-      setTimeout(()=>this.waitForLoginRequest(func, timeout), step);
-    }
-    else {
-      console.error("Couldnt wait for LoginRequest any longer");
+    } else if (timeout >= 0) {
+      timeout -= step;
+      setTimeout(() => this.waitForLoginRequest(func, timeout), step);
+    } else {
+      console.error('Couldnt wait for LoginRequest any longer');
       return false;
     }
   }
 
-  public  sendLoginRequest(type: number, userid: number): Observable<{token: string, user: IUser}> {
+  public sendLoginRequest(type: number, userid: number): Observable<{token: string, user: IUser}> {
     this.isLoginRequestPending = true;
     this.isLoginAlreadyExecutedOnce = true;
 
-    let headers: HttpHeaders = new HttpHeaders({
-      "Content-Type": "application/json"
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
 
     return this.http.post<{token: string, user: IUser}>
-      (`${this.getBaseConnectionUrl()}/api/Login`, {type: type, userid: userid}, {headers: headers});
+      (`${this.getBaseConnectionUrl()}/api/Login`, {type, userid}, {headers});
   }
 
-  public  fetchActiveSearches(): Observable<IActiveSearch[]> {
-    let headers: HttpHeaders = new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization": this.loggedInUserBearerToken
+  public setLoggedInUser(data: {token: string, user: IUser}): void {
+    this.isLoginRequestPending = false;
+    this.loggedInUserBearerToken = 'Bearer ' + data.token;
+    this.loggedInUserData = data.user;
+  }
+  public getLoggedInUser(): IUser {
+    return this.loggedInUserData;
+  }
+
+  /////////////////////////////////
+  // Active Search Stuff
+  /////////////////////////////////
+  public fetchActiveSearches(parameters: any): Observable<IActiveSearch[]> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': this.loggedInUserBearerToken
     });
 
     return this.http.get<IActiveSearch[]>
-      (`${this.getBaseConnectionUrl()}/api/ActiveSearches`, {headers: headers});
+      (`${this.getBaseConnectionUrl()}/api/ActiveSearches`, {headers});
   }
 
-  public  setLoggedInUser(data: {token: string, user: IUser}): void {
-    this.loggedInUserBearerToken = "Bearer "+data.token;
-    this.loggedInUserData = data.user;
+  /////////////////////////////////
+  // Games Stuff
+  /////////////////////////////////
+  public fetchGames(): Observable<IGame[]> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': this.loggedInUserBearerToken
+    });
+
+    return this.http.get<IGame[]>
+      (`${this.getBaseConnectionUrl()}/api/Games`, {headers});
   }
 
-  public  getBaseConnectionUrl(): string {
+  public fetchUserGames(): Observable<IUserGame[]> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': this.loggedInUserBearerToken
+    });
+
+    return this.http.get<IUserGame[]>
+      (`${this.getBaseConnectionUrl()}/api/UserGames`, {headers});
+  }
+
+  /////////////////////////////////
+  // Parameters Stuff
+  /////////////////////////////////
+  public fetchGameParameters(gameId: number): Observable<IParameter[]> { // TODO: Add gameId to search when it is implemented in backend
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': this.loggedInUserBearerToken
+    });
+
+    return this.http.get<IParameter[]>
+      (`${this.getBaseConnectionUrl()}/api/Parameters`, {headers});
+  }
+
+  /////////////////////////////////
+  // General Stuff
+  /////////////////////////////////
+  public getBaseConnectionUrl(): string {
     return `${this.connectionProtocol}://${this.connectionEndpoint}:`
       +  `${this.connectionPort}`;
   }

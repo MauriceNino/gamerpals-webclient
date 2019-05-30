@@ -1,3 +1,48 @@
-<p>
-  short-search-page works!
-</p>
+<div id="searchbar-container">
+  <mat-form-field id="searchbar-games-select">
+    <mat-label>Select Games you want to search:</mat-label>
+    <mat-select [formControl]="gamesSelect" multiple (selectionChange)="gamesSelectionChanged($event)">
+      <mat-option *ngFor="let game of games" [value]="game">{{game.game.gameName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          General Information
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="single-setting-container">
+      <mat-form-field appearance="standard">
+        <mat-label>Age</mat-label>
+        <input matInput placeholder="Type the Age you are looking for">
+      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{gameParam.title}}
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <div class="single-setting-container" *ngFor="let param of gameParam.parameters">
+        <div *ngIf="param.parameterType == 'string'">
+          <mat-form-field appearance="standard">
+            <mat-label>{{param.parameterName}}</mat-label>
+            <input matInput placeholder="Type your {{param.parameterName}}">
+          </mat-form-field>
+        </div>
+        <div *ngIf="param.parameterType == 'int'">
+          <mat-form-field appearance="standard">
+            <mat-label>{{param.parameterName}}</mat-label>
+            <input matInput type="number" placeholder="Type your {{param.parameterName}}">
+          </mat-form-field>
+        </div>
+      </div>
+  </mat-expansion-panel>
+</div>

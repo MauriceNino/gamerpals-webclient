@@ -1,15 +1,83 @@
 import { Component, OnInit } from '@angular/core';
+import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
+import { IGame, IUserGame, IParameter } from 'src/app/models/models';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-short-search-page',
   templateUrl: './short-search-page.component.html',
-  styleUrls: ['./short-search-page.component.scss']
+  styleUrls: ['./short-search-page.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('.3s ease-out', style({ opacity: '1' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1' }),
+        animate('.3s ease-out', style({ opacity: '0' })),
+      ])
+    ]),
+  ]
 })
 export class ShortSearchPageComponent implements OnInit {
+  gamesSelect = new FormControl();
+  games: IUserGame[] = [];
+  selectedGamesParameters: ISearchGameInterface[] = [];
 
-  constructor() { }
+  constructor(private restService: GamerPalsRestService) { }
 
   ngOnInit() {
+    this.restService.waitForLoginRequest(
+      async () => {
+        // TODO: When service implements real UserGames method, remove this bulk
+        const games: IGame[] = await this.restService.fetchGames().toPromise();
+        let userGames: IUserGame[] = await this.restService.fetchUserGames().toPromise();
+
+        userGames = userGames.map(ug => {
+          ug.game = games.find(g => g.gameID === ug.gameID);
+          return ug;
+        }).filter(ug => [6, 8, 9, 15].indexOf(ug.userID) !== -1);
+
+        this.games = userGames;
+      },
+      5000
+    );
   }
 
+  gamesSelectionChanged(event: MatSelectChange): void {
+    const selectedGames: IUserGame[] = event.value;
+
+    // Add all elements that are not yet in the list
+    selectedGames.forEach(async (game: IUserGame) => {
+      const paramIndex: number = this.selectedGamesParameters.map(param => param.game.gameID).indexOf(game.gameID);
+      if (paramIndex === -1) {
+        const parameters: IParameter[] = await this.restService.fetchGameParameters(game.gameID).toPromise();
+        this.selectedGamesParameters.push({parameters, game, title: game.game.gameName, show: true, canDisable: true});
+      } else if (this.selectedGamesParameters[paramIndex].show === false) {
+        this.selectedGamesParameters[paramIndex].show = true;
+      }
+    });
+
+    // Disable all elements that are not shown anymore
+    this.selectedGamesParameters.forEach(async (param: ISearchGameInterface) => {
+      if (selectedGames.map(s => s.gameID).indexOf(param.game.gameID) === -1 && param.title !== 'General Parameters') {
+        param.show = false;
+      }
+    });
+  }
+
+  getAllShownParams(): ISearchGameInterface[] {
+    return this.selectedGamesParameters.filter(p => p.show);
+  }
+}
+
+interface ISearchGameInterface {
+  parameters: IParameter[];
+  game: IUserGame;
+  title: string;
+  canDisable: boolean;
+  show: boolean;
 }
