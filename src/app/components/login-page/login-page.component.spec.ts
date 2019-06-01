@@ -30,8 +30,8 @@ describe('LoginPageComponent', () => {
         MatIconModule,
         MatListModule,
         FormsModule,
-        MatSnackBarModule,
         ReactiveFormsModule,
+        MatSnackBarModule,
         HttpClientTestingModule
       ]
     })

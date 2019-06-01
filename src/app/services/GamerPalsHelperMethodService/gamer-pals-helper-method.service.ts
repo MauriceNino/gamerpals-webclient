@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class GamerPalsHelperMethodService {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
 
   public showErrorOnPage(): void {
     this.showSnackbarOnPage('GamerPals seems to be (kinda) down at the moment!', 'Retry!', () => window.location.reload(), 60000);
@@ -14,10 +14,12 @@ export class GamerPalsHelperMethodService {
 
   // tslint:disable-next-line: ban-types
   public showSnackbarOnPage(errorMsg: string, buttonMsg: string, buttonAction: Function, duration: number): void {
-    this.snackBar.open(errorMsg, buttonMsg, {
-      duration
-    }).onAction().subscribe(() => {
-      buttonAction();
+    this.zone.run(() => {
+      this.snackBar.open(errorMsg, buttonMsg, {
+        duration
+      }).onAction().subscribe(() => {
+        buttonAction();
+      });
     });
   }
 

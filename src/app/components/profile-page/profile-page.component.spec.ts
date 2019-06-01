@@ -4,6 +4,7 @@ import { ProfilePageComponent } from './profile-page.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { SettingsService } from 'src/app/services/SettingsService/settings.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBarModule } from '@angular/material';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -13,7 +14,10 @@ describe('ProfilePageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProfilePageComponent ],
       providers: [GoogleLoginService, SettingsService],
-      imports: [RouterTestingModule]
+      imports: [
+        RouterTestingModule,
+        MatSnackBarModule
+      ]
     })
     .compileComponents();
   }));
