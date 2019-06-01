@@ -1,39 +1,86 @@
-<div id="background-video-container" class="dark">
-  <video autoplay muted loop id="background-video">
-    <source src="assets/media/videos/Halo-Game-4K-Live-Wallpaper.mp4" type="video/mp4">
-  </video>
-  <script>
-    document.getElementById('background-video').play();
-  </script>
-</div>
+<div id="welcome-container">
+  <div id="background-video-container" class="dark">
+    <video autoplay muted loop id="background-video">
+      <source src="assets/media/videos/Halo-Game-4K-Live-Wallpaper.mp4" type="video/mp4">
+    </video>
+    <script>
+      document.getElementById('background-video').play();
+    </script>
+  </div>
 
-<div id="gp-status-cards-container">
-  <div class="gp-home-users-single-base" [ngClass]="stat.show?'show':'hide'" *ngFor="let stat of playerStats">
-    <div class="gp-home-users-single-base-game">
-      <span>{{stat.obj.gameName}}</span>
-    </div>
-    <div class="gp-home-users-single-base-game-img">
-      <div class="gp-home-users-single-base-game-img-logo" [style.background-image]="stat.obj.gameImg"></div>
-    </div>
-    <div class="gp-home-users-single-base-stats">
-      <div class="gp-home-users-single-base-stats-searching">
-          <span>{{stat.obj.playerCountSearching}}<br>Searching</span>
-      </div>    
-      <div class="gp-home-users-single-base-stats-online">
-          <span>{{stat.obj.playerCountOnline}}<br>Online</span>
+  <div id="gp-status-cards-container">
+    <div class="gp-home-users-single-base" [ngClass]="stat.show?'show':'hide'" *ngFor="let stat of playerStats">
+      <div class="gp-home-users-single-base-game">
+        <span>{{stat.obj.gameName}}</span>
       </div>
-      <div class="gp-home-users-single-base-stats-bg"></div>
+      <div class="gp-home-users-single-base-game-img">
+        <div class="gp-home-users-single-base-game-img-logo" [style.background-image]="stat.obj.gameImg"></div>
+      </div>
+      <div class="gp-home-users-single-base-stats">
+        <div class="gp-home-users-single-base-stats-searching">
+            <span>{{stat.obj.playerCountSearching}}<br>Searching</span>
+        </div>    
+        <div class="gp-home-users-single-base-stats-online">
+            <span>{{stat.obj.playerCountOnline}}<br>Online</span>
+        </div>
+        <div class="gp-home-users-single-base-stats-bg"></div>
+      </div>
+    </div>
+  </div>
+
+  <a id="gp-home-scrollbutton" href="#gp-home-real-content-top" (click)="scrollToContent($event, scrollTarget)"><span></span></a>
+
+  <div id="gp-home-join-now-spinner">
+    <div id="gp-home-join-now-spinner-outerCircle"></div>
+    <div id="gp-home-join-now-spinner-innerCircle"></div>
+    <div id="gp-join-now-text" (click)="openLoginPage()">
+      {{ isUserSignedIn? 'WELCOME BACK!':'JOIN NOW!'}}
     </div>
   </div>
 </div>
+<div id="content-container">
+  <div id="gp-home-real-content-top"></div>
+  <!--Jeder Gamer kennt das Gefühl, wenn man vergeblich eine gute Gruppe sucht, mit der man in Spielen Spaß haben kann. Das in den meisten Spielen verbaute Matchmaking hat einfach keine Einstellungen, welche ein gezieltes Suchen ermöglichen würde. Meistens werden die erstbesten Spieler zusammen in ein Team gewürfelt und diese müssen dann miteinander auskommen. Mit GamerPals gehört dieses Gefühl der Geschichte an. Wir bieten gezielte Filter und eine aktive Community, wodurch sich jederzeit ein Team finden lässt, mit dem man auch gerne noch ein paar Runden mehr Spielen würde-->
+  <div id="gp-home-real-content" #scrollTarget>
+      <div id="gp-home-real-content-wrapper">
+          <div class="gp-fadeIn-on-view">
+              <section class="gp-home-introduction-heading">
+                  <h1>What is this site about?</h1>
+              </section>
+              <div class="gp-home-introduction-heading-spacer"></div>
+              <section class="gp-home-introduction-content">
+                  
+                  <p>
+                      Every gamer knows the feeling when looking for a good group to have fun in games. The matchmaking built into most games simply has no settings that would allow a targeted search. Most of the time, the first best players are rolled together into a team and they have to get along with each other.
+                      <br><br><br>
+                      With GamerPals this feeling belongs to history. We offer targeted filters and an active community, so you can always find a team that would like to play a few more rounds.
+                  </p>
+                  <div class="video-wrapper">
+                      <iframe width="560" height="349"
+                      src="https://www.youtube.com/embed/NM2wtte1JRE" frameborder="0" allowfullscreen>
+                      </iframe>
+                  </div>
+              </section>
+          </div>
+          <div class="gp-fadeIn-on-view">
+            <section class="gp-home-introduction-heading">
+              <h1>Services</h1>
+            </section>
+            <div class="gp-home-introduction-heading-spacer"></div>
+            <section class="gp-home-introduction-content" id="gp-home-introduction-services">
+              We offer some Services
+            </section>
+        
+            <section id="gp-home-introduction-services-wrapper">
+              <div class="gp-home-introduction-services-button"></div>
+              <div class="gp-home-introduction-services-button"></div>
+              <div class="gp-home-introduction-services-button"></div>
+            </section>
+          </div>
+      </div>
+  </div>
+  <div id="gp-home-real-content-bottom"></div>
+  <div id="gp-home-footer">
 
-
-
-
-<div id="gp-home-join-now-spinner">
-  <div id="gp-home-join-now-spinner-outerCircle"></div>
-  <div id="gp-home-join-now-spinner-innerCircle"></div>
-  <div id="gp-join-now-text" (click)="openLoginPage()">
-    {{ isUserSignedIn? 'WELCOME BACK!':'JOIN NOW!'}}
   </div>
 </div>

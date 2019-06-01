@@ -81,6 +81,11 @@ export class HomePageComponent implements OnInit {
   public openLoginPage(): void{
     this.profileButtonComp.loginProfileClick();
   }
+
+  public scrollToContent(e: any, el: HTMLElement): void {
+    e.preventDefault();
+    el.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+  }
 }
 interface IPlayerStat {
   gameName: string;
