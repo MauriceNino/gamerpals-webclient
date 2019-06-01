@@ -6,7 +6,7 @@ import { ShortSearchPageRoutingModule } from './short-search-page-routing.module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatDividerModule, MatToolbarModule, MatExpansionModule, MatButtonModule } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ShortSearchPageComponent', () => {
   let component: ShortSearchPageComponent;
@@ -17,7 +17,7 @@ describe('ShortSearchPageComponent', () => {
       declarations: [ ShortSearchPageComponent ],
       providers: [GamerPalsRestService],
       imports: [
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         ShortSearchPageRoutingModule,
         FormsModule,
         ReactiveFormsModule,
