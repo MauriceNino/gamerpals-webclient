@@ -54,3 +54,30 @@
   <button mat-button color="warn" style="margin-right: 10px;" (click)="resetParameters()">Reset Search Parameters</button>
   <button mat-raised-button color="primary" (click)="applyParameters()">Apply Parameters</button>
 </div>
+<div id="search-result-container">
+  <div id="search-result-header">Showing result for specified filters:</div>
+  <div class="searchResult-base" *ngFor="let test of foundActiveSearches">
+    <div class="searchResult-top">
+        <div class="searchResult-matchPercent-base">
+            <div class="searchResult-matchPercent">NaN %</div>
+            <div class="searchResult-joinStatus almostFull">3/5</div>
+        </div>
+        <div class="searchResult-textBase">
+            <div class="searchResult-text">
+                Lorem ipsum dolor sit amet, consetetur sadipscing
+            </div>
+            <div class="searchResult-text-readMore">More info</div>
+        </div>
+    </div>
+    <div class="searchResult-bottom">
+        <div class="searchResult-lobbyCreator-base">
+            <div class="userPic big"></div>
+        </div>
+        <div class="searchResult-joinees-base">
+            <div class="userPic"></div>
+            <div class="searchResult-joinees-join">Join</div>
+            <div class="searchResult-joinees-bg"></div>
+        </div>
+    </div>
+</div>
+</div>

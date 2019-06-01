@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
-import { IGame, IUserGame, IParameter, IUser } from 'src/app/models/models';
+import { IGame, IUserGame, IParameter, IUser, IActiveSearch } from 'src/app/models/models';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -32,6 +32,8 @@ export class ShortSearchPageComponent implements OnInit {
 
   // The selected option of the #searchbar-games-select MatSelect
   selectedGames: IUserGame[] = [];
+
+  foundActiveSearches: IActiveSearch[] = [null, null, null, null, null, null, null, null, null, null, null];
 
   constructor(private restService: GamerPalsRestService) { }
 
