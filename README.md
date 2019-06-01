@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gamerpals/WebClient.svg?branch=master)](https://travis-ci.org/gamerpals/WebClient)
+[![Build Status](https://travis-ci.org/gamerpals/WebClient.svg?branch=master)](https://travis-ci.org/gamerpals/WebClient) [![Greenkeeper badge](https://badges.greenkeeper.io/gamerpals/WebClient.svg)](https://greenkeeper.io/)
 
 # Information about this Repository
 The official Repository for the GamerPals Website.
