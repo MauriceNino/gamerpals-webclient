@@ -10,6 +10,7 @@ app-electron-controls{
 app-header{
     position: relative;
     float: left;
+    z-index: 99;
 }
 
 #gp_main_content{
