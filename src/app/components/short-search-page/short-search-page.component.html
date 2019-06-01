@@ -22,7 +22,7 @@
     </div>
   </mat-expansion-panel>
 
-  <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn>
+  <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn expanded="false">
     <mat-expansion-panel-header>
       <mat-panel-title>
           {{gameParam.title}}
