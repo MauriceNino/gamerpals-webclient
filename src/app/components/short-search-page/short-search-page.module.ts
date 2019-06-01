@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ShortSearchPageRoutingModule } from './short-search-page-routing.module';
 import { ShortSearchPageComponent } from './short-search-page.component';
-import { MatFormFieldModule, MatSelectModule, MatOptionModule, MatDividerModule, MatInputModule, MatToolbarModule, MatExpansionModule } from '@angular/material';
+import { MatFormFieldModule, MatSelectModule, MatOptionModule, MatDividerModule, MatInputModule, MatToolbarModule, MatExpansionModule, MatButtonModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatDividerModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonModule
   ]
 })
 export class ShortSearchPageModule { }

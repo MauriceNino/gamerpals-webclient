@@ -6,10 +6,68 @@
 }
 
 #searchbar-container {
-    height: 100%;
+    height: calc(100% - 60px);
     width: 400px;
-    overflow: auto;
     background-color: var(--card-color);
+    position: relative;
+    left: 0;
+    top: 0;
+
+    #searchbar-content {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        overflow: auto;
+    }
+
+    #searchbar-container-shadow-bottom {
+        pointer-events: none;
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        box-shadow: inset -5px -200px 71px -167px var(--background-color);
+        opacity: 0;
+        transition: opacity .3s ease-out;
+
+        &.show {
+            opacity: 1;
+        }
+    }
+    
+    #searchbar-container-shadow-top {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        box-shadow: inset -5px 200px 71px -167px var(--background-color);
+        opacity: 0;
+        transition: opacity .3s ease-out;
+
+        &.show {
+            opacity: 1;
+        }
+    }
+}
+
+#searchbar-buttons{
+    height: 60px;
+    width: 400px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: var(--card-color);
+    vertical-align: middle;
+    text-align: center;
+
+    button {
+        margin-top: 15px;
+    }
 }
 
 #searchbar-games-select {
@@ -18,10 +76,13 @@
     margin-top: 20px;
 }
 
-mat-expansion-panel-header {
-    margin-top: 20px;
-    background-color: var(--focused-button-color) !important;
-    border-bottom: 2px solid var(--primary-color) !important;
+mat-expansion-panel {
+    
+    mat-expansion-panel-header {
+        margin-top: 20px;
+        background-color: var(--focused-button-color) !important;
+        border-bottom: 2px solid var(--primary-color) !important;
+    }
 }
 .single-setting-container{
     width: 100%;

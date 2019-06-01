@@ -1,48 +1,56 @@
 <div id="searchbar-container">
-  <mat-form-field id="searchbar-games-select">
-    <mat-label>Select Games you want to search:</mat-label>
-    <mat-select [formControl]="gamesSelect" multiple (selectionChange)="gamesSelectionChanged($event)">
-      <mat-option *ngFor="let game of games" [value]="game">{{game.game.gameName}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div id="searchbar-container-shadow-top" [class.show]="!isTop"></div>
+  <div id="searchbar-content" (scroll)="changeShadows()"> 
+    <mat-form-field id="searchbar-games-select">
+      <mat-label>Select Games you want to search:</mat-label>
+      <mat-select multiple (selectionChange)="gamesSelectionChanged($event)" [(ngModel)]="selectedGames">
+        <mat-option *ngFor="let game of games" [value]="game" class="game-options" selected="true">{{game.game.gameName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          General Information
-      </mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="single-setting-container">
-      <mat-form-field appearance="standard">
-        <mat-label>Age</mat-label>
-        <input matInput placeholder="Type the Age you are looking for">
-      </mat-form-field>
-    </div>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn expanded="false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          {{gameParam.title}}
-      </mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-      <div class="single-setting-container" *ngFor="let param of gameParam.parameters">
-        <div *ngIf="param.parameterType == 'string'">
-          <mat-form-field appearance="standard">
-            <mat-label>{{param.parameterName}}</mat-label>
-            <input matInput placeholder="Type your {{param.parameterName}}">
-          </mat-form-field>
-        </div>
-        <div *ngIf="param.parameterType == 'int'">
-          <mat-form-field appearance="standard">
-            <mat-label>{{param.parameterName}}</mat-label>
-            <input matInput type="number" placeholder="Type your {{param.parameterName}}">
-          </mat-form-field>
-        </div>
+    <mat-expansion-panel (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            General Information
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="single-setting-container">
+        <mat-form-field appearance="standard">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Type the Age you are looking for">
+        </mat-form-field>
       </div>
-  </mat-expansion-panel>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn expanded="false" (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{gameParam.title}}
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <div class="single-setting-container" *ngFor="let paramWithValue of gameParam.parametersWithValue">
+          <div *ngIf="paramWithValue.parameter.parameterType == 'string'">
+            <mat-form-field appearance="standard">
+              <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
+              <input matInput placeholder="Type your {{paramWithValue.parameter.parameterName}}" [(ngModel)]="paramWithValue.value">
+            </mat-form-field>
+          </div>
+          <div *ngIf="paramWithValue.parameter.parameterType == 'int'">
+            <mat-form-field appearance="standard">
+              <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
+              <input matInput type="number" placeholder="Type your {{paramWithValue.parameter.parameterName}}" [(ngModel)]="paramWithValue.value">
+            </mat-form-field>
+          </div>
+        </div>
+    </mat-expansion-panel>
+  </div>
+  <div id="searchbar-container-shadow-bottom" [class.show]="!isBottom"></div>
+</div>
+<div id="searchbar-buttons">
+  <button mat-button color="warn" style="margin-right: 10px;" (click)="resetParameters()">Reset Search Parameters</button>
+  <button mat-raised-button color="primary" (click)="applyParameters()">Apply Parameters</button>
 </div>
