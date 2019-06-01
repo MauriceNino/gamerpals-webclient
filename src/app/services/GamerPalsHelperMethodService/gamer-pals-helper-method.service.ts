@@ -1,14 +1,29 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamerPalsHelperMethodService {
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
+  public showErrorOnPage(): void {
+    this.showSnackbarOnPage('GamerPals seems to be (kinda) down at the moment!', 'Retry!', () => window.location.reload(), 60000);
+  }
+
+  // tslint:disable-next-line: ban-types
+  public showSnackbarOnPage(errorMsg: string, buttonMsg: string, buttonAction: Function, duration: number): void {
+    this.snackBar.open(errorMsg, buttonMsg, {
+      duration
+    }).onAction().subscribe(() => {
+      buttonAction();
+    });
+  }
+
+  // tslint:disable-next-line: ban-types
   public callWhenPropertyAvailable(name: string, callback: Function): void {
-    var interval = 10;
+    const interval = 10;
 
     window.setTimeout(() => {
       if (window[name]) {
@@ -19,11 +34,11 @@ export class GamerPalsHelperMethodService {
     }, interval);
   }
 
-  public callWhenObjectAvailable(obj: Object, callback: Function): void {
-    var interval = 10;
-    
+  public callWhenObjectAvailable(obj: object, callback: () => void): void {
+    const interval = 10;
+
     window.setTimeout(() => {
-      if (obj != undefined) {
+      if (obj !== undefined) {
         callback();
       } else {
         window.setTimeout(() => this.callWhenObjectAvailable(obj, callback), interval);
