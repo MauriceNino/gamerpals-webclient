@@ -9,25 +9,26 @@ import { SettingsService } from 'src/app/services/SettingsService/settings.servi
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  public showButtons=false;
+  public showButtons = false;
 
   constructor(private gLoginService: GoogleLoginService, private router: Router, private settings: SettingsService) { }
 
   ngOnInit() {
-    this.gLoginService.isUserSignedIn().then((isSignedIn: boolean)=>{
-      if(!isSignedIn) this.router.navigateByUrl("/home");
+    this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
+      if (!isSignedIn) { this.router.navigateByUrl('/home'); }
     });
 
-    this.settings.loadSettings(false)
+    this.settings.loadSettings(false);
     this.settings.getObserver().subscribe((type: number) => {
-      if(type==2)
-        this.showButtons=true;
+      if (type === 2) {
+        this.showButtons = true;
+      }
     });
   }
 
   public onLogout(): void {
     this.gLoginService.signOutCurrentUser().then(()=>{
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl('/home');
     });
   }
 

@@ -36,7 +36,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.http.get('assets/data/countrylist.json').subscribe((countryList: {Code: string, Name: string}[]) => {
       this.countryList = countryList;
-    })
+    });
 
     this.http.get('assets/data/languagelist.json').subscribe((languageList: {code: string, name: string, nativeName: string}[]) => {
       this.languageList = languageList;

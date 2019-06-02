@@ -14,6 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatSliderModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ]
 })
 export class ProfilePageModule { }

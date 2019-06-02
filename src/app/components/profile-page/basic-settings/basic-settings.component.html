@@ -15,7 +15,17 @@
   </mat-list-item>
   <mat-list-item>
     <p mat-line class="setting-heading">Volume</p>
-    <mat-slider thumbLabel [displayWith]="formatVolumeSlider" tickInterval="1" style="width: 100%" [(ngModel)]="settings.soundVolume" (change)="settingChanged()"></mat-slider>
+    <mat-slider thumbLabel [displayWith]="formatVolumeSlider" tickInterval="1" style="width: 100%" [(value)]="settings.soundVolume" (change)="settingChanged()"></mat-slider>
+  </mat-list-item>
+  <mat-list-item>
+    <p mat-line class="setting-heading">Site Language</p>
+    <p mat-line class="setting-subheading">Can you speak?</p>
+    
+    <mat-select (selectionChange)="settingChanged()" [(ngModel)]="settings.siteLanguage">
+      <mat-option *ngFor="let language of availableLanguages" [value]="language.code">
+        {{language.name}}
+      </mat-option>
+    </mat-select>
   </mat-list-item>
    
   <mat-divider></mat-divider>
