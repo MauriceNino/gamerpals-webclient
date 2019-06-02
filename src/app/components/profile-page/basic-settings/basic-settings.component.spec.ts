@@ -13,6 +13,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BasicSettingsComponent', () => {
   let component: BasicSettingsComponent;
@@ -33,7 +35,9 @@ describe('BasicSettingsComponent', () => {
         MatSlideToggleModule,
         MatSliderModule,
         MatExpansionModule,
-        MatIconModule
+        MatIconModule,
+        MatSelectModule,
+        HttpClientTestingModule
       ]})
     .compileComponents();
   }));

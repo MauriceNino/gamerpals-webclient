@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "ng build --base-href ./ && electron .",
-    "electronNB": "electron .",
+    "electron:no-build": "electron .",
     "postinstall": "ivy-ngcc && ng build --aot --prod"
   },
   "private": true,
