@@ -32,6 +32,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'friends',
+    loadChildren: () => import('./components/friends-page/friends-page.module').then(m => m.FriendsPageModule),
+    data: {animation: 'profile', preload: true}
+  },
+
+  {
     path: 'login',
     loadChildren: () => import('./components/login-page/login-page.module').then(m => m.LoginPageModule),
     data: {animation: 'login'}
