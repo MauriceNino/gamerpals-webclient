@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomePageComponent } from './home-page.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;

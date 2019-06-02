@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
 import { IGame, IUserGame, IParameter, IUser, IActiveSearch } from 'src/app/models/models';
 import { FormControl } from '@angular/forms';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({

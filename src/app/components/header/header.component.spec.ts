@@ -4,7 +4,7 @@ import { HeaderComponent } from './header.component';
 import { ProfileButtonComponent } from './profile-button/profile-button.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

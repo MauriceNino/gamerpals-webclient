@@ -12,7 +12,7 @@ import { PlatformInfoService } from './services/PlatformInfoService/platform-inf
 import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
 import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingsService } from './services/SettingsService/settings.service';
 import { IUser } from './models/models';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';

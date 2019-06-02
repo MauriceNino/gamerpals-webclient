@@ -5,7 +5,14 @@ import { ProfilePageRoutingModule } from './profile-page-routing.module';
 import { ProfilePageComponent } from './profile-page.component';
 import { BasicSettingsComponent } from './basic-settings/basic-settings.component';
 import { ConnectionSettingsComponent } from './connection-settings/connection-settings.component';
-import { MatButtonModule, MatToolbarModule, MatDividerModule, MatListModule, MatSlideToggleModule, MatSliderModule, MatExpansionModule, MatIconModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

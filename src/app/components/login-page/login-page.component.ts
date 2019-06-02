@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IGoogleUser } from 'src/app/models/gapiImpl';
 
 @Component({

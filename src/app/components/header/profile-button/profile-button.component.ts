@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IGoogleUser } from 'src/app/models/gapiImpl';
 
 @Component({

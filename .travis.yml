@@ -8,7 +8,7 @@ before_script:
 - npm install -g @angular/cli
 script:
 - ng build --prod --aot
-- ng test --browsers PhantomJS
+- ng test --browsers=ChromeHeadless
 deploy:
   provider: heroku
   api_key:

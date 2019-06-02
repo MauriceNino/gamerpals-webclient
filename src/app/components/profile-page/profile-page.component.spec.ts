@@ -4,7 +4,7 @@ import { ProfilePageComponent } from './profile-page.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { SettingsService } from 'src/app/services/SettingsService/settings.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
