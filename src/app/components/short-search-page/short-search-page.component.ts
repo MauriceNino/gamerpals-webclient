@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
 import { IGame, IUserGame, IParameter, IUser, IActiveSearch } from 'src/app/models/models';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-short-search-page',
   templateUrl: './short-search-page.component.html',
   styleUrls: ['./short-search-page.component.scss'],
   animations: [
-    trigger('fadeIn', [
+    trigger('fadeInGames', [
       transition(':enter', [
         style({ opacity: '0' , height: '100px'}),
         animate('.3s ease-out', style({ opacity: '1' , height: '100px' })),
@@ -20,6 +21,16 @@ import { trigger, transition, style, animate } from '@angular/animations';
         animate('.3s ease-out', style({ opacity: '0' })),
       ])
     ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('.5s ease-out', style({ opacity: '1' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1' }),
+        animate('.5s ease-out', style({ opacity: '0' })),
+      ])
+    ])
   ]
 })
 export class ShortSearchPageComponent implements OnInit {
@@ -33,7 +44,17 @@ export class ShortSearchPageComponent implements OnInit {
   // The selected option of the #searchbar-games-select MatSelect
   selectedGames: IUserGame[] = [];
 
-  foundActiveSearches: IActiveSearch[] = [null, null, null, null, null, null, null, null, null, null, null];
+  foundActiveSearches: IActiveSearch[] = [];
+
+  // Loading spinners
+  @ViewChild('gamesLoading', {static: false})
+  gameSpinner: MatSpinner;
+
+  @ViewChild('searchesLoading', {static: false})
+  searchSpinner: MatSpinner;
+
+  @ViewChild('content', {static: false})
+  mainContent: ElementRef;
 
   constructor(private restService: GamerPalsRestService) { }
 
@@ -67,6 +88,14 @@ export class ShortSearchPageComponent implements OnInit {
             this.selectedGames.push(this.games[paramIndex]);
           }
         });
+
+        // Small Timeout to hide the fadeIn effect beeing ugly and only show it after that thing is over
+        setTimeout(() => {
+          this.gameSpinner._elementRef.nativeElement.classList.add('finished-loading');
+          this.mainContent.nativeElement.classList.add('finished-loading');
+
+          this.loadActiveSearches();
+        }, 50);
       },
       5000
     );
@@ -107,6 +136,16 @@ export class ShortSearchPageComponent implements OnInit {
     this.isBottom = searchbar.scrollTop === (searchbar.scrollHeight - searchbar.offsetHeight);
   }
 
+  public loadActiveSearches(): void {
+    this.searchSpinner._elementRef.nativeElement.classList.remove('finished-loading');
+    this.foundActiveSearches = [];
+    // TODO: Remove Timeout and replace with real search function
+    setTimeout(() => {
+      this.foundActiveSearches = [null, null, null, null, null, null, null, null, null, null, null];
+      this.searchSpinner._elementRef.nativeElement.classList.add('finished-loading');
+    }, 1000);
+  }
+
   public saveParametersToLocalStorage(paramArr: ISearchGameParametersInterface[]): void {
     localStorage.setItem('searchGameParameters', JSON.stringify(paramArr));
   }
@@ -121,6 +160,7 @@ export class ShortSearchPageComponent implements OnInit {
 
   public applyParameters(): void {
     this.saveParametersToLocalStorage(this.getAllShownParams());
+    this.loadActiveSearches();
   }
 }
 

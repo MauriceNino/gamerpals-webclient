@@ -1,6 +1,7 @@
 <div id="searchbar-container">
   <div id="searchbar-container-shadow-top" [class.show]="!isTop"></div>
-  <div id="searchbar-content" (scroll)="changeShadows()"> 
+  <mat-spinner id="gamesLoading-spinner" #gamesLoading></mat-spinner>
+  <div id="searchbar-content" (scroll)="changeShadows()" #content>
     <mat-form-field id="searchbar-games-select">
       <mat-label>Select Games you want to search:</mat-label>
       <mat-select multiple (selectionChange)="gamesSelectionChanged($event)" [(ngModel)]="selectedGames">
@@ -24,7 +25,7 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeIn expanded="false" (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
+    <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeInGames expanded="false" (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
       <mat-expansion-panel-header>
         <mat-panel-title>
             {{gameParam.title}}
@@ -50,13 +51,18 @@
   </div>
   <div id="searchbar-container-shadow-bottom" [class.show]="!isBottom"></div>
 </div>
+
+
 <div id="searchbar-buttons">
   <button mat-button color="warn" style="margin-right: 10px;" (click)="resetParameters()">Reset Search Parameters</button>
   <button mat-raised-button color="primary" (click)="applyParameters()">Apply Parameters</button>
 </div>
+
+
 <div id="search-result-container">
   <div id="search-result-header">Showing result for specified filters:</div>
-  <div class="searchResult-base" *ngFor="let test of foundActiveSearches">
+  <mat-spinner id="searchesLoading-spinner" #searchesLoading></mat-spinner>
+  <div class="searchResult-base" *ngFor="let test of foundActiveSearches" @fadeIn>
     <div class="searchResult-top">
         <div class="searchResult-matchPercent-base">
             <div class="searchResult-matchPercent">NaN %</div>

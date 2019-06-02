@@ -22,6 +22,13 @@
         left: 0;
         top: 0;
         overflow: auto;
+        opacity: 0;
+        transition: opacity .5s ease-in-out;
+
+        &.finished-loading {
+            opacity: 1 !important;
+        }
+    
     }
 
     #searchbar-container-shadow-bottom {
@@ -276,5 +283,37 @@ mat-toolbar {
                 width: 70px;
             }
         }
+    }
+}
+
+#gamesLoading-spinner {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 30%;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+
+    &.finished-loading {
+        opacity: 0 !important;
+    }
+}
+
+#searchesLoading-spinner {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 15%;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+
+    &.finished-loading {
+        opacity: 0 !important;
     }
 }
