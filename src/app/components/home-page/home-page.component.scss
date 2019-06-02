@@ -442,8 +442,9 @@
             }
     
             #gp-home-introduction-services-wrapper{
+                position: relative;
+                float: left;
                 width: 100%;
-                height: 200px;
                 margin-bottom: 120px;
     
                 .gp-home-introduction-services-button{
@@ -451,6 +452,7 @@
                     float: left;
                     margin-left: 3%;
                     width: 30%;
+                    height: 240px;
                     cursor: pointer;
                     @include border-radius(3px);
                     @include boxShadowLevel(2);
@@ -469,11 +471,22 @@
                         transform: translate(3px, -3px);
                         @include boxShadowLevel(3);
                     }
-    
-                    &:before{
-                        content: "";
-                        display: block;
-                        padding-top: 100%;
+
+                    .material-icons {
+                        position: absolute;
+                        top: 30px;
+                        text-align: center;
+                        width: 100%;
+                        font-size: 130px;
+                    }
+
+                    .introduction-services-heading {
+                        position: absolute;
+                        bottom: 15px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        text-align: center;
+                        width: 100%;
                     }
                 }
             }
