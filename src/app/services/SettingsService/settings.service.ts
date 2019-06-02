@@ -12,7 +12,7 @@ export class SettingsService {
   public isDarkThemeEnabled: boolean = true;
   public isSoundEnabled: boolean = true;
   public soundVolume: number = 30;
-  public siteLanguage: string = "EN";
+  public siteLanguage: string = "en-GB";
 
   constructor() { }
 
