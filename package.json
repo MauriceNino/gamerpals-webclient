@@ -15,6 +15,7 @@
   },
   "greenkeeper": {
     "ignore": [
+      "core-js",
       "typescript"
     ]
   },
