@@ -13,6 +13,11 @@
     "electron:no-build": "electron .",
     "postinstall": "ivy-ngcc && ng build --aot --prod"
   },
+  "greenkeeper": {
+    "ignore": [
+      "typescript"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.0.0",
