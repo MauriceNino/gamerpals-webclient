@@ -46,7 +46,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.800.1",
     "@angular/language-service": "^8.0.0",
-    "@types/gapi": "0.0.36",
+    "@types/gapi": "0.0.37",
     "@types/gapi.auth2": "0.0.50",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "~2.0.3",
