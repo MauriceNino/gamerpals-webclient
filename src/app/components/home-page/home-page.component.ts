@@ -25,8 +25,7 @@ export class HomePageComponent implements OnInit {
     {obj: {gameName: 'Tera', playerCountOnline: 867297, playerCountSearching: 7632,
       gameImg: (`url("assets/media/images/game-logos/tera-logo.png")`)}, show: true}
   ];
-  private showOnlyOneRow: boolean = false;
-  public isUserSignedIn: boolean = false;
+  public isUserSignedIn = false;
 
 
   constructor(private sanitizer: DomSanitizer, private router: Router,
@@ -34,7 +33,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     // Set the initial values for the resize dependant components in this page
-    this.onResize(undefined, window.innerWidth);
+    this.onResize(undefined, window.innerWidth, window.innerHeight);
 
     // Get the login status of the user everytime its updated
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
@@ -58,9 +57,14 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  private showOnlyOneRow = false;
+  private showOnlyTopAndBottom = false;
+
   @HostListener('window:resize', ['$event'])
-  private onResize(event, innerWidth: number): void {
+  private onResize(event, innerWidth: number, innerHeight: number): void {
     innerWidth = innerWidth || event.target.innerWidth;
+    innerHeight = innerHeight || event.target.innerHeight;
+
     if (innerWidth < 935) {
       this.showOnlyOneRow = true;
 
@@ -73,12 +77,33 @@ export class HomePageComponent implements OnInit {
 
       document.getElementById('gp-home-join-now-spinner').classList.remove('align-right');
       this.playerStats.forEach((stat, i) => {
-        stat.show = true;
+        if (!(i === 2 || i === 3) || !this.showOnlyTopAndBottom) {
+          stat.show = true;
+        }
+      });
+    }
+    if (!this.showOnlyTopAndBottom && innerHeight < 700) {
+      this.showOnlyTopAndBottom = true;
+      this.playerStats.forEach((stat, i) => {
+        if (i === 2 || i === 3) {
+          stat.show =  false;
+        }
+      });
+    } else if (innerHeight >= 700) {
+      this.showOnlyTopAndBottom = false;
+      this.playerStats.forEach((stat, i) => {
+        if (i === 2) {
+          stat.show =  true;
+        }
+
+        if (i === 3 && !this.showOnlyOneRow) {
+          stat.show =  true;
+        }
       });
     }
   }
 
-  public openLoginPage(): void{
+  public openLoginPage(): void {
     this.profileButtonComp.loginProfileClick();
   }
 

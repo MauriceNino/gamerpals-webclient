@@ -78,6 +78,9 @@ export class AppComponent implements OnInit {
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
       console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
 
+      // Default redirect disabled, because it needs to wait for Google Login
+      this.router.navigateByUrl('');
+
       if (isSignedIn) {
         // TODO: make request to backend variable
         this.gpRESTService.sendLoginRequest(0, 1234).subscribe((user: { token: string; user: IUser; }) => {
