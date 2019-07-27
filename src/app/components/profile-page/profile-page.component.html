@@ -1,7 +1,7 @@
 <div id="settings-control-panel" #settingsControlPanel>
     <div id="settings-button-container">
-        <button mat-button routerLink="basic" [routerLinkActive]="isMobile()?'':'active'" (click)="toggleMenu()">Basic</button>
-        <button mat-button routerLink="connections" [routerLinkActive]="isMobile()?'':'active'" (click)="toggleMenu()">Connection</button>
+        <button mat-button routerLink="basic" [routerLinkActive]="'active'" (click)="toggleMenu()">Basic</button>
+        <button mat-button routerLink="connections" [routerLinkActive]="'active'" (click)="toggleMenu()">Connection</button>
         <button mat-raised-button color="primary" (click)="onLogout()">Logout</button>
     </div>
 </div>

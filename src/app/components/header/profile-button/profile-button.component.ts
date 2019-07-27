@@ -66,6 +66,8 @@ export class ProfileButtonComponent implements OnInit {
           });
         });
       }
+    }).catch((error) => {
+      this.router.navigateByUrl('/profile');
     });
   }
 }

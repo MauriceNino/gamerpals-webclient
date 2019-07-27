@@ -35,9 +35,9 @@
             width: 100%;
             height: 50px;
             text-align: left;
-    
+
             &.active{
-                background-color: var(--focused-button-color);
+                background-color: unset;
             }
         }
            
