@@ -1,3 +1,13 @@
-<p>
-  friends-page works!
-</p>
+<div id="friends-container">
+  <div id="friends-container-shadow-top" [class.show]="!isTop"></div>
+  <mat-spinner id="friendsLoading-spinner" #friendsLoading></mat-spinner>
+  <div id="friends-content" (scroll)="changeShadows()" #content>
+    
+  </div>
+  <div id="friends-container-shadow-bottom" [class.show]="!isBottom"></div>
+</div>
+
+
+<div id="single-friend-container">
+  
+</div>
