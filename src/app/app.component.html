@@ -1,7 +1,7 @@
 <app-electron-controls [ngStyle]="{'display': showElectronControls == true? 'block' : 'none'}"></app-electron-controls>
 <app-header></app-header>
 
-<div id="gp_main_content" [ngStyle]="{'height': showElectronControls == true? 'calc(100% - 102px)' : 'calc(100% - 80px)'}">
+<div id="gp_main_content">
     <div [@routeAnimations]="mainOutlet && mainOutlet.activatedRouteData 
       && mainOutlet.activatedRouteData['animation']">
         <router-outlet #mainOutlet="outlet"></router-outlet>

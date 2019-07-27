@@ -105,136 +105,167 @@
     $top-and-bottom-side-distance: 22%;
     $middle-side-distance: 10%;
 
-    .gp-home-users-single-base{
-        z-index: 15;
-        width: 25%;
-        min-width: 250px;
-        max-width: 400px;
-        height: 120px;
+    #gp-status-cards-container {
         position: absolute;
-        @include boxShadowLevel(2);
-        transition: box-shadow 0.4s, transform 0.4s;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        overflow: hidden;
+        
+        .gp-home-users-single-base{
+            z-index: 15;
+            width: 25%;
+            min-width: 250px;
+            max-width: 400px;
+            height: 120px;
+            position: absolute;
+            @include boxShadowLevel(2);
+            transition: box-shadow 0.4s, transform 0.4s, width .3s, height .3s, left .3s, top .3s;
+    
+            transform: scale(0);
+    
+            :host-context(.mobile) & {
+                width: 90%;
+                height: 160px;
+                min-width: unset;
+                max-width: unset;
+                left: 5%;
 
-        transform: scale(0);
-        
-        &:nth-child(1) {
-            top: 50px;
-            left: $top-and-bottom-side-distance;
-        }
-        
-        &:nth-child(2) {
-            top: 50px;
-            right: $top-and-bottom-side-distance;
-        }
-        
-        &:nth-child(3) {
-            bottom: calc(50% - 50px);
-            left: $middle-side-distance;
-        }
-        
-        &:nth-child(4) {
-            bottom: calc(50% - 50px);
-            right: $middle-side-distance;
-        }
-        
-        &:nth-child(5) {
-            bottom: 50px;
-            left: $top-and-bottom-side-distance;
-        }
-        
-        &:nth-child(6) {
-            bottom: 50px;
-            right: $top-and-bottom-side-distance;
-        }
+                &:nth-child(3) {
+                    bottom: calc(50% - 25px);
+                }
+                
+                &:nth-child(5) {
+                    bottom: 125px;
+                }
 
-        &.show{
-            transform: scale(0.9);
-        }
-        &:nth-child(odd):hover{
-            transform: translate(-3px, -3px) scale(1);
-            @include boxShadowLevel(3);
-        }
-        &:nth-child(even):hover{
-            transform: translate(3px, -3px) scale(1);
-            @include boxShadowLevel(3);
-        }
-
-        .gp-home-users-single-base-game{
-            height: 40px;
-            width: 100%;
-            background-color: var(--background-color);
-            float: left;
-            color: var(--text-color);
-
-            span{
-                position: relative;
-                top: 15px;
-                left: 15px;
-                font-size: 18px;
+                &.show{
+                    transform: unset;
+                }
+                
             }
-        }
-
-        .gp-home-users-single-base-game-img{
-            height: 80px;
-            width: 80px;
-            background-color: var(--background-color);
-            border-bottom: var(--primary-color) 2px solid;
-            float: left;
-
-            .gp-home-users-single-base-game-img-logo{
-                height: 50px;
-                width: 50px;
-                margin-top: 15px;
-                margin-left: 15px;
-
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: contain;
+            
+            &:nth-child(1) {
+                top: 50px;
+                left: $top-and-bottom-side-distance;
             }
-        }
-
-        .gp-home-users-single-base-stats{
-            position: relative;
-            z-index: 4;
-            height: 80px;
-            width: calc(100% - 80px);
-            float: left;
-            text-align: center;
-
-            .gp-home-users-single-base-stats-online{
-                z-index: 4;
-                position: relative;
-                float: left;
-                width: 50%;
-                height: 100%;
-                color: var(--text-color);
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            
+            &:nth-child(2) {
+                top: 50px;
+                right: $top-and-bottom-side-distance;
             }
-
-            .gp-home-users-single-base-stats-searching{
-                z-index: 4;
-                position: relative;
-                float: left;
-                width: 50%;
-                height: 100%;
-                color: var(--text-color);
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            
+            &:nth-child(3) {
+                bottom: calc(50% - 50px);
+                left: $middle-side-distance;
             }
-
-            .gp-home-users-single-base-stats-bg{
-                position: absolute;
-                z-index: 3;
-                top: 0px;
-                left: 0px;
-                height: 80px;
+            
+            &:nth-child(4) {
+                bottom: calc(50% - 50px);
+                right: $middle-side-distance;
+            }
+            
+            &:nth-child(5) {
+                bottom: 50px;
+                left: $top-and-bottom-side-distance;
+            }
+            
+            &:nth-child(6) {
+                bottom: 50px;
+                right: $top-and-bottom-side-distance;
+            }
+    
+            &.show{
+                transform: scale(0.9);
+            }
+            &:nth-child(odd):hover{
+                transform: translate(-3px, -3px) scale(1);
+                @include boxShadowLevel(3);
+            }
+            &:nth-child(even):hover{
+                transform: translate(3px, -3px) scale(1);
+                @include boxShadowLevel(3);
+            }
+    
+            .gp-home-users-single-base-game{
+                height: 40px;
                 width: 100%;
                 background-color: var(--background-color);
+                float: left;
+                color: var(--text-color);
+    
+                span{
+                    position: relative;
+                    top: 15px;
+                    left: 15px;
+                    font-size: 18px;
+                }
+            }
+    
+            .gp-home-users-single-base-game-img{
+                height: calc(100% - 40px);
+                width: 80px;
+                background-color: var(--background-color);
                 border-bottom: var(--primary-color) 2px solid;
-                opacity: 0.5;
+                float: left;
+    
+                .gp-home-users-single-base-game-img-logo{
+                    height: 50px;
+                    width: 50px;
+                    margin-top: 15px;
+                    margin-left: 15px;
+    
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                }
+            }
+    
+            .gp-home-users-single-base-stats{
+                position: relative;
+                z-index: 4;
+                height: calc(100% - 40px);
+                width: calc(100% - 80px);
+                float: left;
+                text-align: center;
+    
+                .gp-home-users-single-base-stats-online{
+                    z-index: 4;
+                    position: relative;
+                    float: left;
+                    width: 50%;
+                    height: 100%;
+                    color: var(--text-color);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+    
+                .gp-home-users-single-base-stats-searching{
+                    z-index: 4;
+                    position: relative;
+                    float: left;
+                    width: 50%;
+                    height: 100%;
+                    color: var(--text-color);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+    
+                .gp-home-users-single-base-stats-bg{
+                    position: absolute;
+                    z-index: 3;
+                    top: 0px;
+                    left: 0px;
+                    height: 100%;
+                    width: 100%;
+                    background-color: var(--background-color);
+                    border-bottom: var(--primary-color) 2px solid;
+                    opacity: 0.5;
+                }
             }
         }
     }
@@ -255,6 +286,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: right .3s;
+
+        :host-context(.mobile) & {
+            right: -100%;
+        }
 
         &.align-right{
             left: unset;
@@ -271,7 +307,7 @@
             top: calc(10% - $border-size);
             left: calc(10% - $border-size);
             border-radius: 50%;
-            border: $border-size solid #000;
+            border: $border-size solid var(--primary-color);
             border-color: var(--primary-color) transparent var(--primary-color) transparent;
             -webkit-animation: spin-animation 15s linear infinite;
             animation: spin-animation 15s linear infinite;
@@ -300,11 +336,12 @@
     }
 
     #gp-home-scrollbutton {
-        z-index: 5;
+        z-index: 15;
         padding-top: 100px;
         cursor: pointer;
 
         span {
+            z-index: 15;
             position: absolute;
             bottom: 50px;
             left: 50%;

@@ -26,17 +26,17 @@
         <div class="gp-home-users-single-base-stats-bg"></div>
       </div>
     </div>
+    <div id="gp-home-join-now-spinner">
+      <div id="gp-home-join-now-spinner-outerCircle"></div>
+      <div id="gp-home-join-now-spinner-innerCircle"></div>
+      <div id="gp-join-now-text" (click)="openLoginPage()">
+        {{ isUserSignedIn? 'WELCOME BACK!':'JOIN NOW!'}}
+      </div>
+    </div>
   </div>
 
   <a id="gp-home-scrollbutton" (click)="scrollToContent($event, scrollTarget)"><span></span></a>
 
-  <div id="gp-home-join-now-spinner">
-    <div id="gp-home-join-now-spinner-outerCircle"></div>
-    <div id="gp-home-join-now-spinner-innerCircle"></div>
-    <div id="gp-join-now-text" (click)="openLoginPage()">
-      {{ isUserSignedIn? 'WELCOME BACK!':'JOIN NOW!'}}
-    </div>
-  </div>
 </div>
 <div id="content-container">
   <div id="gp-home-real-content-top"></div>

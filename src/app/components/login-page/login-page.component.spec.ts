@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -41,7 +42,8 @@ describe('LoginPageComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatSnackBarModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        DeviceDetectorModule.forRoot()
       ]
     })
       .compileComponents();

@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+
+export enum SettingsChangedState {
+  SAVED,
+  UNSAVED
+}
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
-  public settingsLoaded: boolean = false;
+  public settingsLoaded = false;
   // 0 - nothing changed, 1 - changes saved, 2 - changes but not saved
-  public settingsChanged: Subject<number> = new Subject();
+  public settingsChanged: Subject<SettingsChangedState> = new Subject();
 
-  public isDarkThemeEnabled: boolean = true;
-  public isSoundEnabled: boolean = true;
-  public soundVolume: number = 30;
-  public siteLanguage: string = "en-GB";
+  public isDarkThemeEnabled = true;
+  public isSoundEnabled = true;
+  public soundVolume = 30;
+  public siteLanguage = 'en-GB';
 
   constructor() { }
 
-  public getObserver(): Observable<number> {
+  public getObserver(): Observable<SettingsChangedState> {
     return this.settingsChanged.asObservable();
   }
 
@@ -50,9 +55,12 @@ export class SettingsService {
       }
 
       // If its the first load, initialize siteSpecific settings
-      if (!this.settingsLoaded) { this.settingsChanged.subscribe((type: number) => {
-        if (type === 1) { this.applySiteSpecificSettings(); }
-      });
+      if (!this.settingsLoaded) {
+        this.settingsChanged.subscribe((type: number) => {
+          if (type === 1) {
+            this.applySiteSpecificSettings();
+          }
+        });
       }
 
       this.settingsLoaded = true;
@@ -75,22 +83,22 @@ export class SettingsService {
       localStorage.setItem('soundVolume', `${this.soundVolume}`);
       localStorage.setItem('siteLanguage', `${this.siteLanguage}`);
 
-      this.settingsChanged.next(1);
+      this.settingsChanged.next(SettingsChangedState.SAVED);
 
       resolve(this);
     });
   }
 
-  public notifyUnsavedChanges(): void{
-    this.settingsChanged.next(2);
+  public notifyUnsavedChanges(): void {
+    this.settingsChanged.next(SettingsChangedState.UNSAVED);
   }
 
   private applySiteSpecificSettings(): void {
     const htmlNode = document.documentElement;
-    if(this.isDarkThemeEnabled && !htmlNode.classList.contains('dark-theme')){
+    if (this.isDarkThemeEnabled && !htmlNode.classList.contains('dark-theme')) {
       htmlNode.classList.add('dark-theme');
       htmlNode.classList.remove('light-theme');
-    }else if(!this.isDarkThemeEnabled && !htmlNode.classList.contains('light-theme')){
+    } else if (!this.isDarkThemeEnabled && !htmlNode.classList.contains('light-theme')) {
       htmlNode.classList.remove('dark-theme');
       htmlNode.classList.add('light-theme');
     }

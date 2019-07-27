@@ -2,14 +2,20 @@
 @import "functions";
 
 :host {
+    width: 100%;
+    height: 80px; // remove this to make mobile navigation pull away content
+    @include boxShadowLevel(4);
+}
+
+#header_bar {
+    position: relative;
     display: block;
     width: 100%;
     height: 80px;
-    z-index: 5;
+    z-index: 15 !important;
     background-color: var(--app-bar-color);
 
     @include no-select();
-    @include boxShadowLevel(4);
     
     text-align: center;
     white-space: nowrap;
@@ -29,3 +35,67 @@
     vertical-align: middle;
     height: 100%;
 }
+
+app-mobile-navigation{
+    @include boxShadowLevel(4);
+    z-index: 5 !important;
+    margin-top: -100%;
+    overflow: hidden;
+    transition: margin-top .5s;
+
+    &.show {
+        margin-top: 0;
+    }
+}
+
+#nav-icon {
+    z-index: 15 !important;
+    width: 50px;
+    height: 38px;
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+  }
+  
+  #nav-icon span{
+    display: block;
+    position: absolute;
+    height: 15%;
+    width: 100%;
+    background: var(--text-color);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+  }
+  
+  #nav-icon span:nth-child(1) {
+    top: 0;
+  }
+  
+  #nav-icon span:nth-child(2) {
+    top: 42.5%;
+  }
+  
+  #nav-icon span:nth-child(3) {
+    top: 85%;
+  }
+  
+  #nav-icon.open span:nth-child(1) {
+    top: 18px;
+    transform: rotate(135deg);
+  }
+  
+  #nav-icon.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+  }
+  
+  #nav-icon.open span:nth-child(3) {
+    top: 18px;
+    transform: rotate(-135deg);
+  }

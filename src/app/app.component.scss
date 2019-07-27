@@ -1,7 +1,10 @@
 @import "variables";
 @import "functions";
 
-
+:host {
+    display: flex;
+    flex-direction: column; 
+}
 app-electron-controls{
     position: relative;
     float: left;
@@ -19,6 +22,7 @@ app-header{
     position: relative;
     float: left;
     overflow: auto;
+    flex: 1;
 
     div{
         height: 100%;

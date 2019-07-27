@@ -4,6 +4,7 @@ import { ProfileButtonComponent } from './profile-button.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('ProfileButtonComponent', () => {
   let component: ProfileButtonComponent;
@@ -13,7 +14,7 @@ describe('ProfileButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProfileButtonComponent ],
       providers: [GoogleLoginService],
-      imports: [RouterTestingModule, MatSnackBarModule]
+      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot()]
     })
     .compileComponents();
   }));

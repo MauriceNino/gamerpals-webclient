@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -13,7 +14,7 @@ describe('HomePageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HomePageComponent ],
       providers: [GoogleLoginService],
-      imports: [RouterTestingModule, MatSnackBarModule]
+      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot()]
     })
     .compileComponents();
   }));

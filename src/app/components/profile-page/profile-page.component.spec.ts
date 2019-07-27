@@ -5,6 +5,7 @@ import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-l
 import { SettingsService } from 'src/app/services/SettingsService/settings.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -16,7 +17,8 @@ describe('ProfilePageComponent', () => {
       providers: [GoogleLoginService, SettingsService],
       imports: [
         RouterTestingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        DeviceDetectorModule.forRoot()
       ]
     })
     .compileComponents();

@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavigationComponent } from './components/header/navigation/navigation.component';
 import { ProfileButtonComponent } from './components/header/profile-button/profile-button.component';
 import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -23,7 +24,8 @@ describe('AppComponent', () => {
         // Angular Material
         MatButtonModule,
         MatCardModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        DeviceDetectorModule.forRoot()
       ],
       declarations: [
         AppComponent,

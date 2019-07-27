@@ -5,6 +5,7 @@ import { ProfileButtonComponent } from './profile-button/profile-button.componen
 import { NavigationComponent } from './navigation/navigation.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DeviceDetectorService, DeviceDetectorModule } from 'ngx-device-detector';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -12,8 +13,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent, ProfileButtonComponent, NavigationComponent],
-      imports: [RouterTestingModule, MatSnackBarModule]
+      declarations: [ HeaderComponent, ProfileButtonComponent, NavigationComponent ],
+      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot()]
     })
     .compileComponents();
   }));

@@ -1,0 +1,58 @@
+@import "variables";
+@import "functions";
+
+:host{
+    display: block;
+}
+
+.gp_main_header_item{
+    height: 80px;
+    background-color: var(--background-color);
+    width: 100%;
+    position: relative;
+    float: left;
+    font-family: Arial;
+    cursor: pointer;
+    text-decoration: none;
+    @include no-select();
+    outline: none !important;
+    transition: opacity 0.15s;
+
+    p {
+        margin-top: 35px;
+        margin-left: 10px;
+        color: var(--text-color);
+    }
+
+    &.active{
+        .gp_main_header_item_active{
+            opacity: 1;
+        }
+    }
+
+    &:hover{
+        .gp_main_header_item_active{
+            opacity: 0.5;
+
+        }
+        
+        &.active{
+            .gp_main_header_item_active{
+                opacity: 1;
+    
+            }
+        }
+    }
+
+    .gp_main_header_item_active{
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+        background-color: var(--primary-color);
+
+        transition: opacity 0.3s;
+    }
+}
+

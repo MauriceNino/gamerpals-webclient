@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, HostListener, OnInit } from '@angular/core';
 import {
   transition,
   trigger,
@@ -8,7 +8,7 @@ import {
   group,
   animateChild
 } from '@angular/animations';
-import { PlatformInfoService } from './services/PlatformInfoService/platform-info.service';
+import { PlatformInfoService, MobileChangedState } from './services/PlatformInfoService/platform-info.service';
 import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
 import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
@@ -24,18 +24,18 @@ import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodSe
   animations: [
     trigger('routeAnimations', [
       transition('* <=> *', [
-        query(':enter, :leave', 
-          style({ position: 'absolute'}), 
+        query(':enter, :leave',
+          style({ position: 'absolute'}),
           { optional: true }),
         group([
-          query(':enter',[
+          query(':enter', [
             style({ opacity: '0' }),
-            animate('0.3s ease-in-out', 
+            animate('0.3s ease-in-out',
             style({ opacity: '1' }))
           ], { optional: true }),
           query(':leave', [
             style({ opacity: '1' }),
-            animate('0.3s ease-in-out', 
+            animate('0.3s ease-in-out',
             style({ opacity: '0' }))
           ], { optional: true }),
         ])
@@ -43,7 +43,7 @@ import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodSe
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'GamerPalsWebsite';
   showElectronControls = false;
 
@@ -51,19 +51,34 @@ export class AppComponent {
               private gpRESTService: GamerPalsRestService, private router: Router,
               private zone: NgZone, private snackBar: MatSnackBar, private settings: SettingsService,
               private gpHelper: GamerPalsHelperMethodService) {
+    this.onResize(undefined);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event): void {
+    const htmlNode = document.documentElement;
+    const currentPlatformMobile = this.platformInfo.isCurrentPlatformMobile();
+
+    if (currentPlatformMobile  && !htmlNode.classList.contains('mobile')) {
+      htmlNode.classList.add('mobile');
+      this.platformInfo.mobileChanged.next(MobileChangedState.IS_MOBILE);
+    } else if (!currentPlatformMobile  && htmlNode.classList.contains('mobile')) {
+      htmlNode.classList.remove('mobile');
+      this.platformInfo.mobileChanged.next(MobileChangedState.IS_DESKTOP);
+    }
   }
 
   ngOnInit(): void {
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
 
-    this.settings.loadSettings(false)
+    this.settings.loadSettings(false);
 
     // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
     this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
       console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
 
-      if(isSignedIn){
+      if (isSignedIn) {
         // TODO: make request to backend variable
         this.gpRESTService.sendLoginRequest(0, 1234).subscribe((user: { token: string; user: IUser; }) => {
           this.gpRESTService.setLoggedInUser(user);

@@ -8,8 +8,8 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 })
 export class FriendsPageComponent implements OnInit {
   // Scrollstatus for the shadow indicators of the friendslist
-  isTop: boolean = true;
-  isBottom: boolean = true;
+  isTop = true;
+  isBottom = true;
 
   // Loading spinners
   @ViewChild('friendsLoading', {static: false})
