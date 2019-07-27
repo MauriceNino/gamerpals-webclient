@@ -6,6 +6,7 @@ import { SettingsService } from 'src/app/services/SettingsService/settings.servi
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -18,6 +19,7 @@ describe('ProfilePageComponent', () => {
       imports: [
         RouterTestingModule,
         MatSnackBarModule,
+        MatDialogModule,
         DeviceDetectorModule.forRoot()
       ]
     })
