@@ -70,7 +70,7 @@ export class GoogleLoginService {
     });
   }
 
-  public async signInUser(mode?: string): Promise<any> {
+  public async signInUser(mode?: string, redirectUri?: string): Promise<any> {
     await this.initGoogleLogin();
 
     const m = mode || 'popup';
@@ -82,16 +82,15 @@ export class GoogleLoginService {
       options.ux_mode = 'popup';
     } else {
       options.ux_mode = 'redirect';
-      options.redirect_uri = 'http://localhost:4200';
+    }
+
+    if (options.ux_mode === 'redirect' && redirectUri != null) {
+      options.redirect_uri = redirectUri;
     }
 
     if (this.platformInfo.isCurrentPlatformElectron()) {
-      return GoogleLoginService.googleAuth.signIn({
-        scope: 'profile email',
-        prompt: 'select_account',
-        ux_mode: 'redirect',
-        redirect_uri: 'http://localhost:4200'
-      });
+      options.ux_mode = 'redirect';
+      return GoogleLoginService.googleAuth.signIn(options);
     } else {
       return GoogleLoginService.googleAuth.signIn(options);
     }
