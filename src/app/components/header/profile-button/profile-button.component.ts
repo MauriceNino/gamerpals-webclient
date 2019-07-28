@@ -38,6 +38,7 @@ export class ProfileButtonComponent implements OnInit {
         // this.router.navigateByUrl("/login");
         this.router.navigateByUrl('/profile');
       } else {
+        console.log(window.location.origin);
         this.gLoginService.signInUser(this.platformInfo.isCurrentPlatformNativeMobile() ? 'redirect' : null, window.location.origin)
         .then((user: IGoogleUser ) => {
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();

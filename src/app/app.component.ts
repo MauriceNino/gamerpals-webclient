@@ -16,6 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingsService } from './services/SettingsService/settings.service';
 import { IUser } from './models/models';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -77,6 +78,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(window.location);
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
 
@@ -86,14 +88,22 @@ export class AppComponent implements OnInit {
 
     this.settings.loadSettings(false);
 
-    // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
-    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
-      console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
-
-      // Default redirect disabled, because it needs to wait for Google Login
+    // Default redirect disabled, because it needs to wait for Google Login on mobile devices
+    if (!this.platformInfo.isCurrentPlatformNativeMobile()) {
       this.zone.run(() => {
         this.router.navigateByUrl('');
       });
+    } else {
+      this.gLoginService.initGoogleLogin().finally(() => {
+        this.zone.run(() => {
+          this.router.navigateByUrl('');
+        });
+      });
+    }
+
+    // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
+    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
+      console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
 
       if (isSignedIn) {
         // TODO: make request to backend variable

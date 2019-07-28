@@ -73,8 +73,6 @@ export class GoogleLoginService {
   public async signInUser(mode?: string, redirectUri?: string): Promise<any> {
     await this.initGoogleLogin();
 
-    console.log(redirectUri)
-
     const m = mode || 'popup';
 
     const options: ISigninOptions = {};
@@ -86,16 +84,11 @@ export class GoogleLoginService {
       options.ux_mode = 'redirect';
     }
 
-    if (options.ux_mode === 'redirect' && redirectUri != null) {
+    if (options.ux_mode === 'redirect' && redirectUri != null /* || this.platformInfo.isCurrentPlatformElectron() */) {
       options.redirect_uri = redirectUri;
     }
 
-    if (this.platformInfo.isCurrentPlatformElectron()) {
-      options.ux_mode = 'redirect';
-      return GoogleLoginService.googleAuth.signIn(options);
-    } else {
-      return GoogleLoginService.googleAuth.signIn(options);
-    }
+    return GoogleLoginService.googleAuth.signIn(options);
   }
 
   public async signOutCurrentUser(): Promise<any> {
