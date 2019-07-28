@@ -128,7 +128,6 @@
     
             :host-context(.mobile) & {
                 width: 90%;
-                height: 130px;
                 min-width: unset;
                 max-width: unset;
                 left: 5%;
@@ -138,7 +137,7 @@
                 }
                 
                 &:nth-child(5) {
-                    bottom: 125px;
+                    bottom: 120px;
                 }
 
                 &.show{
@@ -279,8 +278,8 @@
         top: 0;
         bottom: 0;
         margin: auto auto auto auto;
-        width: 400px;
-        height: 400px;
+        width: 40vh;
+        height: 40vh;
         -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
         transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
         display: flex;

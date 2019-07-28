@@ -82,14 +82,14 @@ export class HomePageComponent implements OnInit {
         }
       });
     }
-    if (!this.showOnlyTopAndBottom && innerHeight < 700) {
+    if (!this.showOnlyTopAndBottom && innerHeight < 600) {
       this.showOnlyTopAndBottom = true;
       this.playerStats.forEach((stat, i) => {
         if (i === 2 || i === 3) {
           stat.show =  false;
         }
       });
-    } else if (innerHeight >= 700) {
+    } else if (innerHeight >= 600) {
       this.showOnlyTopAndBottom = false;
       this.playerStats.forEach((stat, i) => {
         if (i === 2) {
