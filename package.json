@@ -6,20 +6,6 @@
     "name": "Maurice el-Banna",
     "email": "mauricenino98@gmail.com"
   },
-  "build": {
-    "appId": "com.gamerpals",
-    "directories": {
-      "buildResources": "dist/GamerPalsWebsite",
-      "output": "dist/GamerPalsWebsite/assets/clientfiles"
-    },
-    "mac": {
-      "category": "public.app-category.gaming"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "build/icon.ico"
-    }
-  },
   "main": "main.js",
   "scripts": {
     "ng": "ng",
