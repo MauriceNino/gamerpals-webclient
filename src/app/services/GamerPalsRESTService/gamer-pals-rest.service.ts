@@ -12,7 +12,7 @@ export class GamerPalsRestService {
 
   private connectionProtocol = 'http';
   private connectionEndpoint = 'localhost';
-  private connectionPort = 53175;
+  private connectionPort = 50606;
 
   private loggedInUserBearerToken: string;
   private loggedInUserData: IUser;
