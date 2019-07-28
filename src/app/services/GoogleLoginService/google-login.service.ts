@@ -20,17 +20,20 @@ export class GoogleLoginService {
       }
 
       this.gpHelperMethods.callWhenPropertyAvailable('gapi', () => {
-        gapi.load('auth2', () => {
-          const auth: IGoogleAuth = gapi.auth2.init({client_id: GoogleLoginService.clientId});
-          GoogleLoginService.googleAuth = auth;
-
-          resolve(auth);
+        gapi.load('client:auth2', () => {
+          gapi.client.init({
+            client_id: GoogleLoginService.clientId,
+            scope: 'profile email'
+          }).then(() => {
+            GoogleLoginService.googleAuth = gapi.auth2.getAuthInstance();
+            resolve(GoogleLoginService.googleAuth);
+          });
         });
       });
     });
   }
 
-  public onSignInAndInitial(callback: (b: boolean) => any): void {
+  public onSignInAndInitial(callback: (isSignedIn: boolean) => any): void {
     this.isUserSignedIn().then((isSignedIn: boolean) => {
       callback(isSignedIn);
     });

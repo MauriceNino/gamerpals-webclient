@@ -6,6 +6,8 @@
     flex-direction: row;
     width: 100%;
     height: 100%;
+    
+    overflow: hidden;
 }
 
 #settings-control-panel{
@@ -77,12 +79,14 @@
     :host-context(.mobile) & {
         flex: unset;
         position: absolute;
+        width: 0%;
         left: 100%;
-        transition: left .3s;
+        transition: left .3s, width .3s;
         max-width: unset;
 
         &.menuClosed {
             left: 0%;
+            width: 100%;
         }
     }
     
@@ -107,15 +111,22 @@
         position: absolute;
         bottom: -200px;
         right: 0px;
+        z-index: 150;
 
         transition: bottom 0.3s ease-in-out;
     
+        :host-context(.mobile) & {
+            right: 20px;
+        }
         &.show {
             bottom: 20px;
         }
     
         button{
             margin-left: 20px;
+        }
+        button:nth-child(1) {
+            background-color: var(--background-color);
         }
     }
 }

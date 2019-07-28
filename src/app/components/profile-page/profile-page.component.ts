@@ -17,7 +17,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit  {
   settingsControlPanel: ElementRef<HTMLElement>;
   @ViewChild('settingsContainer', {static: false})
   settingsContainer: ElementRef<HTMLElement>;
-  
+
   @ViewChildren('button[mat-button]')
   routerButtons: QueryList<HTMLElement>;
 
@@ -36,7 +36,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit  {
       this.settingsControlPanel.nativeElement.classList.toggle('menuClosed');
       this.settingsContainer.nativeElement.classList.toggle('menuClosed');
 
-      if(!this.settingsContainer.nativeElement.classList.contains('menuClosed')) {
+      if (!this.settingsContainer.nativeElement.classList.contains('menuClosed')) {
       }
     }
   }

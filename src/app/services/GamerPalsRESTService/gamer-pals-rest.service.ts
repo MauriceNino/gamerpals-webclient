@@ -10,21 +10,21 @@ export class GamerPalsRestService {
 
   constructor(private http: HttpClient) { }
 
-  private connectionProtocol: string = 'http';
-  private connectionEndpoint: string = 'localhost';
-  private connectionPort: number = 53175;
+  private connectionProtocol = 'http';
+  private connectionEndpoint = 'localhost';
+  private connectionPort = 53175;
 
   private loggedInUserBearerToken: string;
   private loggedInUserData: IUser;
 
-  private isLoginRequestPending: boolean = false;
-  private isLoginAlreadyExecutedOnce: boolean = false;
+  private isLoginRequestPending = false;
+  private isLoginAlreadyExecutedOnce = false;
 
   /////////////////////////////////
   // Login Stuff
   /////////////////////////////////
   public waitForLoginRequest(func: () => void, timeout: number): boolean {
-    const step: number = 50; // 50 ms recursive steps
+    const step = 50; // 50 ms recursive steps
 
     if (!this.isLoginRequestPending && this.isLoginAlreadyExecutedOnce) {
       func();

@@ -79,7 +79,9 @@ export class AppComponent implements OnInit {
       console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
 
       // Default redirect disabled, because it needs to wait for Google Login
-      this.router.navigateByUrl('');
+      this.zone.run(() => {
+        this.router.navigateByUrl('');
+      });
 
       if (isSignedIn) {
         // TODO: make request to backend variable
