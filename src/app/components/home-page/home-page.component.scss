@@ -329,7 +329,10 @@
             z-index: 10;
             cursor: pointer;
             font-weight: bold;
-            font-size: 20pt;
+            width: 70%;
+            margin: auto;
+            text-align: center;
+            font-size: 200%;
             color: var(--text-color);
         }
     }
