@@ -9,7 +9,7 @@ export class GamerPalsHelperMethodService {
   constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
 
   public showErrorOnPage(): void {
-    this.showSnackbarOnPage('GamerPals seems to be (kinda) down at the moment!', 'Retry!', () => window.location.reload(), 60000);
+    this.showSnackbarOnPage('There seems to be a problem with our infrastructure!', 'Retry!', () => window.location.reload(), 60000);
   }
 
   // tslint:disable-next-line: ban-types

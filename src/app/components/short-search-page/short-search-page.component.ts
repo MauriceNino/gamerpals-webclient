@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
-import { IGame, IUserGame, IParameter, IUser, IActiveSearch } from 'src/app/models/models';
-import { FormControl } from '@angular/forms';
+import { IUserGame } from 'src/app/models/models';
 import { MatSelectChange } from '@angular/material/select';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
+import { IGame } from 'src/app/models/game';
+import { ISearchParameter } from 'src/app/models/parameters';
+import { IActiveSearch } from 'src/app/models/active-search';
 
 @Component({
   selector: 'app-short-search-page',
@@ -38,8 +41,8 @@ export class ShortSearchPageComponent implements OnInit {
   selectedGamesParameters: ISearchGameParametersInterface[] = [];
 
   // Scrollstatus for the shadow indicators of the searchbar
-  isTop: boolean = true;
-  isBottom: boolean = true;
+  isTop = true;
+  isBottom = true;
 
   // The selected option of the #searchbar-games-select MatSelect
   selectedGames: IUserGame[] = [];
@@ -56,17 +59,17 @@ export class ShortSearchPageComponent implements OnInit {
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(private restService: GamerPalsRestService) { }
+  constructor(private restService: GamerPalsRestService, private gpHelperService: GamerPalsHelperMethodService) { }
 
   ngOnInit() {
-    this.restService.waitForLoginRequest(
+    const loggedIn = this.restService.waitForLoginRequest(
       async () => {
         // TODO: When service implements real UserGames method, remove this bulk
         const games: IGame[] = await this.restService.fetchGames().toPromise();
         let userGames: IUserGame[] = await this.restService.fetchUserGames().toPromise();
 
         userGames = userGames.map(ug => {
-          ug.game = games.find(g => g.gameID === ug.gameID);
+          ug.game = games.find(g => g._id === ug.gameID);
           return ug;
         }).filter(ug => [6, 8, 9, 15].indexOf(ug.userID) !== -1);
 
@@ -80,7 +83,7 @@ export class ShortSearchPageComponent implements OnInit {
         this.selectedGamesParameters.forEach((searchGame: ISearchGameParametersInterface) => {
           // If the game of the parameters still exists in the users games list, then select it in the #searchbar-games-select MatSelect
           // > else disable it in the array of parameters
-          const paramIndex = this.games.map(g => g.game.gameID).indexOf(searchGame.game.gameID);
+          const paramIndex = this.games.map(g => g.game._id).indexOf(searchGame.game.gameID);
           if (paramIndex === -1) {
             searchGame.canDisable = true;
             searchGame.show = false;
@@ -99,6 +102,10 @@ export class ShortSearchPageComponent implements OnInit {
       },
       5000
     );
+
+    if (!loggedIn) {
+      this.gpHelperService.showErrorOnPage();
+    }
   }
 
   public gamesSelectionChanged(event: MatSelectChange): void {
@@ -108,11 +115,11 @@ export class ShortSearchPageComponent implements OnInit {
     selectedGames.forEach(async (game: IUserGame) => {
       const paramIndex: number = this.selectedGamesParameters.map(param => param.game.gameID).indexOf(game.gameID);
       if (paramIndex === -1) {
-        const parameters: IParameter[] = await this.restService.fetchGameParameters(game.gameID).toPromise();
-        const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: IParameter) => {
+        const parameters: ISearchParameter[] = await this.restService.fetchGameParameters(game.gameID).toPromise();
+        const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: ISearchParameter) => {
           return {parameter, value: null};
         });
-        this.selectedGamesParameters.push({parametersWithValue, game, title: game.game.gameName, show: true, canDisable: true});
+        this.selectedGamesParameters.push({parametersWithValue, game, title: game.game.name, show: true, canDisable: true});
       } else if (this.selectedGamesParameters[paramIndex].show === false) {
         this.selectedGamesParameters[paramIndex].show = true;
       }
@@ -165,7 +172,7 @@ export class ShortSearchPageComponent implements OnInit {
 }
 
 interface ISearchParameterWithValue {
-  parameter: IParameter;
+  parameter: ISearchParameter;
   value: any;
 }
 

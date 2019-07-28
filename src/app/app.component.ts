@@ -14,7 +14,7 @@ import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingsService } from './services/SettingsService/settings.service';
-import { IUser } from './models/models';
+import { IUser } from './models/user';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { ThrowStmt } from '@angular/compiler';
 
@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(window.location);
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
 
@@ -91,24 +90,26 @@ export class AppComponent implements OnInit {
     // Default redirect disabled, because it needs to wait for Google Login on mobile devices
     if (!this.platformInfo.isCurrentPlatformNativeMobile()) {
       this.zone.run(() => {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl(window.location.pathname);
       });
     } else {
       this.gLoginService.initGoogleLogin().finally(() => {
         this.zone.run(() => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl(window.location.pathname);
         });
       });
     }
 
     // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
-    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
+    this.gLoginService.onSignInAndInitial(async (isSignedIn: boolean) => {
       console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
-
       if (isSignedIn) {
-        // TODO: make request to backend variable
-        this.gpRESTService.sendLoginRequest(0, 1234).subscribe((user: { token: string; user: IUser; }) => {
-          this.gpRESTService.setLoggedInUser(user);
+        const user = await this.gLoginService.getSignedInUser();
+
+        console.log('Google User', user);
+        this.gpRESTService.sendLoginRequest(1, user.getAuthResponse().id_token).subscribe((gpUser: { token: string; user: IUser; }) => {
+          console.log('Local User', gpUser);
+          this.gpRESTService.setLoggedInUser(gpUser);
 
           this.zone.run(() => {
             // TODO: If user has not completed his pofile yet -> open snackbar to send him to login

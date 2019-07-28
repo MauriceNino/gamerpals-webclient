@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUser, IActiveSearch, IParameter, IUserGame, IGame } from 'src/app/models/models';
+import { IUserGame } from 'src/app/models/models';
+import { IUser } from 'src/app/models/user';
+import { IGame } from 'src/app/models/game';
+import { ISearchParameter } from 'src/app/models/parameters';
+import { IActiveSearch } from 'src/app/models/active-search';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +42,7 @@ export class GamerPalsRestService {
     }
   }
 
-  public sendLoginRequest(type: number, userid: number): Observable<{token: string, user: IUser}> {
+  public sendLoginRequest(type: number, token: string): Observable<{token: string, user: IUser}> {
     this.isLoginRequestPending = true;
     this.isLoginAlreadyExecutedOnce = true;
 
@@ -47,7 +51,7 @@ export class GamerPalsRestService {
     });
 
     return this.http.post<{token: string, user: IUser}>
-      (`${this.getBaseConnectionUrl()}/api/Login`, {type, userid}, {headers});
+      (`${this.getBaseConnectionUrl()}/api/Login`, {type, token}, {headers});
   }
 
   public setLoggedInUser(data: {token: string, user: IUser}): void {
@@ -101,15 +105,16 @@ export class GamerPalsRestService {
   /////////////////////////////////
   // Parameters Stuff
   /////////////////////////////////
-  public fetchGameParameters(gameId: number): Observable<IParameter[]> { // TODO: Add gameId to search when it is implemented in backend
+  public fetchGameParameters(gameId: number): Observable<ISearchParameter[]> {
+    // TODO: Add gameId to search when it is implemented in backend
     const headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       // tslint:disable-next-line: object-literal-key-quotes
       'Authorization': this.loggedInUserBearerToken
     });
 
-    return this.http.get<IParameter[]>
-      (`${this.getBaseConnectionUrl()}/api/Parameters`, {headers});
+    return this.http.get<ISearchParameter[]>
+      (`${this.getBaseConnectionUrl()}/api/SearchParameter`, {headers});
   }
 
   /////////////////////////////////
