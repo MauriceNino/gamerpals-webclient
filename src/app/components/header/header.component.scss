@@ -31,13 +31,12 @@
 
 app-profile-button {
   right: 25px;
-  top: 20%;
+  bottom: 5%;
   height: 75%;
   position: absolute;
   
   :host-context(.mobile) & {
-    top: 15%;
-    height: 75%;
+    bottom: 10%;
   }
 }
 

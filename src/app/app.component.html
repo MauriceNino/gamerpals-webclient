@@ -1,4 +1,4 @@
-<app-electron-controls [ngStyle]="{'display': showElectronControls == true? 'block' : 'none'}"></app-electron-controls>
+<app-electron-controls *ngIf="showElectronControls"></app-electron-controls>
 <app-header></app-header>
 
 <div id="gp_main_content">

@@ -73,6 +73,8 @@ export class GoogleLoginService {
   public async signInUser(mode?: string, redirectUri?: string): Promise<any> {
     await this.initGoogleLogin();
 
+    console.log(redirectUri)
+
     const m = mode || 'popup';
 
     const options: ISigninOptions = {};

@@ -38,7 +38,7 @@ export class ProfileButtonComponent implements OnInit {
         // this.router.navigateByUrl("/login");
         this.router.navigateByUrl('/profile');
       } else {
-        this.gLoginService.signInUser(this.platformInfo.isCurrentPlatformNativeMobile() ? 'redirect' : null)
+        this.gLoginService.signInUser(this.platformInfo.isCurrentPlatformNativeMobile() ? 'redirect' : null, window.location.origin)
         .then((user: IGoogleUser ) => {
           this.userProfilePicUrl = user.getBasicProfile().getImageUrl();
           // TODO: If user has not completed his pofile yet -> send him to login

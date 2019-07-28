@@ -68,9 +68,21 @@ export class AppComponent implements OnInit {
     }
   }
 
+  public loadScript(url: string) {
+    const node = document.createElement('script');
+    node.src = url;
+    node.type = 'text/javascript';
+    node.async = true;
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
   ngOnInit(): void {
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
+
+    if (this.showElectronControls) {
+      this.loadScript('assets/js/electron-controls.js');
+    }
 
     this.settings.loadSettings(false);
 
