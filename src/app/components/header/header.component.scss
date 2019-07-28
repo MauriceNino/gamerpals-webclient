@@ -3,15 +3,14 @@
 
 :host {
     width: 100%;
-    height: 80px; // remove this to make mobile navigation pull away content
-    @include boxShadowLevel(4);
+    @include boxShadowLevel(4);    
 }
 
 #header_bar {
     position: relative;
     display: block;
     width: 100%;
-    height: 80px;
+    height: 100%;
     z-index: 15 !important;
     background-color: var(--app-bar-color);
 
@@ -28,6 +27,18 @@
         margin-right: -0.25em;
     }
 
+}
+
+app-profile-button {
+  right: 25px;
+  top: 20%;
+  height: 75%;
+  position: absolute;
+  
+  :host-context(.mobile) & {
+    top: 15%;
+    height: 75%;
+  }
 }
 
 #gp_main_header_items_wrapper{
@@ -51,9 +62,9 @@ app-mobile-navigation{
 #nav-icon {
     z-index: 15 !important;
     width: 50px;
-    height: 38px;
+    height: 60%;
     position: absolute;
-    top: 20px;
+    top: 20%;
     left: 15px;
     transform: rotate(0deg);
     transition: .5s ease-in-out;

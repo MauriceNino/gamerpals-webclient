@@ -17,6 +17,7 @@
     @include no-select();
     outline: none !important;
     transition: opacity 0.15s;
+    border-bottom: 2px solid var(--card-color);
 
     p {
         margin-top: 35px;
@@ -25,6 +26,7 @@
     }
 
     &.active{
+        border-bottom: none;
         .gp_main_header_item_active{
             opacity: 1;
         }

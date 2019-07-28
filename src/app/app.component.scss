@@ -14,6 +14,12 @@ app-header{
     position: relative;
     float: left;
     z-index: 99;
+    height: 80px; // remove this to make mobile navigation pull away content
+    transition: height .3s;
+
+    :host-context(.mobile) & {
+      height: 60px;
+    }
 }
 
 #gp_main_content{
