@@ -1,11 +1,33 @@
 {
   "name": "gamer-pals-website",
+  "description": "A website for gamers made by gamers",
   "version": "0.0.0",
+  "author": {
+    "name": "Maurice el-Banna",
+    "email": "mauricenino98@gmail.com"
+  },
+  "build": {
+    "appId": "com.gamerpals",
+    "directories": {
+      "buildResources": "dist/GamerPalsWebsite",
+      "output": "dist/GamerPalsWebsite/assets/clientfiles"
+    },
+    "mac": {
+      "category": "public.app-category.gaming"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  },
   "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
+    "build:client": "ng build",
+    "build:deployment": "ng build --aot --prod && electron-packager dist/GamerPalsWebsite GamerPals --out=dist/GamerPalsWebsite/assets/clientfiles --platform=win32 --arch=x64",
+    "build:deployment2": "ng build --aot --prod && electron-builder",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -54,6 +76,7 @@
     "@types/node": "~12.6.0",
     "codelyzer": "~5.1.0",
     "electron": "^5.0.1",
+    "electron-packager": "^14.0.3",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.2.0",
