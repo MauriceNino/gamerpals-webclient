@@ -6,19 +6,38 @@
     "name": "Maurice el-Banna",
     "email": "mauricenino98@gmail.com"
   },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "dir": "dist/GamerPalsWebsite",
+        "icon": "build",
+        "out": "electron",
+        "overwrite": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "certificateFile": "./cert.pfx",
+            "certificatePassword": "this-is-a-secret"
+          }
+        }
+      ]
+    }
+  },
   "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
     "build:client": "ng build",
-    "build:deployment": "ng build --aot --prod && electron-packager dist/GamerPalsWebsite GamerPals --out=dist/GamerPalsWebsite/assets/clientfiles --platform=win32 --arch=x64",
-    "build:deployment2": "ng build --aot --prod && electron-builder",
+    "build:electron": "ng build --aot --prod && electron-packager dist/GamerPalsWebsite GamerPals --out=dist/GamerPalsWebsite/assets/clientfiles --platform=win32 --arch=x64",
+    "build:electron:forge": "ng build --aot --prod && electron-forge make",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build --base-href ./ && electron .",
-    "electron:no-build": "electron .",
+    "run:electron": "ng build --base-href ./ && electron .",
+    "run:electron:no-build": "electron .",
     "postinstall": "ivy-ngcc && ng build --aot --prod"
   },
   "greenkeeper": {
@@ -55,6 +74,8 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.801.0",
     "@angular/language-service": "^8.0.0",
+    "@electron-forge/cli": "^6.0.0-beta.43",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.43",
     "@types/gapi": "0.0.37",
     "@types/gapi.auth2": "0.0.50",
     "@types/jasmine": "^3.3.13",
