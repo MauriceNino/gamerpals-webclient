@@ -16,6 +16,7 @@ import { ProfileButtonComponent } from './components/header/profile-button/profi
 import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
 import { MobileNavigationComponent } from './components/header/mobile-navigation/mobile-navigation.component';
 import { YesNoDialogComponent } from './components/_shared/yes-no-dialog/yes-no-dialog.component';
+import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-search-lobby-popup/active-search-lobby-popup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { YesNoDialogComponent } from './components/_shared/yes-no-dialog/yes-no-
     MobileNavigationComponent,
     ProfileButtonComponent,
     ElectronControlsComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    ActiveSearchLobbyPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { YesNoDialogComponent } from './components/_shared/yes-no-dialog/yes-no-
     MatButtonModule,
     MatCardModule,
     MatSnackBarModule,
+    MatRippleModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [

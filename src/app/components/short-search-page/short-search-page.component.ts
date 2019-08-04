@@ -8,6 +8,8 @@ import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMe
 import { IGame } from 'src/app/models/game';
 import { ISearchParameter } from 'src/app/models/parameters';
 import { IActiveSearch } from 'src/app/models/active-search';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-short-search-page',
@@ -59,7 +61,8 @@ export class ShortSearchPageComponent implements OnInit {
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(private restService: GamerPalsRestService, private gpHelperService: GamerPalsHelperMethodService) { }
+  constructor(private restService: GamerPalsRestService, private gpHelperService: GamerPalsHelperMethodService, 
+              public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     const loggedIn = this.restService.waitForLoginRequest(
@@ -168,6 +171,15 @@ export class ShortSearchPageComponent implements OnInit {
   public applyParameters(): void {
     this.saveParametersToLocalStorage(this.getAllShownParams());
     this.loadActiveSearches();
+  }
+
+  public createLobby(): void {
+    this.router.navigateByUrl('/createLobby');
+    /* const dialogRef = this.dialog.open(CreateActiveSearchComponent, {data: []});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // Do sth
+    }); */
   }
 }
 

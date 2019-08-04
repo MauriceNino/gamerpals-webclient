@@ -46,6 +46,12 @@ app-root {
     width: 100%;
 }
 
+
+
+mat-toolbar{
+    background: none !important;
+}
+
 .mobile {
     ::-webkit-scrollbar {
         width: 7px;

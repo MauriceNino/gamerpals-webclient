@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ShortSearchPageRoutingModule } from './short-search-page-routing.module';
 import { ShortSearchPageComponent } from './short-search-page.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatOptionModule } from '@angular/material/core';
+import { MatOptionModule, MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatToolbarModule,
     MatExpansionModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDialogModule
   ]
 })
 export class ShortSearchPageModule { }

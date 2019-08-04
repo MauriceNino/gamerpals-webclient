@@ -105,6 +105,14 @@
     }
 }
 
+
+#create-new-lobby {
+    z-index: 500;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
+
 #searchbar-games-select {
     width: 90%;
     margin-left: 5%;
@@ -142,10 +150,10 @@ mat-toolbar {
     margin: 20px;
     transition: box-shadow 0.2s, transform 0.2s;
     
-    &:hover{
+    /* &:hover{
         transform: translate(-3px, -3px) scale(1.1);
         @include boxShadowLevel(4);
-    }
+    } */
 
     .searchResult-top{
         color: var(--text-color);

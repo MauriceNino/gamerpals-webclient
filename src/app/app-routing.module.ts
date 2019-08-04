@@ -43,6 +43,12 @@ const routes: Routes = [
     loadChildren: () => import('./components/profile-page/profile-page.module').then(m => m.ProfilePageModule),
     data: {animation: 'profile', preload: true}
   },
+
+  {
+    path: 'createLobby',
+    loadChildren: () => import('./components/create-active-search/create-active-search.module').then(m => m.CreateActiveSearchModule),
+    data: {animation: 'createLobby'}
+  },
 ];
 
 @NgModule({
