@@ -18,6 +18,9 @@ import { IUser } from './models/user';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { ThrowStmt } from '@angular/compiler';
 
+import 'tinymce';
+declare var tinyMCE: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -78,6 +81,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    tinyMCE.baseURL = 'tinymce';
+
+
     // check if current platform is electron and show controls accordingly
     this.showElectronControls = this.platformInfo.isCurrentPlatformElectron();
 

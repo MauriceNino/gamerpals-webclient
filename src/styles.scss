@@ -46,7 +46,112 @@ app-root {
     width: 100%;
 }
 
+editor {
+    .tox-tinymce {
+        border-color: var(--selected-button-color) !important;
 
+
+        .tox-editor-container {
+            .tox-menubar {
+                background-color: var(--background-color) !important;
+
+                button {
+                    color: var(--text-color) !important;
+                }
+            }
+            .tox-toolbar{
+                background-color: var(--background-color) !important;
+                border-top-color: var(--selected-button-color) !important;
+
+                button {
+                    color: var(--text-color) !important;
+
+                }
+
+                span > svg {
+                    fill: var(--text-color) !important;
+                }
+            }
+            .tox-sidebar-wrap > .tox-edit-area > iframe{
+                background-color: var(--card-color) !important;
+                color: var(--text-color) !important;
+            }
+        }
+        .tox-statusbar{
+            background-color: var(--background-color) !important;
+            border-top-color: var(--selected-button-color) !important;
+
+            .tox-statusbar__path-item {
+                color: var(--text-color) !important;
+            }
+
+            .tox-statusbar__branding > a {
+                color: var(--primary-color) !important;
+            }
+        }
+    }
+}
+
+.tox .tox-mbtn--enabled {
+    background: var(--selected-button-color) !important;
+}
+
+.tox .tox-mbtn:focus {
+    background: var(--selected-button-color) !important;
+}
+
+.tox .tox-mbtn:hover {
+    background-color: var(--selected-button-color) !important;
+}
+
+.tox .tox-mbtn--active {
+    background-color: var(--selected-button-color) !important;
+}
+
+.tox .tox-tbtn--enabled {
+    background: var(--selected-button-color) !important;
+}
+
+.tox .tox-tbtn:focus {
+    background: var(--selected-button-color) !important;
+}
+
+.tox .tox-tbtn:hover {
+    background-color: var(--selected-button-color) !important;
+}
+
+.tox .tox-menu {
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
+
+    .tox-collection__item {
+        color: var(--text-color) !important;
+        background-color: var(--background-color) !important;
+    }
+
+    .tox-collection__item--active {
+        color: var(--text-color) !important;
+        background-color: var(--background-color) !important;
+    }
+}
+
+.tox-tiered-menu {
+    .tox-collection--toolbar {
+        background-color: var(--background-color) !important;
+
+        .tox-collection__item-icon > svg {
+            fill: var(--text-color) !important;
+        }
+
+        .tox-collection__item-icon {
+            fill: var(--text-color) !important;
+        }
+
+        .tox-collection__item--active{
+            background-color: var(--selected-button-color) !important;
+        }
+    }
+}
 
 mat-toolbar{
     background: none !important;

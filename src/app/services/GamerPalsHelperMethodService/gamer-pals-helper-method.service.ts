@@ -26,7 +26,7 @@ export class GamerPalsHelperMethodService {
   // tslint:disable-next-line: ban-types
   public callWhenPropertyAvailable(name: string, callback: Function): void {
     const interval = 10;
-
+    
     window.setTimeout(() => {
       if (window[name]) {
         callback(window[name]);

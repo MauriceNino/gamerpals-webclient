@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateActiveSearchRoutingModule } from './create-active-search-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { EditorModule } from '@tinymce/tinymce-angular';
+// import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     CreateActiveSearchRoutingModule,
     FormsModule,
     MatDialogModule,
-    EditorModule,
+    // EditorModule,
     MatToolbarModule
   ]
 })

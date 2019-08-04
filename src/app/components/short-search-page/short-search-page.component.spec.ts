@@ -13,8 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ShortSearchPageComponent', () => {
   let component: ShortSearchPageComponent;
@@ -38,6 +40,8 @@ describe('ShortSearchPageComponent', () => {
         MatExpansionModule,
         MatButtonModule,
         MatSnackBarModule,
+        MatDialogModule,
+        RouterTestingModule,
         HttpClientTestingModule
       ]
     })
