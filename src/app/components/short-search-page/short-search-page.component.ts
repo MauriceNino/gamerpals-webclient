@@ -56,11 +56,14 @@ export class ShortSearchPageComponent implements OnInit {
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(private restService: GamerPalsRestService, public dialog: MatDialog, private router: Router) { }
+  constructor(private restService: GamerPalsRestService, public dialog: MatDialog, private router: Router,
+              private helpers: GamerPalsHelperMethodService) { }
 
   ngOnInit() {
+    this.helpers.preventSiteIfNoProfile();
     this.restService.waitForLoginRequest(
       async () => {
+
         // TODO: When service implements real UserGames method, remove this bulk
         this.games = await this.restService.getGames();
 

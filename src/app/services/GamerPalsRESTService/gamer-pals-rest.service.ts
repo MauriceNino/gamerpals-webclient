@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from 'src/app/models/user';
 import { IGame } from 'src/app/models/game';
 import { ISearchParameter } from 'src/app/models/parameters';
@@ -12,7 +12,7 @@ import { EnvironmentService } from '../EnvironmentService/environment.service';
 })
 export class GamerPalsRestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private zone: NgZone) { }
 
   private connectionProtocol = EnvironmentService.fileReference.connectionProtocol;
   private connectionEndpoint = EnvironmentService.fileReference.connectionEndpoint;
@@ -24,7 +24,7 @@ export class GamerPalsRestService {
   private isLoginRequestPending = false;
   private isLoginAlreadyExecutedOnce = false;
 
-  public isUserSignedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private userSignedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /////////////////////////////////
   // Login Stuff
@@ -34,7 +34,7 @@ export class GamerPalsRestService {
 
     if (!this.isLoginRequestPending && this.isLoginAlreadyExecutedOnce) {
       func();
-      return true;
+      return this.isUserSignedIn();
     } else if (timeout >= 0) {
       timeout -= step;
       setTimeout(() => this.waitForLoginRequest(func, timeout), step);
@@ -57,7 +57,7 @@ export class GamerPalsRestService {
 
     if (retrievedUser != null) {
       this.setLoggedInUser(retrievedUser);
-      this.isUserSignedIn.next(true);
+      this.updateSignedIn(true);
     }
 
     this.isLoginRequestPending = false;
@@ -74,11 +74,23 @@ export class GamerPalsRestService {
   }
 
   public onSignInAndInitial(callback: (isSignedIn: boolean) => any): void {
-    callback(this.isUserSignedIn.getValue());
+    callback(this.userSignedIn.getValue());
 
-    this.isUserSignedIn.subscribe((signedInListener: boolean) => {
+    this.userSignedIn.subscribe((signedInListener: boolean) => {
       callback(signedInListener);
     });
+  }
+
+  public isUserSignedInHandler(): Observable<boolean> {
+    return this.userSignedIn.asObservable();
+  }
+
+  public isUserSignedIn(): boolean {
+    return this.userSignedIn.getValue();
+  }
+
+  public updateSignedIn(signedIn: boolean) {
+    this.userSignedIn.next(signedIn);
   }
 
   /////////////////////////////////

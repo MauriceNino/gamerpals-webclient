@@ -17,6 +17,8 @@ import { ElectronControlsComponent } from './components/electron-controls/electr
 import { MobileNavigationComponent } from './components/header/mobile-navigation/mobile-navigation.component';
 import { YesNoDialogComponent } from './components/_shared/yes-no-dialog/yes-no-dialog.component';
 import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-search-lobby-popup/active-search-lobby-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OkDialogComponent } from './components/_shared/ok-dialog/ok-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-sea
     ProfileButtonComponent,
     ElectronControlsComponent,
     YesNoDialogComponent,
+    OkDialogComponent,
     ActiveSearchLobbyPopupComponent
   ],
   imports: [
@@ -39,6 +42,7 @@ import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-sea
     MatCardModule,
     MatSnackBarModule,
     MatRippleModule,
+    MatDialogModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [

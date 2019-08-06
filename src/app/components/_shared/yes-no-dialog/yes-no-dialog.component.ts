@@ -34,8 +34,6 @@ export class YesNoDialogComponent implements OnInit {
   }
 }
 
-
-
 export interface IYesNoDialogData {
   title: string;
   yes: string;

@@ -112,12 +112,7 @@ export class AppComponent implements OnInit {
 
           if (!gpUser.profileComplete) {
             this.zone.run(() => {
-              // TODO: If user has not completed his pofile yet -> open snackbar to send him to login
-              this.snackBar.open('Please complete your profile!', 'Let\'s Go!', {
-                duration: 60000
-              }).onAction().subscribe(() => {
-                this.router.navigateByUrl('/login');
-              });
+              this.router.navigateByUrl('/login');
             });
           }
         },

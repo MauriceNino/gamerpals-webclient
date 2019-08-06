@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 
 @Component({
   selector: 'app-friends-page',
@@ -15,9 +16,10 @@ export class FriendsPageComponent implements OnInit {
   @ViewChild('friendsLoading', {static: false})
   friendsSpinner: MatSpinner;
 
-  constructor() { }
+  constructor(private helpers: GamerPalsHelperMethodService) { }
 
   ngOnInit() {
+    this.helpers.preventSiteIfNoProfile();
     setTimeout(() => {
       this.friendsSpinner._elementRef.nativeElement.classList.add('finished-loading');
     }, 1000);

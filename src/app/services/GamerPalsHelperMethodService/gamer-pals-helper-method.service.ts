@@ -1,12 +1,38 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GamerPalsRestService } from '../GamerPalsRESTService/gamer-pals-rest.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { OkDialogComponent } from 'src/app/components/_shared/ok-dialog/ok-dialog.component';
+import { YesNoDialogComponent } from 'src/app/components/_shared/yes-no-dialog/yes-no-dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamerPalsHelperMethodService {
 
-  constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
+  constructor(private snackBar: MatSnackBar, private zone: NgZone, private backendService: GamerPalsRestService,
+              private router: Router, private dialog: MatDialog) { }
+
+  public preventSiteIfNoProfile(): void {
+    if (!this.backendService.isUserSignedIn()) {
+      this.zone.run(() => {
+        this.router.navigateByUrl('/home');
+        this.dialog.open(OkDialogComponent, {data: {
+          ok: 'Ok',
+          title: 'Please login!'
+        }});
+      });
+    } else if (!this.backendService.getLoggedInUser().profileComplete) {
+      this.zone.run(() => {
+        this.router.navigateByUrl('/login');
+        this.dialog.open(OkDialogComponent, {data: {
+          ok: 'Ok',
+          title: 'Please complete your profile!'
+        }});
+      });
+    }
+  }
 
   public showErrorOnPage(): void {
     this.showSnackbarOnPage('There seems to be a problem with our infrastructure!', 'Retry!', () => window.location.reload(), 60000);
