@@ -107,20 +107,19 @@ export class AppComponent implements OnInit {
         const user = await this.gLoginService.getSignedInUser();
 
         console.log('Google User', user);
-        this.gpRESTService.sendLoginRequest(1, user.getAuthResponse().id_token).subscribe((gpUser: { token: string; user: IUser; }) => {
+        this.gpRESTService.sendLoginRequest(1, user.getAuthResponse().id_token).then((gpUser: IUser) => {
           console.log('Local User', gpUser);
-          this.gpRESTService.setLoggedInUser(gpUser);
 
-          this.zone.run(() => {
-            // TODO: If user has not completed his pofile yet -> open snackbar to send him to login
-            this.snackBar.open('Please complete your profile!', 'Let\'s Go!', {
-              duration: 60000
-            }).onAction().subscribe(() => {
-              this.router.navigateByUrl('/login');
+          if (!gpUser.profileComplete) {
+            this.zone.run(() => {
+              // TODO: If user has not completed his pofile yet -> open snackbar to send him to login
+              this.snackBar.open('Please complete your profile!', 'Let\'s Go!', {
+                duration: 60000
+              }).onAction().subscribe(() => {
+                this.router.navigateByUrl('/login');
+              });
             });
-            // TODO: If he has completed it -> send him to home
-            // this.router.navigateByUrl("/home");
-          });
+          }
         },
         (error: any) => {
           console.log(error);

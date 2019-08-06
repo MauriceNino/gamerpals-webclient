@@ -5,6 +5,7 @@ import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-l
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -14,7 +15,7 @@ describe('HomePageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HomePageComponent ],
       providers: [GoogleLoginService],
-      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot()]
+      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot(), HttpClientTestingModule]
     })
     .compileComponents();
   }));

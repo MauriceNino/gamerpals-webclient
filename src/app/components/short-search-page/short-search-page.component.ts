@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
-import { IUserGame } from 'src/app/models/models';
 import { MatSelectChange } from '@angular/material/select';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { MatSpinner } from '@angular/material/progress-spinner';
 import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { IGame } from 'src/app/models/game';
 import { ISearchParameter } from 'src/app/models/parameters';
@@ -39,54 +37,42 @@ import { Router } from '@angular/router';
   ]
 })
 export class ShortSearchPageComponent implements OnInit {
-  games: IUserGame[] = [];
-  selectedGamesParameters: ISearchGameParametersInterface[] = [];
+  games: IGame[] = [];
+  selectedGamesParameters: ISearchGameParameters[] = [];
 
   // Scrollstatus for the shadow indicators of the searchbar
   isTop = true;
   isBottom = true;
 
   // The selected option of the #searchbar-games-select MatSelect
-  selectedGames: IUserGame[] = [];
+  selectedGames: IGame[] = [];
 
   foundActiveSearches: IActiveSearch[] = [];
 
   // Loading spinners
-  @ViewChild('gamesLoading', {static: false})
-  gameSpinner: MatSpinner;
-
-  @ViewChild('searchesLoading', {static: false})
-  searchSpinner: MatSpinner;
+  showGameSpinner: boolean = true;
+  showSearchSpinner: boolean = true;
 
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(private restService: GamerPalsRestService, private gpHelperService: GamerPalsHelperMethodService, 
-              public dialog: MatDialog, private router: Router) { }
+  constructor(private restService: GamerPalsRestService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
-    const loggedIn = this.restService.waitForLoginRequest(
+    this.restService.waitForLoginRequest(
       async () => {
         // TODO: When service implements real UserGames method, remove this bulk
-        const games: IGame[] = await this.restService.fetchGames().toPromise();
-        let userGames: IUserGame[] = await this.restService.fetchUserGames().toPromise();
-
-        userGames = userGames.map(ug => {
-          ug.game = games.find(g => g._id === ug.gameID);
-          return ug;
-        }).filter(ug => [6, 8, 9, 15].indexOf(ug.userID) !== -1);
-
-        this.games = userGames;
+        this.games = await this.restService.getGames();
 
         // Load the locally saved search parameters
         const localSaved = this.loadParametersFromLocalStorage();
         this.selectedGamesParameters = localSaved === null ? [] : localSaved.slice();
 
         // Check if locally saved parameters are still viable
-        this.selectedGamesParameters.forEach((searchGame: ISearchGameParametersInterface) => {
+        this.selectedGamesParameters.forEach((searchGame: ISearchGameParameters) => {
           // If the game of the parameters still exists in the users games list, then select it in the #searchbar-games-select MatSelect
           // > else disable it in the array of parameters
-          const paramIndex = this.games.map(g => g.game._id).indexOf(searchGame.game.gameID);
+          const paramIndex = this.games.map(g => g._id).indexOf(searchGame.game._id);
           if (paramIndex === -1) {
             searchGame.canDisable = true;
             searchGame.show = false;
@@ -97,7 +83,7 @@ export class ShortSearchPageComponent implements OnInit {
 
         // Small Timeout to hide the fadeIn effect beeing ugly and only show it after that thing is over
         setTimeout(() => {
-          this.gameSpinner._elementRef.nativeElement.classList.add('finished-loading');
+          this.showGameSpinner = false;
           this.mainContent.nativeElement.classList.add('finished-loading');
 
           this.loadActiveSearches();
@@ -105,38 +91,35 @@ export class ShortSearchPageComponent implements OnInit {
       },
       5000
     );
-
-    if (!loggedIn) {
-      this.gpHelperService.showErrorOnPage();
-    }
   }
 
   public gamesSelectionChanged(event: MatSelectChange): void {
-    const selectedGames: IUserGame[] = event.value;
+    const selectedGames: IGame[] = event.value;
 
     // Add all elements that are not yet in the list
-    selectedGames.forEach(async (game: IUserGame) => {
-      const paramIndex: number = this.selectedGamesParameters.map(param => param.game.gameID).indexOf(game.gameID);
+    selectedGames.forEach(async (game: IGame) => {
+      const paramIndex: number = this.selectedGamesParameters
+        .map((param: ISearchGameParameters) => param.game._id).indexOf(game._id);
       if (paramIndex === -1) {
-        const parameters: ISearchParameter[] = await this.restService.fetchGameParameters(game.gameID).toPromise();
+        const parameters: ISearchParameter[] = await this.restService.getSearchParametersByGame(game);
         const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: ISearchParameter) => {
           return {parameter, value: null};
         });
-        this.selectedGamesParameters.push({parametersWithValue, game, title: game.game.name, show: true, canDisable: true});
+        this.selectedGamesParameters.push({parametersWithValue, game, title: game.name, show: true, canDisable: true});
       } else if (this.selectedGamesParameters[paramIndex].show === false) {
         this.selectedGamesParameters[paramIndex].show = true;
       }
     });
 
     // Disable all elements that are not shown anymore
-    this.selectedGamesParameters.forEach(async (param: ISearchGameParametersInterface) => {
-      if (selectedGames.map(s => s.gameID).indexOf(param.game.gameID) === -1 && param.canDisable) {
+    this.selectedGamesParameters.forEach(async (param: ISearchGameParameters) => {
+      if (selectedGames.map(s => s._id).indexOf(param.game._id) === -1 && param.canDisable) {
         param.show = false;
       }
     });
   }
 
-  public getAllShownParams(): ISearchGameParametersInterface[] {
+  public getAllShownParams(): ISearchGameParameters[] {
     return this.selectedGamesParameters.filter(p => p.show);
   }
 
@@ -147,20 +130,20 @@ export class ShortSearchPageComponent implements OnInit {
   }
 
   public loadActiveSearches(): void {
-    this.searchSpinner._elementRef.nativeElement.classList.remove('finished-loading');
+    this.showSearchSpinner = true;
     this.foundActiveSearches = [];
     // TODO: Remove Timeout and replace with real search function
     setTimeout(() => {
       this.foundActiveSearches = [null, null, null, null, null, null, null, null, null, null, null];
-      this.searchSpinner._elementRef.nativeElement.classList.add('finished-loading');
+      this.showSearchSpinner = false;
     }, 1000);
   }
 
-  public saveParametersToLocalStorage(paramArr: ISearchGameParametersInterface[]): void {
+  public saveParametersToLocalStorage(paramArr: ISearchGameParameters[]): void {
     localStorage.setItem('searchGameParameters', JSON.stringify(paramArr));
   }
 
-  public loadParametersFromLocalStorage(): ISearchGameParametersInterface[] {
+  public loadParametersFromLocalStorage(): ISearchGameParameters[] {
     return JSON.parse(localStorage.getItem('searchGameParameters'));
   }
 
@@ -188,9 +171,9 @@ interface ISearchParameterWithValue {
   value: any;
 }
 
-interface ISearchGameParametersInterface {
+interface ISearchGameParameters {
   parametersWithValue: ISearchParameterWithValue[];
-  game: IUserGame;
+  game: IGame;
   title: string;
   canDisable: boolean;
   show: boolean;

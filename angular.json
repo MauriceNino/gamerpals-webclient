@@ -34,9 +34,6 @@
                 "src/assets/scss"
               ]
             },
-            "scripts": [
-              "node_modules/tinymce/tinymce.min.js"
-            ],
             "es5BrowserSupport": true,
             "aot": true
           },

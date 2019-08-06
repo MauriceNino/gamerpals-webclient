@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { IUserGame } from 'src/app/models/models';
+import { BehaviorSubject } from 'rxjs';
 import { IUser } from 'src/app/models/user';
 import { IGame } from 'src/app/models/game';
 import { ISearchParameter } from 'src/app/models/parameters';
 import { IActiveSearch } from 'src/app/models/active-search';
+import { EnvironmentService } from '../EnvironmentService/environment.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,17 @@ export class GamerPalsRestService {
 
   constructor(private http: HttpClient) { }
 
-  private connectionProtocol = 'http';
-  private connectionEndpoint = 'localhost';
-  private connectionPort = 50606;
+  private connectionProtocol = EnvironmentService.fileReference.connectionProtocol;
+  private connectionEndpoint = EnvironmentService.fileReference.connectionEndpoint;
+  private connectionPort = EnvironmentService.fileReference.connectionPort;
 
   private loggedInUserBearerToken: string;
   private loggedInUserData: IUser;
 
   private isLoginRequestPending = false;
   private isLoginAlreadyExecutedOnce = false;
+
+  public isUserSignedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   /////////////////////////////////
   // Login Stuff
@@ -42,7 +44,7 @@ export class GamerPalsRestService {
     }
   }
 
-  public sendLoginRequest(type: number, token: string): Observable<{token: string, user: IUser}> {
+  public async sendLoginRequest(type: number, token: string): Promise<IUser> {
     this.isLoginRequestPending = true;
     this.isLoginAlreadyExecutedOnce = true;
 
@@ -50,76 +52,104 @@ export class GamerPalsRestService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.post<{token: string, user: IUser}>
-      (`${this.getBaseConnectionUrl()}/api/Login`, {type, token}, {headers});
+    const retrievedUser: IUser = await this.http.post<IUser>
+      (`${this.getBaseConnectionUrl()}/api/Login`, {type, token}, {headers}).toPromise();
+
+    if (retrievedUser != null) {
+      this.setLoggedInUser(retrievedUser);
+      this.isUserSignedIn.next(true);
+    }
+
+    this.isLoginRequestPending = false;
+    return retrievedUser;
   }
 
-  public setLoggedInUser(data: {token: string, user: IUser}): void {
-    this.isLoginRequestPending = false;
-    this.loggedInUserBearerToken = 'Bearer ' + data.token;
-    this.loggedInUserData = data.user;
+  public setLoggedInUser(user: IUser): void {
+    this.loggedInUserBearerToken = user.currentSession.sessionToken;
+    this.loggedInUserData = user;
   }
+
   public getLoggedInUser(): IUser {
     return this.loggedInUserData;
+  }
+
+  public onSignInAndInitial(callback: (isSignedIn: boolean) => any): void {
+    callback(this.isUserSignedIn.getValue());
+
+    this.isUserSignedIn.subscribe((signedInListener: boolean) => {
+      callback(signedInListener);
+    });
   }
 
   /////////////////////////////////
   // Active Search Stuff
   /////////////////////////////////
-  public fetchActiveSearches(parameters: any): Observable<IActiveSearch[]> {
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': this.loggedInUserBearerToken
-    });
+  public async getActiveSearches(parameters: any): Promise<IActiveSearch[]> {
+    const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeader());
 
     return this.http.get<IActiveSearch[]>
-      (`${this.getBaseConnectionUrl()}/api/ActiveSearches`, {headers});
+      (`${this.getBaseConnectionUrl()}/api/ActiveSearches`, {headers}).toPromise();
   }
 
   /////////////////////////////////
   // Games Stuff
   /////////////////////////////////
-  public fetchGames(): Observable<IGame[]> {
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': this.loggedInUserBearerToken
-    });
+  public async getGames(): Promise<IGame[]> {
+    const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeader());
 
     return this.http.get<IGame[]>
-      (`${this.getBaseConnectionUrl()}/api/Games`, {headers});
+      (`${this.getBaseConnectionUrl()}/api/Game`, {headers}).toPromise();
   }
+  public async getGame(mongoId: string): Promise<IGame> {
+    const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeader());
 
-  public fetchUserGames(): Observable<IUserGame[]> {
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': this.loggedInUserBearerToken
-    });
-
-    return this.http.get<IUserGame[]>
-      (`${this.getBaseConnectionUrl()}/api/UserGames`, {headers});
+    return this.http.get<IGame>
+      (`${this.getBaseConnectionUrl()}/api/Game/${mongoId}`, {headers}).toPromise();
   }
 
   /////////////////////////////////
   // Parameters Stuff
   /////////////////////////////////
-  public fetchGameParameters(gameId: number): Observable<ISearchParameter[]> {
-    // TODO: Add gameId to search when it is implemented in backend
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      // tslint:disable-next-line: object-literal-key-quotes
-      'Authorization': this.loggedInUserBearerToken
-    });
+  public async getSearchParameters(): Promise<ISearchParameter[]> {
+    const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeader());
 
     return this.http.get<ISearchParameter[]>
-      (`${this.getBaseConnectionUrl()}/api/SearchParameter`, {headers});
+      (`${this.getBaseConnectionUrl()}/api/SearchParameter`, {headers}).toPromise();
+  }
+
+  public async getSearchParameter(mongoId: string): Promise<ISearchParameter> {
+    const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeader());
+
+    return this.http.get<ISearchParameter>
+      (`${this.getBaseConnectionUrl()}/api/SearchParameter/${mongoId}`, {headers}).toPromise();
+  }
+
+  public async getSearchParametersByGame(game: string | IGame): Promise<ISearchParameter[]> {
+    let localGame: IGame;
+
+    if (typeof(game) === 'string') {
+      localGame = await this.getGame(game);
+    } else {
+      localGame = game;
+    }
+
+    return Promise.all(localGame.availableParameters.map(async (param: string) => {
+      return this.getSearchParameter(param);
+    }));
   }
 
   /////////////////////////////////
   // General Stuff
   /////////////////////////////////
+
+  private getDefaultHeader(): { [name: string]: string } {
+    return {
+      'Content-Type': 'application/json',
+      // tslint:disable-next-line: object-literal-key-quotes
+      'Authorization': 'Bearer ' + this.loggedInUserBearerToken
+    };
+  }
+
   public getBaseConnectionUrl(): string {
     return `${this.connectionProtocol}://${this.connectionEndpoint}:`
       +  `${this.connectionPort}`;

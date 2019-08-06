@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ProfileButtonComponent } from '../header/profile-button/profile-button.component';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
+import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
 
 @Component({
   selector: 'app-home-page',
@@ -27,16 +28,19 @@ export class HomePageComponent implements OnInit {
   ];
   public isUserSignedIn = false;
 
+  private showOnlyOneRow = false;
+  private showOnlyTopAndBottom = false;
+
 
   constructor(private sanitizer: DomSanitizer, private router: Router,
-              private profileButtonComp: ProfileButtonComponent, private gLoginService: GoogleLoginService) { }
+              private profileButtonComp: ProfileButtonComponent, private backendService: GamerPalsRestService) { }
 
   ngOnInit() {
     // Set the initial values for the resize dependant components in this page
     this.onResize(undefined, window.innerWidth, window.innerHeight);
 
     // Get the login status of the user everytime its updated
-    this.gLoginService.onSignInAndInitial((isSignedIn: boolean) => {
+    this.backendService.onSignInAndInitial((isSignedIn: boolean) => {
       this.isUserSignedIn = isSignedIn;
     });
 
@@ -56,9 +60,6 @@ export class HomePageComponent implements OnInit {
       videoContainerElement.classList.add('bright');
     }
   }
-
-  private showOnlyOneRow = false;
-  private showOnlyTopAndBottom = false;
 
   @HostListener('window:resize', ['$event'])
   private onResize(event, innerWidth: number, innerHeight: number): void {

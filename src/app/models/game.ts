@@ -1,6 +1,6 @@
 export interface IGame {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     name: string;
     logo: string;
-    availableParameters: any[]; // ObjectId
+    availableParameters: string[]; // ObjectId
 }
