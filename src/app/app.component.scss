@@ -35,3 +35,7 @@ app-header{
         width: 100%;
     }
 }
+
+::ng-deep .mat-progress-bar-buffer {
+    background-color: var(--background-color) !important;
+}

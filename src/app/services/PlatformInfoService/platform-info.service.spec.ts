@@ -10,4 +10,8 @@ describe('PlatformInfoService', () => {
     const service: PlatformInfoService = TestBed.get(PlatformInfoService);
     expect(service).toBeTruthy();
   });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

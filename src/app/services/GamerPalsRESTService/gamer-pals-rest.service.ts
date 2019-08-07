@@ -7,12 +7,17 @@ import { ISearchParameter } from 'src/app/models/parameters';
 import { IActiveSearch } from 'src/app/models/active-search';
 import { EnvironmentService } from '../EnvironmentService/environment.service';
 
+export enum LoginType {
+  Google = 1,
+  Facebook = 2
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GamerPalsRestService {
 
-  constructor(private http: HttpClient, private zone: NgZone) { }
+  constructor(private http: HttpClient) { }
 
   private connectionProtocol = EnvironmentService.fileReference.connectionProtocol;
   private connectionEndpoint = EnvironmentService.fileReference.connectionEndpoint;

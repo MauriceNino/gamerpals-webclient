@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LongSearchPageComponent } from './long-search-page.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LongSearchPageComponent', () => {
   let component: LongSearchPageComponent;
@@ -8,7 +13,8 @@ describe('LongSearchPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LongSearchPageComponent ]
+      declarations: [ LongSearchPageComponent ],
+      imports: [MatSnackBarModule, HttpClientTestingModule, RouterTestingModule, MatDialogModule, NoopAnimationsModule]
     })
     .compileComponents();
   }));
@@ -21,5 +27,9 @@ describe('LongSearchPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 });

@@ -9,4 +9,8 @@ describe('SettingsService', () => {
     const service: SettingsService = TestBed.get(SettingsService);
     expect(service).toBeTruthy();
   });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

@@ -6,6 +6,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeviceDetectorService, DeviceDetectorModule } from 'ngx-device-detector';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,7 +16,7 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent, ProfileButtonComponent, NavigationComponent ],
-      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot()]
+      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot(), HttpClientTestingModule, MatDialogModule]
     })
     .compileComponents();
   }));
@@ -27,5 +29,9 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 });

@@ -19,6 +19,7 @@ import { YesNoDialogComponent } from './components/_shared/yes-no-dialog/yes-no-
 import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-search-lobby-popup/active-search-lobby-popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OkDialogComponent } from './components/_shared/ok-dialog/ok-dialog.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { OkDialogComponent } from './components/_shared/ok-dialog/ok-dialog.comp
     MatSnackBarModule,
     MatRippleModule,
     MatDialogModule,
+    MatProgressBarModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [

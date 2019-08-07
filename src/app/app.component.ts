@@ -10,13 +10,14 @@ import {
 } from '@angular/animations';
 import { PlatformInfoService, MobileChangedState } from './services/PlatformInfoService/platform-info.service';
 import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
-import { GamerPalsRestService } from './services/GamerPalsRESTService/gamer-pals-rest.service';
+import { GamerPalsRestService, LoginType } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingsService } from './services/SettingsService/settings.service';
 import { IUser } from './models/user';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { ThrowStmt } from '@angular/compiler';
+import { ProgressBarService } from './services/ProgressBarService/progress-bar.service';
 
 @Component({
   selector: 'app-root',
@@ -100,6 +101,7 @@ export class AppComponent implements OnInit {
       });
     }
 
+
     // Top Level Google Login Handler (Automatically logs in user to GamerPals-Backend)
     this.gLoginService.onSignInAndInitial(async (isSignedIn: boolean) => {
       console.log(`Google User signed ${isSignedIn ? 'in' : 'out'}!`);
@@ -107,9 +109,12 @@ export class AppComponent implements OnInit {
         const user = await this.gLoginService.getSignedInUser();
 
         console.log('Google User', user);
-        this.gpRESTService.sendLoginRequest(1, user.getAuthResponse().id_token).then((gpUser: IUser) => {
+
+        ProgressBarService.progressBarVisible = true;
+        this.gpRESTService.sendLoginRequest(LoginType.Google, user.getAuthResponse().id_token).then((gpUser: IUser) => {
           console.log('Local User', gpUser);
 
+          ProgressBarService.progressBarVisible = false;
           if (!gpUser.profileComplete) {
             this.zone.run(() => {
               this.router.navigateByUrl('/login');
@@ -118,9 +123,19 @@ export class AppComponent implements OnInit {
         },
         (error: any) => {
           console.log(error);
+          ProgressBarService.progressBarVisible = false;
+          this.gLoginService.signOutCurrentUser();
           this.gpHelper.showErrorOnPage();
         });
       }
     });
+  }
+
+  private getBarMode(): string {
+    return ProgressBarService.progressBarMode;
+  }
+
+  private showProgressBar(): boolean {
+    return ProgressBarService.progressBarVisible;
   }
 }

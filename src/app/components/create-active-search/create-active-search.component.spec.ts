@@ -22,4 +22,8 @@ describe('CreateActiveSearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

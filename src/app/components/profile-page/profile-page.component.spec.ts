@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -20,7 +21,8 @@ describe('ProfilePageComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatDialogModule,
-        DeviceDetectorModule.forRoot()
+        DeviceDetectorModule.forRoot(),
+        HttpClientTestingModule
       ]
     })
     .compileComponents();
@@ -34,5 +36,9 @@ describe('ProfilePageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 });

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EnvironmentService } from './environment.service';
+import { ProgressBarService } from './progress-bar.service';
 
-describe('EnvironmentService', () => {
+describe('ProgressBarService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EnvironmentService = TestBed.get(EnvironmentService);
+    const service: ProgressBarService = TestBed.get(ProgressBarService);
     expect(service).toBeTruthy();
   });
 

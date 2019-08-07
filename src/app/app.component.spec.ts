@@ -12,6 +12,7 @@ import { NavigationComponent } from './components/header/navigation/navigation.c
 import { ProfileButtonComponent } from './components/header/profile-button/profile-button.component';
 import { ElectronControlsComponent } from './components/electron-controls/electron-controls.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -25,7 +26,8 @@ describe('AppComponent', () => {
         MatButtonModule,
         MatCardModule,
         MatSnackBarModule,
-        DeviceDetectorModule.forRoot()
+        DeviceDetectorModule.forRoot(),
+        MatDialogModule
       ],
       declarations: [
         AppComponent,
@@ -41,5 +43,9 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 });

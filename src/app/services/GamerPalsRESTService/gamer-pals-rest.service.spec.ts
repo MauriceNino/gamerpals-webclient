@@ -13,4 +13,8 @@ describe('GamerPalsRestService', () => {
     const service: GamerPalsRestService = TestBed.get(GamerPalsRestService);
     expect(service).toBeTruthy();
   });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

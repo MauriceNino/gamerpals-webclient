@@ -51,4 +51,8 @@ describe('BasicSettingsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
+  });
 });

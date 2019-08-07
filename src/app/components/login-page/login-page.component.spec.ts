@@ -18,6 +18,7 @@ import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-l
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -43,7 +44,8 @@ describe('LoginPageComponent', () => {
         ReactiveFormsModule,
         MatSnackBarModule,
         HttpClientTestingModule,
-        DeviceDetectorModule.forRoot()
+        DeviceDetectorModule.forRoot(),
+        RouterTestingModule
       ]
     })
       .compileComponents();
@@ -57,5 +59,9 @@ describe('LoginPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule();
   });
 });
