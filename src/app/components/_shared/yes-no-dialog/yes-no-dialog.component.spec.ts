@@ -7,7 +7,7 @@ describe('YesNoDialogComponent', () => {
   let component: YesNoDialogComponent;
   let fixture: ComponentFixture<YesNoDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ YesNoDialogComponent ],
       imports: [
@@ -20,9 +20,8 @@ describe('YesNoDialogComponent', () => {
       ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(YesNoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -13,7 +13,7 @@ describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
   let fixture: ComponentFixture<ProfilePageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ProfilePageComponent ],
       providers: [GoogleLoginService, SettingsService],
@@ -26,9 +26,8 @@ describe('ProfilePageComponent', () => {
       ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(ProfilePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

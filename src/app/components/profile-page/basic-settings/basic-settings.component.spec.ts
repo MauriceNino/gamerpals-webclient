@@ -20,7 +20,7 @@ describe('BasicSettingsComponent', () => {
   let component: BasicSettingsComponent;
   let fixture: ComponentFixture<BasicSettingsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ BasicSettingsComponent ],
       providers: [SettingsService],
@@ -40,9 +40,8 @@ describe('BasicSettingsComponent', () => {
         HttpClientTestingModule
       ]})
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(BasicSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

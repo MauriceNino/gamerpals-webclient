@@ -22,7 +22,7 @@ describe('ShortSearchPageComponent', () => {
   let component: ShortSearchPageComponent;
   let fixture: ComponentFixture<ShortSearchPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ShortSearchPageComponent ],
       providers: [GamerPalsRestService],
@@ -46,9 +46,8 @@ describe('ShortSearchPageComponent', () => {
       ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(ShortSearchPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -17,7 +17,7 @@ describe('ConnectionSettingsComponent', () => {
   let component: ConnectionSettingsComponent;
   let fixture: ComponentFixture<ConnectionSettingsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ConnectionSettingsComponent ],
       imports: [
@@ -35,9 +35,8 @@ describe('ConnectionSettingsComponent', () => {
       ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(ConnectionSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

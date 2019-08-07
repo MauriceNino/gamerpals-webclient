@@ -11,15 +11,14 @@ describe('FriendsPageComponent', () => {
   let component: FriendsPageComponent;
   let fixture: ComponentFixture<FriendsPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ FriendsPageComponent ],
       imports: [MatSnackBarModule, HttpClientTestingModule, RouterTestingModule, MatDialogModule, NoopAnimationsModule]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(FriendsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

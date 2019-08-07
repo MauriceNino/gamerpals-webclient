@@ -11,15 +11,14 @@ describe('LongSearchPageComponent', () => {
   let component: LongSearchPageComponent;
   let fixture: ComponentFixture<LongSearchPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ LongSearchPageComponent ],
       imports: [MatSnackBarModule, HttpClientTestingModule, RouterTestingModule, MatDialogModule, NoopAnimationsModule]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(LongSearchPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

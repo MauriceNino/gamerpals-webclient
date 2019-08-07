@@ -15,7 +15,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { MatDialogModule } from '@angular/material/dialog';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -37,7 +37,7 @@ describe('AppComponent', () => {
         ElectronControlsComponent
       ],
     }).compileComponents();
-  }));
+  });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);

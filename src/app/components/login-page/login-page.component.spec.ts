@@ -24,7 +24,7 @@ describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
 
-  beforeEach((() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginPageComponent],
       providers: [GoogleLoginService],
@@ -48,10 +48,9 @@ describe('LoginPageComponent', () => {
         RouterTestingModule
       ]
     })
-      .compileComponents();
-  }));
+    .compileComponents();
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

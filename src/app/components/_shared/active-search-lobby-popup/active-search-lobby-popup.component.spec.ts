@@ -6,14 +6,13 @@ describe('ActiveSearchLobbyPopupComponent', () => {
   let component: ActiveSearchLobbyPopupComponent;
   let fixture: ComponentFixture<ActiveSearchLobbyPopupComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ActiveSearchLobbyPopupComponent ]
     })
     .compileComponents();
-  }));
 
-  beforeEach(() => {
+
     fixture = TestBed.createComponent(ActiveSearchLobbyPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
