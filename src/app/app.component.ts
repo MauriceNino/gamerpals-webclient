@@ -131,11 +131,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private getBarMode(): string {
+  getBarMode(): string {
     return ProgressBarService.progressBarMode;
   }
 
-  private showProgressBar(): boolean {
+  showProgressBar(): boolean {
     return ProgressBarService.progressBarVisible;
   }
 }
