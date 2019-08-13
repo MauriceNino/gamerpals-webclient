@@ -2,8 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ProfileButtonComponent } from '../header/profile-button/profile-button.component';
-import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
-import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
+import { BackendService } from 'src/app/services/BackendService/backend.service';
 
 @Component({
   selector: 'app-home-page',
@@ -33,14 +32,14 @@ export class HomePageComponent implements OnInit {
 
 
   constructor(private sanitizer: DomSanitizer, private router: Router,
-              private profileButtonComp: ProfileButtonComponent, private backendService: GamerPalsRestService) { }
+              private profileButtonComp: ProfileButtonComponent, private backend: BackendService) { }
 
   ngOnInit() {
     // Set the initial values for the resize dependant components in this page
     this.onResize(undefined, window.innerWidth, window.innerHeight);
 
     // Get the login status of the user everytime its updated
-    this.backendService.onSignInAndInitial((isSignedIn: boolean) => {
+    this.backend.Login.onSignInAndInitial((isSignedIn: boolean) => {
       this.isUserSignedIn = isSignedIn;
     });
 

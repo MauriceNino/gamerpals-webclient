@@ -1,21 +1,21 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GamerPalsRestService } from '../GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { OkDialogComponent } from 'src/app/components/_shared/ok-dialog/ok-dialog.component';
 import { YesNoDialogComponent } from 'src/app/components/_shared/yes-no-dialog/yes-no-dialog.component';
+import { BackendService } from '../BackendService/backend.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GamerPalsHelperMethodService {
 
-  constructor(private snackBar: MatSnackBar, private zone: NgZone, private backendService: GamerPalsRestService,
+  constructor(private snackBar: MatSnackBar, private zone: NgZone, private backend: BackendService,
               private router: Router, private dialog: MatDialog) { }
 
   public preventSiteIfNoProfile(): void {
-    if (!this.backendService.isUserSignedIn()) {
+    if (!this.backend.Login.isUserSignedIn()) {
       this.zone.run(() => {
         this.router.navigateByUrl('/home');
         this.dialog.open(OkDialogComponent, {data: {
@@ -23,7 +23,7 @@ export class GamerPalsHelperMethodService {
           title: 'Please login!'
         }});
       });
-    } else if (!this.backendService.getLoggedInUser().profileComplete) {
+    } else if (!this.backend.Login.getLoggedInUser().profileComplete) {
       this.zone.run(() => {
         this.router.navigateByUrl('/login');
         this.dialog.open(OkDialogComponent, {data: {

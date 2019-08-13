@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 import { SettingsService, SettingsChangedState } from 'src/app/services/SettingsService/settings.service';
 import { MatDialog } from '@angular/material/dialog';
 import { YesNoDialogComponent, IYesNoDialogResult } from '../_shared/yes-no-dialog/yes-no-dialog.component';
 import { PlatformInfoService } from 'src/app/services/PlatformInfoService/platform-info.service';
-import { MatButton } from '@angular/material/button';
-import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
+import { BackendService } from 'src/app/services/BackendService/backend.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -25,7 +24,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit  {
   public showButtons = false;
 
   constructor(private gLoginService: GoogleLoginService, private router: Router, private settings: SettingsService,
-              public dialog: MatDialog, public platformInfo: PlatformInfoService, private backendService: GamerPalsRestService) {
+              public dialog: MatDialog, public platformInfo: PlatformInfoService, private backend: BackendService) {
   }
 
   public isMobile(): boolean {
@@ -68,7 +67,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit  {
     dialogRef.afterClosed().subscribe((result: IYesNoDialogResult) => {
       if (result === IYesNoDialogResult.YES) {
         this.gLoginService.signOutCurrentUser().then(() => {
-          this.backendService.updateSignedIn(false);
+          this.backend.Login.updateSignedIn(false);
           this.router.navigateByUrl('/home');
         });
       }

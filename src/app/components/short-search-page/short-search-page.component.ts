@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
 import { MatSelectChange } from '@angular/material/select';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
@@ -8,6 +7,7 @@ import { ISearchParameter } from 'src/app/models/parameters';
 import { IActiveSearch } from 'src/app/models/active-search';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BackendService } from 'src/app/services/BackendService/backend.service';
 
 @Component({
   selector: 'app-short-search-page',
@@ -56,16 +56,16 @@ export class ShortSearchPageComponent implements OnInit {
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(private restService: GamerPalsRestService, public dialog: MatDialog, private router: Router,
-              private helpers: GamerPalsHelperMethodService) { }
+  constructor(public dialog: MatDialog, private router: Router,
+              private helpers: GamerPalsHelperMethodService, private backend: BackendService) { }
 
   ngOnInit() {
     this.helpers.preventSiteIfNoProfile();
-    this.restService.waitForLoginRequest(
+    this.backend.Login.waitForLoginRequest(
       async () => {
 
         // TODO: When service implements real UserGames method, remove this bulk
-        this.games = await this.restService.getGames();
+        this.games = await this.backend.Games.getAll();
 
         // Load the locally saved search parameters
         const localSaved = this.loadParametersFromLocalStorage();
@@ -104,7 +104,7 @@ export class ShortSearchPageComponent implements OnInit {
       const paramIndex: number = this.selectedGamesParameters
         .map((param: ISearchGameParameters) => param.game._id).indexOf(game._id);
       if (paramIndex === -1) {
-        const parameters: ISearchParameter[] = await this.restService.getSearchParametersByGame(game);
+        const parameters: ISearchParameter[] = await this.backend.SearchParameters.getByGame(game);
         const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: ISearchParameter) => {
           return {parameter, value: null};
         });

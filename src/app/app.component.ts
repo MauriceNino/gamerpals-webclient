@@ -5,19 +5,18 @@ import {
   query,
   style,
   animate,
-  group,
-  animateChild
+  group
 } from '@angular/animations';
 import { PlatformInfoService, MobileChangedState } from './services/PlatformInfoService/platform-info.service';
 import { GoogleLoginService } from './services/GoogleLoginService/google-login.service';
-import { GamerPalsRestService, LoginType } from './services/GamerPalsRESTService/gamer-pals-rest.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingsService } from './services/SettingsService/settings.service';
 import { IUser } from './models/user';
 import { GamerPalsHelperMethodService } from './services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
-import { ThrowStmt } from '@angular/compiler';
 import { ProgressBarService } from './services/ProgressBarService/progress-bar.service';
+import { BackendService } from './services/BackendService/backend.service';
+import { LoginType } from './models/login';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
   showElectronControls = false;
 
   constructor(private platformInfo: PlatformInfoService, private gLoginService: GoogleLoginService,
-              private gpRESTService: GamerPalsRestService, private router: Router,
+              private router: Router, private backend: BackendService,
               private zone: NgZone, private snackBar: MatSnackBar, private settings: SettingsService,
               private gpHelper: GamerPalsHelperMethodService) {
     this.onResize(undefined);
@@ -110,11 +109,13 @@ export class AppComponent implements OnInit {
 
         console.log('Google User', user);
 
-        ProgressBarService.progressBarVisible = true;
-        this.gpRESTService.sendLoginRequest(LoginType.Google, user.getAuthResponse().id_token).then((gpUser: IUser) => {
+        this.zone.run(() => ProgressBarService.progressBarVisible = true);
+
+        console.log(this.backend);
+        this.backend.Login.sendLoginRequest(LoginType.Google, user.getAuthResponse().id_token).then((gpUser: IUser) => {
           console.log('Local User', gpUser);
 
-          ProgressBarService.progressBarVisible = false;
+          this.zone.run(() => ProgressBarService.progressBarVisible = false);
           if (!gpUser.profileComplete) {
             this.zone.run(() => {
               this.router.navigateByUrl('/login');
@@ -123,7 +124,7 @@ export class AppComponent implements OnInit {
         },
         (error: any) => {
           console.log(error);
-          ProgressBarService.progressBarVisible = false;
+          this.zone.run(() => ProgressBarService.progressBarVisible = false);
           this.gLoginService.signOutCurrentUser();
           this.gpHelper.showErrorOnPage();
         });

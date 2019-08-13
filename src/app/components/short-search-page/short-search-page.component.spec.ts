@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShortSearchPageComponent } from './short-search-page.component';
-import { GamerPalsRestService } from 'src/app/services/GamerPalsRESTService/gamer-pals-rest.service';
 import { ShortSearchPageRoutingModule } from './short-search-page-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,7 @@ describe('ShortSearchPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ ShortSearchPageComponent ],
-      providers: [GamerPalsRestService],
+      providers: [],
       imports: [
         NoopAnimationsModule,
         ShortSearchPageRoutingModule,
