@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -17,19 +18,22 @@ const routes: Routes = [
   {
     path: 'short-search',
     loadChildren: () => import('./components/short-search-page/short-search-page.module').then(m => m.ShortSearchPageModule),
-    data: {animation: 'short-search'}
+    data: {animation: 'short-search'},
+    canActivate: [AuthGuardService]
   },
 
   {
     path: 'long-search',
     loadChildren: () => import('./components/long-search-page/long-search-page.module').then(m => m.LongSearchPageModule),
-    data: {animation: 'long-search'}
+    data: {animation: 'long-search'},
+    canActivate: [AuthGuardService]
   },
 
   {
     path: 'friends',
     loadChildren: () => import('./components/friends-page/friends-page.module').then(m => m.FriendsPageModule),
-    data: {animation: 'profile', preload: true}
+    data: {animation: 'profile', preload: true},
+    canActivate: [AuthGuardService]
   },
 
   {
@@ -41,13 +45,15 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./components/profile-page/profile-page.module').then(m => m.ProfilePageModule),
-    data: {animation: 'profile', preload: true}
+    data: {animation: 'profile', preload: true},
+    canActivate: [AuthGuardService]
   },
 
   {
     path: 'createLobby',
     loadChildren: () => import('./components/create-active-search/create-active-search.module').then(m => m.CreateActiveSearchModule),
-    data: {animation: 'createLobby'}
+    data: {animation: 'createLobby'},
+    canActivate: [AuthGuardService]
   },
 ];
 

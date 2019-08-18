@@ -20,6 +20,7 @@ import { ActiveSearchLobbyPopupComponent } from './components/_shared/active-sea
 import { MatDialogModule } from '@angular/material/dialog';
 import { OkDialogComponent } from './components/_shared/ok-dialog/ok-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

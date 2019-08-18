@@ -19,7 +19,6 @@ export class FriendsPageComponent implements OnInit {
   constructor(private helpers: GamerPalsHelperMethodService) { }
 
   ngOnInit() {
-    this.helpers.preventSiteIfNoProfile();
     setTimeout(() => {
       this.friendsSpinner._elementRef.nativeElement.classList.add('finished-loading');
     }, 1000);

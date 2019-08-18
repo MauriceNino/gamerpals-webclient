@@ -128,6 +128,8 @@ export class AppComponent implements OnInit {
           this.gLoginService.signOutCurrentUser();
           this.gpHelper.showErrorOnPage();
         });
+      } else {
+        this.backend.Login.noLoginPlanned();
       }
     });
   }

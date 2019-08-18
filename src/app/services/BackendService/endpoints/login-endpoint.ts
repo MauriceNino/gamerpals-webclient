@@ -10,6 +10,7 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
 
     private isLoginRequestPending = false;
     private isLoginAlreadyExecutedOnce = false;
+    private isAutoLoginPlanned = true;
 
     private userSignedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -30,6 +31,29 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
             console.error('Couldnt wait for LoginRequest any longer');
             return false;
         }
+    }
+
+    public async waitForLoginAsync(): Promise<void> {
+        if (this.isAutoLoginPlanned && (this.isLoginRequestPending || !this.isLoginAlreadyExecutedOnce)) {
+            await new Promise(resolve =>
+                setTimeout(() =>
+                    this.waitForLoginAsync().then(resolve).catch(resolve),
+                    1000
+                )
+            );
+        }
+    }
+
+    public waitForLogin(func: () => void): void {
+        if (this.isAutoLoginPlanned && (this.isLoginRequestPending || !this.isLoginAlreadyExecutedOnce)) {
+            setTimeout(() => this.waitForLogin(func), 50);
+        } else {
+            func();
+        }
+    }
+
+    public noLoginPlanned(): void {
+        this.isAutoLoginPlanned = false;
     }
 
     public async sendLoginRequest(type: number, token: string): Promise<IUser> {
