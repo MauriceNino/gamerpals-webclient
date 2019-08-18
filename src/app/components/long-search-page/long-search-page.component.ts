@@ -11,7 +11,6 @@ export class LongSearchPageComponent implements OnInit {
   constructor(private helpers: GamerPalsHelperMethodService) { }
 
   ngOnInit() {
-    this.helpers.preventSiteIfNoProfile();
   }
 
 }

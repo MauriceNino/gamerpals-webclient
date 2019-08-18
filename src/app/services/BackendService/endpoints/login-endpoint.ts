@@ -18,26 +18,11 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
         super(EnvironmentService.fileReference.loginEndpoint, http);
     }
 
-    public waitForLoginRequest(func: () => void, timeout: number): boolean {
-        const step = 50; // 50 ms recursive steps
-
-        if (!this.isLoginRequestPending && this.isLoginAlreadyExecutedOnce) {
-            func();
-            return this.isUserSignedIn();
-        } else if (timeout >= 0) {
-            timeout -= step;
-            setTimeout(() => this.waitForLoginRequest(func, timeout), step);
-        } else {
-            console.error('Couldnt wait for LoginRequest any longer');
-            return false;
-        }
-    }
-
     public async waitForLoginAsync(): Promise<void> {
         if (this.isAutoLoginPlanned && (this.isLoginRequestPending || !this.isLoginAlreadyExecutedOnce)) {
             await new Promise(resolve =>
                 setTimeout(() =>
-                    this.waitForLoginAsync().then(resolve).catch(resolve),
+                    this.waitForLoginAsync().then(() => resolve()).catch(() => resolve()),
                     1000
                 )
             );

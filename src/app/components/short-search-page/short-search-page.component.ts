@@ -56,44 +56,37 @@ export class ShortSearchPageComponent implements OnInit {
   @ViewChild('content', {static: false})
   mainContent: ElementRef;
 
-  constructor(public dialog: MatDialog, private router: Router,
-              private helpers: GamerPalsHelperMethodService, private backend: BackendService) { }
+  constructor(public dialog: MatDialog, private router: Router, private backend: BackendService) { }
 
-  ngOnInit() {
-    this.helpers.preventSiteIfNoProfile();
-    this.backend.Login.waitForLoginRequest(
-      async () => {
+  async ngOnInit() {
+    await this.backend.Login.waitForLoginAsync();
+    // TODO: When service implements real UserGames method, remove this bulk
+    this.games = await this.backend.Games.getAll();
 
-        // TODO: When service implements real UserGames method, remove this bulk
-        this.games = await this.backend.Games.getAll();
+    // Load the locally saved search parameters
+    const localSaved = this.loadParametersFromLocalStorage();
+    this.selectedGamesParameters = localSaved === null ? [] : localSaved.slice();
 
-        // Load the locally saved search parameters
-        const localSaved = this.loadParametersFromLocalStorage();
-        this.selectedGamesParameters = localSaved === null ? [] : localSaved.slice();
+    // Check if locally saved parameters are still viable
+    this.selectedGamesParameters.forEach((searchGame: ISearchGameParameters) => {
+      // If the game of the parameters still exists in the users games list, then select it in the #searchbar-games-select MatSelect
+      // > else disable it in the array of parameters
+      const paramIndex = this.games.map(g => g._id).indexOf(searchGame.game._id);
+      if (paramIndex === -1) {
+        searchGame.canDisable = true;
+        searchGame.show = false;
+      } else {
+        this.selectedGames.push(this.games[paramIndex]);
+      }
+    });
 
-        // Check if locally saved parameters are still viable
-        this.selectedGamesParameters.forEach((searchGame: ISearchGameParameters) => {
-          // If the game of the parameters still exists in the users games list, then select it in the #searchbar-games-select MatSelect
-          // > else disable it in the array of parameters
-          const paramIndex = this.games.map(g => g._id).indexOf(searchGame.game._id);
-          if (paramIndex === -1) {
-            searchGame.canDisable = true;
-            searchGame.show = false;
-          } else {
-            this.selectedGames.push(this.games[paramIndex]);
-          }
-        });
+    // Small Timeout to hide the fadeIn effect beeing ugly and only show it after that thing is over
+    setTimeout(() => {
+      this.showGameSpinner = false;
+      this.mainContent.nativeElement.classList.add('finished-loading');
 
-        // Small Timeout to hide the fadeIn effect beeing ugly and only show it after that thing is over
-        setTimeout(() => {
-          this.showGameSpinner = false;
-          this.mainContent.nativeElement.classList.add('finished-loading');
-
-          this.loadActiveSearches();
-        }, 50);
-      },
-      5000
-    );
+      this.loadActiveSearches();
+    }, 50);
   }
 
   public gamesSelectionChanged(event: MatSelectChange): void {
@@ -105,6 +98,7 @@ export class ShortSearchPageComponent implements OnInit {
         .map((param: ISearchGameParameters) => param.game._id).indexOf(game._id);
       if (paramIndex === -1) {
         const parameters: ISearchParameter[] = await this.backend.SearchParameters.getByGame(game);
+        console.log(parameters);
         const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: ISearchParameter) => {
           return {parameter, value: null};
         });
