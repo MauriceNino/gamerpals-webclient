@@ -16,6 +16,12 @@ export class ServiceEndpoint<T> {
         return this.http.get<T[]>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, { headers }).toPromise();
     }
 
+    public async getByList(mongoIds: string[]): Promise<T[]> {
+        return Promise.all(mongoIds.map(async (mongoId: string) => {
+          return this.get(mongoId);
+        }));
+    }
+
     public async get(mongoId: string): Promise<T> {
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 

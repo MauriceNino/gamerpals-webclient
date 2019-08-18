@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
+import { IUser } from 'src/app/models/user';
+import { BackendService } from 'src/app/services/BackendService/backend.service';
 
 @Component({
   selector: 'app-friends-page',
@@ -12,16 +14,16 @@ export class FriendsPageComponent implements OnInit {
   isTop = true;
   isBottom = true;
 
-  // Loading spinners
-  @ViewChild('friendsLoading', {static: false})
-  friendsSpinner: MatSpinner;
+  friends: IUser[] = [];
 
-  constructor(private helpers: GamerPalsHelperMethodService) { }
+  showFriendsSpinner: boolean;
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.friendsSpinner._elementRef.nativeElement.classList.add('finished-loading');
-    }, 1000);
+  constructor(private backend: BackendService) { }
+
+  async ngOnInit() {
+    this.showFriendsSpinner = true;
+    this.friends = await this.backend.Users.getByList(this.backend.Login.getLoggedInUser().friendsList);
+    this.showFriendsSpinner = false;
   }
 
   public changeShadows(): void {
