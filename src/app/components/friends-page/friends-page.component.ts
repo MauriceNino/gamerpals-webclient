@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 import { IUser } from 'src/app/models/user';
@@ -16,6 +16,7 @@ export class FriendsPageComponent implements OnInit {
 
   friends: IUser[] = [];
 
+  showFriends: boolean;
   showFriendsSpinner: boolean;
 
   constructor(private backend: BackendService) { }
@@ -23,6 +24,7 @@ export class FriendsPageComponent implements OnInit {
   async ngOnInit() {
     this.showFriendsSpinner = true;
     this.friends = await this.backend.Users.getByList(this.backend.Login.getLoggedInUser().friendsList);
+    this.showFriends = true;
     this.showFriendsSpinner = false;
   }
 

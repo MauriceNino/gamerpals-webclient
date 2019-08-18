@@ -23,6 +23,7 @@
     margin: 0;
     padding: 0;
     font-family: Arial;
+    color: var(--text-color);
 }
 html {
     margin: 0px;
@@ -38,6 +39,7 @@ body {
 
     background-color: var(--background-color);
 }
+
 
 app-root {
     display: block;

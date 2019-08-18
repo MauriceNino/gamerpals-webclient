@@ -2,10 +2,16 @@
   <div id="friends-container" split-left>
     <div id="friends-container-shadow-top" [class.show]="!isTop"></div>
     <mat-spinner id="friendsLoading-spinner" *ngIf="showFriendsSpinner"></mat-spinner>
-    <div id="friends-content" (scroll)="changeShadows()" #content>
-      <div *ngFor="let friend of friends">
-        {{ friend.profileName }}
-      </div>
+    <div id="friends-content" (scroll)="changeShadows()" [class.finished-loading]="showFriends">
+      <mat-list>
+        <mat-list-item *ngFor="let friend of friends" class="friend-button">
+          <img matListAvatar src="{{ friend.profilePicture }}" alt="Profile Picture">
+          <h3 matLine> {{ friend.profileName }} </h3>
+          <p matLine>
+            <span  class="{{ friend.onlineStatus }}"> {{ friend.onlineStatus }} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
     </div>
     <div id="friends-container-shadow-bottom" [class.show]="!isBottom"></div>
   </div>
