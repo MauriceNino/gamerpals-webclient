@@ -1,15 +1,17 @@
-<div id="friends-container">
-  <div id="friends-container-shadow-top" [class.show]="!isTop"></div>
-  <mat-spinner id="friendsLoading-spinner" *ngIf="showFriendsSpinner"></mat-spinner>
-  <div id="friends-content" (scroll)="changeShadows()" #content>
-    <div *ngFor="let friend of friends">
-      {{ friend.profileName }}
+<app-split-pane leftStyle="width: 400px" rightStyle="width: calc(100% - 400px); max-width: unset;">
+  <div id="friends-container" split-left>
+    <div id="friends-container-shadow-top" [class.show]="!isTop"></div>
+    <mat-spinner id="friendsLoading-spinner" *ngIf="showFriendsSpinner"></mat-spinner>
+    <div id="friends-content" (scroll)="changeShadows()" #content>
+      <div *ngFor="let friend of friends">
+        {{ friend.profileName }}
+      </div>
     </div>
+    <div id="friends-container-shadow-bottom" [class.show]="!isBottom"></div>
   </div>
-  <div id="friends-container-shadow-bottom" [class.show]="!isBottom"></div>
-</div>
 
+  <div id="single-friend-container" split-right>
+    
+  </div>
+</app-split-pane>
 
-<div id="single-friend-container">
-  
-</div>

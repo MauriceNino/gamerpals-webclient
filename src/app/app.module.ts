@@ -21,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { OkDialogComponent } from './components/_shared/ok-dialog/ok-dialog.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
+import { SplitPaneComponent } from './components/_shared/split-pane/split-pane.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
     ElectronControlsComponent,
     YesNoDialogComponent,
     OkDialogComponent,
-    ActiveSearchLobbyPopupComponent
+    ActiveSearchLobbyPopupComponent,
+    SplitPaneComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
     MatRippleModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatIconModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [

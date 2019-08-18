@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { YesNoDialogComponent, IYesNoDialogResult } from '../_shared/yes-no-dialog/yes-no-dialog.component';
 import { PlatformInfoService } from 'src/app/services/PlatformInfoService/platform-info.service';
 import { BackendService } from 'src/app/services/BackendService/backend.service';
+import { SplitPaneComponent } from '../_shared/split-pane/split-pane.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,11 +14,6 @@ import { BackendService } from 'src/app/services/BackendService/backend.service'
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit, AfterViewInit  {
-  @ViewChild('settingsControlPanel', {static: false})
-  settingsControlPanel: ElementRef<HTMLElement>;
-  @ViewChild('settingsContainer', {static: false})
-  settingsContainer: ElementRef<HTMLElement>;
-
   @ViewChildren('button[mat-button]')
   routerButtons: QueryList<HTMLElement>;
 
@@ -27,18 +23,10 @@ export class ProfilePageComponent implements OnInit, AfterViewInit  {
               public dialog: MatDialog, public platformInfo: PlatformInfoService, private backend: BackendService) {
   }
 
-  public isMobile(): boolean {
-    return this.platformInfo.isCurrentPlatformMobile();
-  }
+  @ViewChild(SplitPaneComponent, {static: false}) splitPane;
 
   toggleMenu() {
-    if (this.settingsControlPanel != null && this.settingsControlPanel != null && this.platformInfo.isCurrentPlatformMobile()) {
-      this.settingsControlPanel.nativeElement.classList.toggle('menuClosed');
-      this.settingsContainer.nativeElement.classList.toggle('menuClosed');
-
-      if (!this.settingsContainer.nativeElement.classList.contains('menuClosed')) {
-      }
-    }
+    this.splitPane.toggleMenu();
   }
 
   ngAfterViewInit() {

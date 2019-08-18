@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FriendsPageRoutingModule } from './friends-page-routing.module';
 import { FriendsPageComponent } from './friends-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SplitPaneComponent } from '../_shared/split-pane/split-pane.component';
 
 @NgModule({
-  declarations: [FriendsPageComponent],
+  declarations: [FriendsPageComponent, SplitPaneComponent],
   imports: [
     CommonModule,
     FriendsPageRoutingModule,

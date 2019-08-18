@@ -9,8 +9,7 @@
 
 #friends-container {
     height: 100%;
-    width: 400px;
-    background-color: var(--card-color);
+    width: 100%;
     position: relative;
     left: 0;
     top: 0;
@@ -66,7 +65,7 @@
 
 #friends-result-container{
     height: 100%;
-    width: calc(100% - 400px);
+    width: 100%;
     
     position: relative;
     right: 0;

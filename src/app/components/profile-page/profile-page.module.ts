@@ -17,12 +17,14 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { SplitPaneComponent } from '../_shared/split-pane/split-pane.component';
 
 @NgModule({
   declarations: [
     ProfilePageComponent,
     BasicSettingsComponent,
-    ConnectionSettingsComponent
+    ConnectionSettingsComponent,
+    SplitPaneComponent
   ],
   imports: [
     CommonModule,

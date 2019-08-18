@@ -1,21 +1,18 @@
-<div id="settings-control-panel" #settingsControlPanel>
-    <div id="settings-button-container">
+<app-split-pane>
+    <div id="settings-button-container" split-left>
         <button mat-button routerLink="basic" [routerLinkActive]="'active'" (click)="toggleMenu()">Basic</button>
         <button mat-button routerLink="connections" [routerLinkActive]="'active'" (click)="toggleMenu()">Connection</button>
         <button mat-raised-button color="primary" (click)="onLogout()">Logout</button>
     </div>
-</div>
-
-<div id="settings-container" #settingsContainer>
-    <button mat-button (click)="toggleMenu()" id="go-back-button" *ngIf="isMobile()"> 
-        <mat-icon>keyboard_arrow_left</mat-icon><span>Back to Menu</span>
-    </button>
-    <div id="settings-router-wrapper">
-        <router-outlet></router-outlet>
+    
+    <div id="settings-container" split-right>
+        <div id="settings-router-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+                
+        <div id="settings-action-buttons" [class.show]="showButtons">
+            <button mat-stroked-button color="warn" (click)="undoChanges()">Undo</button>
+            <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
+        </div>
     </div>
-            
-    <div id="settings-action-buttons" [class.show]="showButtons">
-        <button mat-stroked-button color="warn" (click)="undoChanges()">Undo</button>
-        <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
-    </div>
-</div>
+</app-split-pane>
