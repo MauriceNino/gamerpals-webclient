@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SplitPaneComponent } from './split-pane.component';
+import { PlatformInfoService } from 'src/app/services/PlatformInfoService/platform-info.service';
+import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector';
 
 describe('SplitPaneComponent', () => {
   let component: SplitPaneComponent;
@@ -8,7 +10,10 @@ describe('SplitPaneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SplitPaneComponent ]
+      declarations: [ SplitPaneComponent ],
+      providers: [
+        DeviceDetectorService
+      ]
     })
     .compileComponents();
   }));
