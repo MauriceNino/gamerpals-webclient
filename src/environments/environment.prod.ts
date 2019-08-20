@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   envName: 'PRODUCTION',
   shortEnvName: 'PROD',
-  connectionProtocol: 'http',
+  connectionProtocol: 'https',
   connectionEndpoint: 'gamerpals-backend.herokuapp.com',
   connectionPort: 80,
   activeSearchEndpoint: 'api/ActiveSearch',
