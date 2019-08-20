@@ -9,6 +9,7 @@ export const environment = {
   connectionProtocol: 'http',
   connectionEndpoint: 'localhost',
   connectionPort: 50606,
+  useConnectionPort: true,
   activeSearchEndpoint: 'api/ActiveSearch',
   gameEndpoint: 'api/Game',
   languageEndpoint: 'api/Language',

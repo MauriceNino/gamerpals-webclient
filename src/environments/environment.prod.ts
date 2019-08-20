@@ -5,6 +5,7 @@ export const environment = {
   connectionProtocol: 'https',
   connectionEndpoint: 'gamerpals-backend.herokuapp.com',
   connectionPort: 80,
+  useConnectionPort: false,
   activeSearchEndpoint: 'api/ActiveSearch',
   gameEndpoint: 'api/Game',
   languageEndpoint: 'api/Language',

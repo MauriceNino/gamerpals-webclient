@@ -5,6 +5,7 @@ export class ServiceEndpoint<T> {
     private static connectionProtocol = EnvironmentService.fileReference.connectionProtocol;
     private static connectionEndpoint = EnvironmentService.fileReference.connectionEndpoint;
     private static connectionPort = EnvironmentService.fileReference.connectionPort;
+    private static usePort = EnvironmentService.fileReference.useConnectionPort;
 
     public static loggedInUserBearerToken: string;
 
@@ -58,7 +59,7 @@ export class ServiceEndpoint<T> {
 
     // tslint:disable-next-line: member-ordering
     public static getBaseConnectionUrl(): string {
-      return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}:`
-        +  `${ServiceEndpoint.connectionPort}`;
+        return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}
+            ${ServiceEndpoint.usePort ? `:${ServiceEndpoint.connectionPort}` : ``}`;
     }
 }
