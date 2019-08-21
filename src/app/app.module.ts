@@ -23,6 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AuthGuardService } from './guards/AuthGuardService/auth-guard.service';
 import { SplitPaneComponent } from './components/_shared/split-pane/split-pane.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ProfileCompleteGuardService } from './guards/ProfileCompleteGuardService/profile-complete-guard.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
-    AuthGuardService
+    AuthGuardService,
+    ProfileCompleteGuardService
   ],
   bootstrap: [AppComponent]
 })

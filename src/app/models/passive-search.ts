@@ -1,16 +1,16 @@
 import { IUserSearchParameter } from './parameters';
 
 export interface IAnswer {
-    sender: any;
+    sender: string; // ObjectId
     postText: string;
     createTime: Date;
 }
 
 export interface IPassiveSearch {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     createTime: Date;
-    searchingGame: any;
-    creator: any;
+    searchingGame: string; // ObjectId
+    creator: string; // ObjectId
     postTitle: string;
     postText: string;
     searchParameters: IUserSearchParameter[];

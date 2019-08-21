@@ -1,18 +1,20 @@
 <div id="gp_login_content">
     <div id="gp_login_base">
-        <mat-horizontal-stepper linear="false" #stepper>
-            <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
-                    <ng-template matStepLabel>Account Information</ng-template>
+        <mat-horizontal-stepper linear="false">
+            <mat-step [stepControl]="formGroup1">
+                <form [formGroup]="formGroup1" *ngIf="formGroup1">
+                    <ng-template matStepLabel>Profile Information</ng-template>
 
                     <div class="leftSideOfForm" style="width: 65%">
-                        <mat-form-field style="width: 60%" appearance="outline">
+                        <mat-form-field style="width: 60%" appearance="outline" color="primary">
                             <mat-label>Pick a Username</mat-label>
-                            <input matInput placeholder=" ..." formControlName="username" required>
+                            <input matInput placeholder=" ..." formControlName="profileName">
+                            <mat-error *ngIf="!formGroup1.controls['profileName'].valid">{{ getError(formGroup1.controls['profileName']) }}</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" color="primary">
                             <mat-label>Describe yourself</mat-label>
-                            <textarea id="profileInfo" matInput placeholder=" ..." rows="6"></textarea>
+                            <textarea matInput id="profileInfo" placeholder=" ..." rows="6" formControlName="profileDescription"></textarea>
+                            <mat-error *ngIf="!formGroup1.controls['profileDescription'].valid">{{ getError(formGroup1.controls['profileDescription']) }}</mat-error>
                         </mat-form-field>
                     </div>
 
@@ -31,29 +33,29 @@
                     <button mat-button matStepperNext>Next</button>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup" id="personal-information-input">
-                <form [formGroup]="secondFormGroup">
+            <mat-step [stepControl]="formGroup2" id="personal-information-input">
+                <form [formGroup]="formGroup2" *ngIf="formGroup2">
                     <ng-template matStepLabel>Personal Information</ng-template>
 
                     <div class="leftSideOfForm">
                         <mat-form-field>
                             <mat-label>Gender</mat-label>
-                            <mat-select required [(value)]="selGender">
+                            <mat-select [(value)]="selGender">
                                 <mat-option *ngFor="let gender of genderList" [value]="gender"> 
                                 {{ gender }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday" required>
+                            <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Country</mat-label>
                             <mat-select required [(value)]="selCountry">
-                                <mat-option *ngFor="let country of countryList" [value]="country.Name"> 
-                                {{ country.Name }}
+                                <mat-option *ngFor="let country of countryList" [value]="country.isoA3"> 
+                                {{ country.fullName }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -88,8 +90,8 @@
                     <button mat-button matStepperNext>Next</button>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="thirdFormGroup" id="games-input">
-                <form [formGroup]="thirdFormGroup">
+            <mat-step [stepControl]="formGroup3" id="games-input">
+                <form [formGroup]="formGroup3" *ngIf="formGroup3">
                     <ng-template matStepLabel>Pick your Games!</ng-template>
 
                     <div class="leftSideOfForm">

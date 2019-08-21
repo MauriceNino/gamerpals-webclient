@@ -1,5 +1,5 @@
 export interface IUser {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     createTime: Date;
     googleId: string;
     profileName: string;
@@ -7,26 +7,26 @@ export interface IUser {
     profilePicture: string;
     birthday: Date;
     onlineStatus: string;
-    country: any; // ObjectId
-    languages: any[]; // ObjectId
+    country: string; // ObjectId
+    languages: string[]; // ObjectId
     gender: string;
     currentSession: ICurrentSession;
     karma: IKarma;
-    gamesSelected: any[]; // ObjectId
-    activeSearches: any[]; // ObjectId
-    passiveSearches: any[]; // ObjectId
-    Role: any; // ObjectId
+    gamesSelected: string[]; // ObjectId
+    activeSearches: string[]; // ObjectId
+    passiveSearches: string[]; // ObjectId
+    Role: string; // ObjectId
     friendsList: any[];
     recievedFriendRequests: IRecievedFriendsRequest[];
     sentFriendRequests: ISentFriendRequest[];
-    privateChats: any[]; // ObjectId
+    privateChats: string[]; // ObjectId
     notifications: INotification[];
-    connectedServices: any[]; // ObjectId
+    connectedServices: string[]; // ObjectId
     profileComplete: boolean;
 }
 
 export interface ICurrentSession {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     validTo: Date;
     sessionToken: string;
 }
@@ -43,12 +43,12 @@ export interface IKarma {
 }
 
 export interface ISentFriendRequest {
-    requestTo: any;
+    requestTo: string; // ObjectId
     accepted: boolean;
 }
 
 export interface IRecievedFriendsRequest {
-    requestFrom: any;
+    requestFrom: string; // ObjectId
     accepted: boolean;
 }
 

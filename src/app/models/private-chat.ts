@@ -6,7 +6,7 @@ export interface IParticipant {
 }
 
 export interface IPrivateChat {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     isGroupChat: boolean;
     participants: IParticipant[];
     chatMessages: IChatMessage[];

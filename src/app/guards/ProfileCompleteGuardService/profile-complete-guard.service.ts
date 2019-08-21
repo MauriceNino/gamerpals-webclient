@@ -8,7 +8,7 @@ import { OkDialogComponent } from 'src/app/components/_shared/ok-dialog/ok-dialo
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate {
+export class ProfileCompleteGuardService implements CanActivate {
 
   constructor(private backend: BackendService, private router: Router, private zone: NgZone, private dialog: MatDialog) { }
 
@@ -25,6 +25,17 @@ export class AuthGuardService implements CanActivate {
             }});
             ref.afterClosed().subscribe(() => {
               this.zone.run(() => this.router.navigateByUrl('/home'));
+            });
+          });
+          reject(false);
+        } else if (!this.backend.Login.getLoggedInUser().profileComplete) {
+          this.zone.run(() => {
+            const ref = this.dialog.open(OkDialogComponent, {data: {
+              ok: 'Ok',
+              title: 'Please complete your profile first!'
+            }});
+            ref.afterClosed().subscribe(() => {
+              this.zone.run(() => this.router.navigateByUrl('/login'));
             });
           });
           reject(false);

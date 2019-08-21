@@ -4,7 +4,7 @@ export interface IParameterPossibility {
 }
 
 export interface ISearchParameter {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     parameterName: string;
     parameterGrayText: string;
     parameterHint: string;
@@ -16,7 +16,7 @@ export interface ISearchParameter {
 }
 
 export interface IUserSearchParameter {
-    parameter: any; // ObjectId
+    parameter: string; // ObjectId
     valueFrom: number;
     valueTo: number;
 }

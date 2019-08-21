@@ -116,9 +116,11 @@ export class AppComponent implements OnInit {
 
           this.zone.run(() => ProgressBarService.progressBarVisible = false);
           if (!gpUser.profileComplete) {
-            this.zone.run(() => {
-              this.router.navigateByUrl('/login');
-            });
+            this.gpHelper.showSnackbarOnPage('Please complete your profile before you continue!', 'OK', () => {
+              this.zone.run(() => {
+                this.router.navigateByUrl('/login');
+              });
+            }, 10000);
           }
         },
         (error: any) => {

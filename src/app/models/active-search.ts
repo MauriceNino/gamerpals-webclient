@@ -2,11 +2,11 @@ import { IUserSearchParameter } from './parameters';
 import { IChatMessage } from './chat-message';
 
 export interface IActiveSearch {
-    _id: any; // ObjectId
+    _id: string; // ObjectId
     createTime: Date;
-    searchingGame: any; // ObjectId
-    administrator: any; // ObjectId
-    joinedUser: any[]; // ObjectId
+    searchingGame: string; // ObjectId
+    administrator: string; // ObjectId
+    joinedUser: string[]; // ObjectId
     description: string;
     parameters: IUserSearchParameter[];
     chatMessages: IChatMessage[];
