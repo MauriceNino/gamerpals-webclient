@@ -111,7 +111,6 @@ export class AppComponent implements OnInit {
 
         this.zone.run(() => ProgressBarService.progressBarVisible = true);
 
-        console.log(this.backend);
         this.backend.Login.sendLoginRequest(LoginType.Google, user.getAuthResponse().id_token).then((gpUser: IUser) => {
           console.log('Local User', gpUser);
 

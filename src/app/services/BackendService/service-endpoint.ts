@@ -18,24 +18,40 @@ export class ServiceEndpoint<T> {
     }
 
     public async getByList(mongoIds: string[]): Promise<T[]> {
+        if (mongoIds == null) {
+            return [];
+        }
+
         return Promise.all(mongoIds.map(async (mongoId: string) => {
           return this.get(mongoId);
         }));
     }
 
     public async get(mongoId: string): Promise<T> {
+        if (mongoId == null) {
+            return null;
+        }
+
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 
         return this.http.get<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`, { headers }).toPromise();
     }
 
     public async create(createObj: T): Promise<T> {
+        if (createObj == null) {
+            return null;
+        }
+
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 
         return this.http.post<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, createObj, { headers }).toPromise();
     }
 
     public async update(mongoId: string, updateObj: T): Promise<T> {
+        if (mongoId == null || updateObj == null) {
+            return null;
+        }
+
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 
         return this.http.put<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`,
@@ -43,6 +59,10 @@ export class ServiceEndpoint<T> {
     }
 
     public async delete(mongoId: string): Promise<T> {
+        if (mongoId == null) {
+            return null;
+        }
+        
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 
         return this.http.delete<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`, { headers }).toPromise();
@@ -59,7 +79,7 @@ export class ServiceEndpoint<T> {
 
     // tslint:disable-next-line: member-ordering
     public static getBaseConnectionUrl(): string {
-        return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}
-            ${ServiceEndpoint.usePort ? `:${ServiceEndpoint.connectionPort}` : ``}`;
+        return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}`
+            + `${ServiceEndpoint.usePort ? `:${ServiceEndpoint.connectionPort}` : ``}`;
     }
 }

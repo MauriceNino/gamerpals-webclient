@@ -59,9 +59,8 @@ export class ShortSearchPageComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private backend: BackendService) { }
 
   async ngOnInit() {
-    await this.backend.Login.waitForLoginAsync();
     // TODO: When service implements real UserGames method, remove this bulk
-    this.games = await this.backend.Games.getAll();
+    this.games = await this.backend.Games.getByList(this.backend.Login.getLoggedInUser().gamesSelected);
 
     // Load the locally saved search parameters
     const localSaved = this.loadParametersFromLocalStorage();
