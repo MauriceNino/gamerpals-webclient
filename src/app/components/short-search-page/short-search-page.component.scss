@@ -124,7 +124,7 @@ mat-expansion-panel {
     mat-expansion-panel-header {
         margin-top: 20px;
         background-color: var(--focused-button-color) !important;
-        border-bottom: 2px solid var(--primary-color) !important;
+        border-bottom: var(--primary-color) 2px solid !important;
     }
 }
 .single-setting-container{
