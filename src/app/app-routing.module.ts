@@ -48,7 +48,7 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./components/profile-page/profile-page.module').then(m => m.ProfilePageModule),
     data: {animation: 'profile', preload: true},
-    canActivate: [ProfileCompleteGuardService]
+    canActivate: [AuthGuardService]
   },
 
   {

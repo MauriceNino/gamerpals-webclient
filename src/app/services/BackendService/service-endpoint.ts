@@ -62,7 +62,7 @@ export class ServiceEndpoint<T> {
         if (mongoId == null) {
             return null;
         }
-        
+
         const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
 
         return this.http.delete<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`, { headers }).toPromise();
