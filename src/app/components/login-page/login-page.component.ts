@@ -66,15 +66,15 @@ export class LoginPageComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(255)
       ]),
-      profilePicture: new FormControl(this.localUserObject.profilePicture),
+      profilePicture: new FormControl(this.localUserObject.profilePicture)
+    });
+
+    this.formGroup2 = new FormGroup({
       gender: new FormControl(this.localUserObject.gender, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(25)
-      ])
-    });
-
-    this.formGroup2 = new FormGroup({
+      ]),
       birthday: new FormControl(this.localUserObject.birthday, [
         Validators.required
       ]),
@@ -107,8 +107,14 @@ export class LoginPageComponent implements OnInit {
     document.getElementById('image-upload').click();
   }
 
-  public sendForm() {
+  public onImageUpload(files: FileList) {
+    this.backend.Users.uploadProfilePicture(files.item(0)).then((d) => console.log(d))
+  }
 
+  public sendForm() {
+    console.log(this.formGroup1.controls);
+    console.log(this.formGroup2.controls);
+    console.log(this.formGroup3.controls);
   }
 
   public getError(control: FormControl): string {

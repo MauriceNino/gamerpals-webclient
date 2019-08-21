@@ -23,7 +23,7 @@
                             <button mat-fab color="primary">
                                 <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
                             </button>
-                            <input type='file' id="image-upload" hidden/> 
+                            <input type='file' id="image-upload" hidden (change)="onImageUpload($event.target.files)"/> 
                             <div id="imageSelect" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"> 
                                 
                             </div>
@@ -40,7 +40,7 @@
                     <div class="leftSideOfForm">
                         <mat-form-field>
                             <mat-label>Gender</mat-label>
-                            <mat-select [(value)]="selGender">
+                            <mat-select [(value)]="selGender" formControlName="gender">
                                 <mat-option *ngFor="let gender of genderList" [value]="gender"> 
                                 {{ gender }}
                                 </mat-option>
@@ -101,7 +101,7 @@
                     </div>
 
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button matStepperNext color="primary">Finished!</button>
+                    <button mat-raised-button matStepperNext color="primary" (click)="sendForm()">Finished!</button>
                 </form>
             </mat-step>
         </mat-horizontal-stepper>

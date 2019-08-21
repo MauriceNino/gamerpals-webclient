@@ -69,7 +69,7 @@ export class ServiceEndpoint<T> {
     }
 
     // tslint:disable-next-line: member-ordering
-    private static getDefaultHeader(): { [name: string]: string } {
+    public static getDefaultHeader(): { [name: string]: string } {
         return {
             'Content-Type': 'application/json',
             // tslint:disable-next-line: object-literal-key-quotes
