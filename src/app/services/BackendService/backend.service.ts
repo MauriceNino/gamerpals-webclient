@@ -9,6 +9,7 @@ import { SearchParameterEndpoint } from './endpoints/search-parameter-endpoint';
 import { ActiveSearchEndpoint } from './endpoints/active-search-endpoint';
 import { UserEndpoint } from './endpoints/user-endpoint';
 import { EnvironmentService } from '../EnvironmentService/environment.service';
+import { ImageEndpoint } from './endpoints/image-endpoint';
 
 
 
@@ -21,6 +22,7 @@ export class BackendService {
   public SearchParameters: SearchParameterEndpoint;
   public ActiveSearches: ActiveSearchEndpoint;
   public Users: UserEndpoint;
+  public Images: ImageEndpoint;
 
   public Countrys: ServiceEndpoint<ICountry>;
   public Languages: ServiceEndpoint<ILanguage>;
@@ -33,6 +35,7 @@ export class BackendService {
     this.SearchParameters = new SearchParameterEndpoint(this.http);
     this.ActiveSearches = new ActiveSearchEndpoint(this.http);
     this.Users = new UserEndpoint(this.http);
+    this.Images = new ImageEndpoint(this.http);
 
     this.Countrys = new ServiceEndpoint<ICountry>
       (EnvironmentService.fileReference.countryEndpoint, this.http);

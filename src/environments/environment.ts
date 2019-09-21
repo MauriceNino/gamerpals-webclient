@@ -6,10 +6,10 @@ export const environment = {
   production: false,
   envName: 'TESTING',
   shortEnvName: 'TEST',
-  connectionProtocol: 'https',
-  connectionEndpoint: 'gamerpals-backend.herokuapp.com',
-  connectionPort: 80,
-  useConnectionPort: false,
+  connectionProtocol: 'http',
+  connectionEndpoint: 'localhost',
+  connectionPort: 53762,
+  useConnectionPort: true,
   activeSearchEndpoint: 'api/ActiveSearch',
   gameEndpoint: 'api/Game',
   languageEndpoint: 'api/Language',
@@ -18,6 +18,7 @@ export const environment = {
   userEndpoint: 'api/User',
   countryEndpoint: 'api/Country',
   roleEndpoint: 'api/Role',
+  imageEndpoint: 'api/Image',
   matchmakingEndpoint: 'api/Matchmaking'
 };
 

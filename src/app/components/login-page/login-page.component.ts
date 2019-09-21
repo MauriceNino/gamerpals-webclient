@@ -107,8 +107,16 @@ export class LoginPageComponent implements OnInit {
     document.getElementById('image-upload').click();
   }
 
+  // TODO: Dont upload imidiatly, but on save
   public onImageUpload(files: FileList) {
-    this.backend.Users.uploadProfilePicture(files.item(0)).then((d) => console.log(d))
+    const formData: FormData = new FormData();
+    const file = files.item(0);
+
+    formData.append('upload', file, file.name);
+
+    this.backend.Images.create(formData).then((imageId) => {
+      this.imageUrl = `${this.backend.Images.getEndpointUrl()}/${imageId}`;
+    });
   }
 
   public sendForm() {

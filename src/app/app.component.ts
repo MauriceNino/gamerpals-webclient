@@ -26,18 +26,18 @@ import { LoginType } from './models/login';
     trigger('routeAnimations', [
       transition('* <=> *', [
         query(':enter, :leave',
-          style({ position: 'absolute'}),
+          style({ position: 'absolute' }),
           { optional: true }),
         group([
           query(':enter', [
             style({ opacity: '0' }),
             animate('0.3s ease-in-out',
-            style({ opacity: '1' }))
+              style({ opacity: '1' }))
           ], { optional: true }),
           query(':leave', [
             style({ opacity: '1' }),
             animate('0.3s ease-in-out',
-            style({ opacity: '0' }))
+              style({ opacity: '0' }))
           ], { optional: true }),
         ])
       ])
@@ -60,10 +60,10 @@ export class AppComponent implements OnInit {
     const htmlNode = document.documentElement;
     const currentPlatformMobile = this.platformInfo.isCurrentPlatformMobile();
 
-    if (currentPlatformMobile  && !htmlNode.classList.contains('mobile')) {
+    if (currentPlatformMobile && !htmlNode.classList.contains('mobile')) {
       htmlNode.classList.add('mobile');
       this.platformInfo.mobileChanged.next(MobileChangedState.IS_MOBILE);
-    } else if (!currentPlatformMobile  && htmlNode.classList.contains('mobile')) {
+    } else if (!currentPlatformMobile && htmlNode.classList.contains('mobile')) {
       htmlNode.classList.remove('mobile');
       this.platformInfo.mobileChanged.next(MobileChangedState.IS_DESKTOP);
     }
@@ -122,8 +122,8 @@ export class AppComponent implements OnInit {
               });
             }, 10000);
           }
-        },
-        (error: any) => {
+        })
+        .catch((error: any) => {
           console.log(error);
           this.zone.run(() => ProgressBarService.progressBarVisible = false);
           this.gLoginService.signOutCurrentUser();

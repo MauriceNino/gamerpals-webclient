@@ -12,9 +12,7 @@ export class ServiceEndpoint<T> {
     constructor(public endpointUrl: string, public http: HttpClient) { }
 
     public async getAll(): Promise<T[]> {
-        const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
-
-        return this.http.get<T[]>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, { headers }).toPromise();
+        return this.http.get<T[]>(this.getEndpointUrl(), this.getRequestOptions()).toPromise();
     }
 
     public async getByList(mongoIds: string[]): Promise<T[]> {
@@ -32,9 +30,7 @@ export class ServiceEndpoint<T> {
             return null;
         }
 
-        const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
-
-        return this.http.get<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`, { headers }).toPromise();
+        return this.http.get<T>(`${this.getEndpointUrl()}/${mongoId}`, this.getRequestOptions()).toPromise();
     }
 
     public async create(createObj: T): Promise<T> {
@@ -42,9 +38,7 @@ export class ServiceEndpoint<T> {
             return null;
         }
 
-        const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
-
-        return this.http.post<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, createObj, { headers }).toPromise();
+        return this.http.post<T>(this.getEndpointUrl(), createObj, this.getRequestOptions()).toPromise();
     }
 
     public async update(mongoId: string, updateObj: T): Promise<T> {
@@ -52,10 +46,7 @@ export class ServiceEndpoint<T> {
             return null;
         }
 
-        const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
-
-        return this.http.put<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`,
-            updateObj, { headers }).toPromise();
+        return this.http.put<T>(`${this.getEndpointUrl()}/${mongoId}`, updateObj, this.getRequestOptions()).toPromise();
     }
 
     public async delete(mongoId: string): Promise<T> {
@@ -63,18 +54,26 @@ export class ServiceEndpoint<T> {
             return null;
         }
 
-        const headers: HttpHeaders = new HttpHeaders(ServiceEndpoint.getDefaultHeader());
-
-        return this.http.delete<T>(`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}/${mongoId}`, { headers }).toPromise();
+        return this.http.delete<T>(`${this.getEndpointUrl()}/${mongoId}`, this.getRequestOptions()).toPromise();
     }
 
-    // tslint:disable-next-line: member-ordering
-    public static getDefaultHeader(): { [name: string]: string } {
+    public getRequestOptions(): { headers: HttpHeaders } {
+        const headers: HttpHeaders = new HttpHeaders(this.getDefaultHeaders());
+
+        return { headers };
+    }
+
+    public getDefaultHeaders(): { [name: string]: string } {
         return {
             'Content-Type': 'application/json',
             // tslint:disable-next-line: object-literal-key-quotes
             'Authorization': 'Bearer ' + ServiceEndpoint.loggedInUserBearerToken
         };
+    }
+
+
+    public getEndpointUrl(): string {
+        return `${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`;
     }
 
     // tslint:disable-next-line: member-ordering

@@ -14,5 +14,6 @@ export const environment = {
   userEndpoint: 'api/User',
   countryEndpoint: 'api/Country',
   roleEndpoint: 'api/Role',
+  imageEndpoint: 'api/Image',
   matchmakingEndpoint: 'api/Matchmaking'
 };
