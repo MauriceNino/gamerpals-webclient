@@ -1,30 +1,30 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-ok-dialog',
-  templateUrl: './ok-dialog.component.html',
-  styleUrls: ['./ok-dialog.component.scss']
+    selector: 'app-ok-dialog',
+    templateUrl: './ok-dialog.component.html',
+    styleUrls: [ './ok-dialog.component.scss' ]
 })
 export class OkDialogComponent implements OnInit {
-  public title = '';
-  public ok = 'Ok';
+    public title = '';
+    public ok = 'Ok';
 
-  constructor(public dialogRef: MatDialogRef<OkDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: IOkDialogData) {
-    this.title = this.data.title;
-    this.ok = this.data.ok;
-  }
+    constructor(public dialogRef: MatDialogRef<OkDialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: IOkDialogData) {
+        this.title = this.data.title;
+        this.ok = this.data.ok;
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  onOkClick() {
-    this.dialogRef.close();
-  }
+    onOkClick() {
+        this.dialogRef.close();
+    }
 }
 
 export interface IOkDialogData {
-  title: string;
-  ok: string;
+    title: string;
+    ok: string;
 }

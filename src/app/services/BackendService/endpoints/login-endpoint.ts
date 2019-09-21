@@ -1,9 +1,9 @@
-import { ServiceEndpoint } from '../service-endpoint';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ILogin } from 'src/app/models/login';
 import { IUser } from 'src/app/models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { EnvironmentService } from '../../EnvironmentService/environment.service';
+import { ServiceEndpoint } from '../service-endpoint';
 
 export class LoginEndpoint extends ServiceEndpoint<ILogin> {
     private loggedInUserData: IUser;
@@ -22,7 +22,7 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
         if (this.isAutoLoginPlanned && (this.isLoginRequestPending || !this.isLoginAlreadyExecutedOnce)) {
             await new Promise(resolve =>
                 setTimeout(() =>
-                    this.waitForLoginAsync().then(() => resolve()).catch(() => resolve()),
+                        this.waitForLoginAsync().then(() => resolve()).catch(() => resolve()),
                     1000
                 )
             );
@@ -32,7 +32,8 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
     public waitForLogin(func: () => void): void {
         if (this.isAutoLoginPlanned && (this.isLoginRequestPending || !this.isLoginAlreadyExecutedOnce)) {
             setTimeout(() => this.waitForLogin(func), 50);
-        } else {
+        }
+        else {
             func();
         }
     }
@@ -50,7 +51,7 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
         });
 
         const retrievedUser: IUser = await this.http.post<IUser>
-            (`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, { type, token }, { headers }).toPromise();
+        (`${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`, { type, token }, { headers }).toPromise();
 
         if (retrievedUser != null) {
             this.setLoggedInUser(retrievedUser);

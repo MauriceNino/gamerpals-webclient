@@ -1,12 +1,13 @@
-<div id="left-container" #leftContainer>
-  <!-- Left Side Content -->
-	<ng-content select="[split-left]"></ng-content>
+<div #leftContainer id="left-container">
+    <!-- Left Side Content -->
+    <ng-content select="[split-left]"></ng-content>
 </div>
 
-<div id="right-container" #rightContainer>
-  <button mat-button (click)="toggleMenu()" id="go-back-button" *ngIf="isMobile()"> 
-      <mat-icon>keyboard_arrow_left</mat-icon><span>Back to Menu</span>
-  </button>
-  <!-- Right Side Content -->
-	<ng-content select="[split-right]"></ng-content>
+<div #rightContainer id="right-container">
+    <button (click)="toggleMenu()" *ngIf="isMobile()" id="go-back-button" mat-button>
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <span>Back to Menu</span>
+    </button>
+    <!-- Right Side Content -->
+    <ng-content select="[split-right]"></ng-content>
 </div>

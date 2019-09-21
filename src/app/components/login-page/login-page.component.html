@@ -2,81 +2,83 @@
     <div id="gp_login_base">
         <mat-horizontal-stepper linear="false">
             <mat-step [stepControl]="formGroup1">
-                <form [formGroup]="formGroup1" *ngIf="formGroup1">
+                <form *ngIf="formGroup1" [formGroup]="formGroup1">
                     <ng-template matStepLabel>Profile Information</ng-template>
 
                     <div class="leftSideOfForm" style="width: 65%">
-                        <mat-form-field style="width: 60%" appearance="outline" color="primary">
+                        <mat-form-field appearance="outline" color="primary" style="width: 60%">
                             <mat-label>Pick a Username</mat-label>
-                            <input matInput placeholder=" ..." formControlName="profileName">
-                            <mat-error *ngIf="!formGroup1.controls['profileName'].valid">{{ getError(formGroup1.controls['profileName']) }}</mat-error>
+                            <input formControlName="profileName" matInput placeholder=" ...">
+                            <mat-error
+                                *ngIf="!formGroup1.controls['profileName'].valid">{{ getError(formGroup1.controls['profileName']) }}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" color="primary">
                             <mat-label>Describe yourself</mat-label>
-                            <textarea matInput id="profileInfo" placeholder=" ..." rows="6" formControlName="profileDescription"></textarea>
-                            <mat-error *ngIf="!formGroup1.controls['profileDescription'].valid">{{ getError(formGroup1.controls['profileDescription']) }}</mat-error>
+                            <textarea formControlName="profileDescription" id="profileInfo" matInput placeholder=" ..." rows="6"></textarea>
+                            <mat-error
+                                *ngIf="!formGroup1.controls['profileDescription'].valid">{{ getError(formGroup1.controls['profileDescription']) }}</mat-error>
                         </mat-form-field>
                     </div>
 
                     <div class="rightSideOfForm" style="width: 35%">
-                        <div id="imageSelect-container" (click)="imageUploadClick()">
-                            <button mat-fab color="primary">
+                        <div (click)="imageUploadClick()" id="imageSelect-container">
+                            <button color="primary" mat-fab>
                                 <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
                             </button>
-                            <input type='file' id="image-upload" hidden (change)="onImageUpload($event.target.files)"/> 
-                            <div id="imageSelect" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"> 
-                                
+                            <input (change)="onImageUpload($event.target.files)" hidden id="image-upload" type='file'/>
+                            <div [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}" id="imageSelect">
+
                             </div>
                         </div>
                     </div>
-                    
+
                     <button mat-button matStepperNext>Next</button>
                 </form>
             </mat-step>
             <mat-step [stepControl]="formGroup2" id="personal-information-input">
-                <form [formGroup]="formGroup2" *ngIf="formGroup2">
+                <form *ngIf="formGroup2" [formGroup]="formGroup2">
                     <ng-template matStepLabel>Personal Information</ng-template>
 
                     <div class="leftSideOfForm">
                         <mat-form-field>
                             <mat-label>Gender</mat-label>
                             <mat-select [(value)]="selGender" formControlName="gender">
-                                <mat-option *ngFor="let gender of genderList" [value]="gender"> 
-                                {{ gender }}
+                                <mat-option *ngFor="let gender of genderList" [value]="gender">
+                                    {{ gender }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <input [matDatepicker]="picker" formControlName="birthday" matInput placeholder="Birthday">
+                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Country</mat-label>
-                            <mat-select required [(value)]="selCountry">
-                                <mat-option *ngFor="let country of countryList" [value]="country.isoA3"> 
-                                {{ country.fullName }}
+                            <mat-select [(value)]="selCountry" required>
+                                <mat-option *ngFor="let country of countryList" [value]="country.isoA3">
+                                    {{ country.fullName }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    
+
                     <div class="rightSideOfForm">
                         <mat-form-field style="width: 75%; float: left;">
                             <mat-label>Language</mat-label>
-                            <mat-select required [(value)]="selLanguage">
-                                <mat-option *ngFor="let language of languageList" [value]="language.name"> 
-                                {{ language.name }}
+                            <mat-select [(value)]="selLanguage" required>
+                                <mat-option *ngFor="let language of languageList" [value]="language.name">
+                                    {{ language.name }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
 
-                        <button mat-button color="primary" (click)="addSelectedLanguage()" style="float: right; margin-top: 12px">Add</button> 
+                        <button (click)="addSelectedLanguage()" color="primary" mat-button style="float: right; margin-top: 12px">Add</button>
 
                         <div style="color: var(--text-color); width: 100%; float: left; margin-top: 20px;">Selected Languages</div>
 
                         <mat-list style="height: 120px; width: 100%; float: left; overflow: auto;  margin-top: 5px;">
-                            <mat-list *ngFor="let language of selLanguages" dense >
+                            <mat-list *ngFor="let language of selLanguages" dense>
                                 <mat-list-item> {{ language }} </mat-list-item>
                                 <mat-divider></mat-divider>
                             </mat-list>
@@ -91,17 +93,17 @@
                 </form>
             </mat-step>
             <mat-step [stepControl]="formGroup3" id="games-input">
-                <form [formGroup]="formGroup3" *ngIf="formGroup3">
+                <form *ngIf="formGroup3" [formGroup]="formGroup3">
                     <ng-template matStepLabel>Pick your Games!</ng-template>
 
                     <div class="leftSideOfForm">
                     </div>
-                    
+
                     <div class="rightSideOfForm">
                     </div>
 
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button matStepperNext color="primary" (click)="sendForm()">Finished!</button>
+                    <button (click)="sendForm()" color="primary" mat-raised-button matStepperNext>Finished!</button>
                 </form>
             </mat-step>
         </mat-horizontal-stepper>

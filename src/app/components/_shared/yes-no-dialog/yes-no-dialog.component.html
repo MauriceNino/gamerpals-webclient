@@ -1,6 +1,6 @@
 <h3 mat-dialog-title>{{title}}</h3>
 <div mat-dialog-content></div>
 <div mat-dialog-actions style="margin-top: 15px; position: relative; float: right">
-  <button mat-button (click)="onNoClick()">{{no}}</button>
-  <button mat-raised-button (click)="onYesClick()" color="primary">{{yes}}</button>
+    <button (click)="onNoClick()" mat-button>{{no}}</button>
+    <button (click)="onYesClick()" color="primary" mat-raised-button>{{yes}}</button>
 </div>

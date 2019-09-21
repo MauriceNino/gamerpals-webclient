@@ -1,6 +1,6 @@
-import { ServiceEndpoint } from '../service-endpoint';
-import { EnvironmentService } from '../../EnvironmentService/environment.service';
 import { HttpClient } from '@angular/common/http';
+import { EnvironmentService } from '../../EnvironmentService/environment.service';
+import { ServiceEndpoint } from '../service-endpoint';
 
 export class ImageEndpoint extends ServiceEndpoint<object> {
     constructor(http: HttpClient) {

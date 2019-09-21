@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { EnvironmentService } from './environment.service';
 
 describe('EnvironmentService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+    beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: EnvironmentService = TestBed.get(EnvironmentService);
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        const service: EnvironmentService = TestBed.get(EnvironmentService);
+        expect(service).toBeTruthy();
+    });
 
-  afterAll(() => {
-    TestBed.resetTestingModule();
-  });
+    afterAll(() => {
+        TestBed.resetTestingModule();
+    });
 });

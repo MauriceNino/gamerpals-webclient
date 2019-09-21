@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-mobile-navigation',
-  templateUrl: './mobile-navigation.component.html',
-  styleUrls: ['./mobile-navigation.component.scss']
+    selector: 'app-mobile-navigation',
+    templateUrl: './mobile-navigation.component.html',
+    styleUrls: [ './mobile-navigation.component.scss' ]
 })
 export class MobileNavigationComponent implements OnInit {
 
-  constructor(private router: Router) {
-  }
+    constructor(private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

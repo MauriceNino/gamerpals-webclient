@@ -1,36 +1,42 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
 
 import { HomePageComponent } from './home-page.component';
-import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { DeviceDetectorModule } from 'ngx-device-detector';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatDialogModule } from '@angular/material/dialog';
 
 describe('HomePageComponent', () => {
-  let component: HomePageComponent;
-  let fixture: ComponentFixture<HomePageComponent>;
+    let component: HomePageComponent;
+    let fixture: ComponentFixture<HomePageComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ],
-      providers: [GoogleLoginService],
-      imports: [RouterTestingModule, MatSnackBarModule, DeviceDetectorModule.forRoot(), HttpClientTestingModule, MatDialogModule]
-    })
-    .compileComponents();
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+                   declarations: [ HomePageComponent ],
+                   providers: [ GoogleLoginService ],
+                   imports: [
+                       RouterTestingModule,
+                       MatSnackBarModule,
+                       DeviceDetectorModule.forRoot(),
+                       HttpClientTestingModule,
+                       MatDialogModule
+                   ]
+               })
+               .compileComponents();
 
 
-    fixture = TestBed.createComponent(HomePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(HomePageComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  afterAll(() => {
-    TestBed.resetTestingModule();
-  });
+    afterAll(() => {
+        TestBed.resetTestingModule();
+    });
 });

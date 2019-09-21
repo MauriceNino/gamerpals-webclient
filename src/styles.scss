@@ -49,8 +49,7 @@ app-root {
 }
 
 
-
-mat-toolbar{
+mat-toolbar {
     background: none !important;
 }
 
@@ -58,21 +57,22 @@ mat-toolbar{
     ::-webkit-scrollbar {
         width: 7px;
     }
+
     ::-webkit-scrollbar-track {
         z-index: 100;
         border: none;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         z-index: 100;
         background: var(--app-bar-color);
     }
-    
-    ::-webkit-scrollbar-track-piece{
+
+    ::-webkit-scrollbar-track-piece {
         z-index: 100;
         background: var(--card-color);
         border: 1px solid var(--app-bar-color);
-    }    
+    }
 }
 
 
@@ -92,7 +92,7 @@ mat-toolbar{
     background: var(--app-bar-color);
 }
 
-::-webkit-scrollbar-track-piece{
+::-webkit-scrollbar-track-piece {
     z-index: 100;
     background: var(--card-color);
     border: 1px solid var(--app-bar-color);
@@ -108,7 +108,7 @@ mat-toolbar{
     background: var(--background-color) !important;
     color: var(--text-color) !important;
 
-    .mat-simple-snackbar-action{
+    .mat-simple-snackbar-action {
         color: var(--primary-color);
     }
 }

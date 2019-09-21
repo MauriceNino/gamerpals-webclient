@@ -1,4 +1,12 @@
 [
-    {"code":"en-GB","name":"English","nativeName":"English"},
-    {"code":"de","name":"German","nativeName":"Deutsch"}
+    {
+        "code": "en-GB",
+        "name": "English",
+        "nativeName": "English"
+    },
+    {
+        "code": "de",
+        "name": "German",
+        "nativeName": "Deutsch"
+    }
 ]

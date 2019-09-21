@@ -1,99 +1,100 @@
 <div id="searchbar-container">
-  <div id="searchbar-container-shadow-top" [class.show]="!isTop"></div>
-  <mat-spinner id="gamesLoading-spinner" *ngIf="showGameSpinner"></mat-spinner>
-  <div id="searchbar-content" (scroll)="changeShadows()" #content>
-    <mat-form-field id="searchbar-games-select">
-      <mat-label>Select Games you want to search:</mat-label>
-      <mat-select multiple (selectionChange)="gamesSelectionChanged($event)" [(ngModel)]="selectedGames">
-        <mat-option *ngFor="let game of games" [value]="game" class="game-options" selected="true">{{game.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-expansion-panel (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          General Information
-        </mat-panel-title>
-        <mat-panel-description>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="single-setting-container">
-        <mat-form-field appearance="standard">
-          <mat-label>Age</mat-label>
-          <input matInput placeholder="Type the Age you are looking for">
+    <div [class.show]="!isTop" id="searchbar-container-shadow-top"></div>
+    <mat-spinner *ngIf="showGameSpinner" id="gamesLoading-spinner"></mat-spinner>
+    <div #content (scroll)="changeShadows()" id="searchbar-content">
+        <mat-form-field id="searchbar-games-select">
+            <mat-label>Select Games you want to search:</mat-label>
+            <mat-select (selectionChange)="gamesSelectionChanged($event)" [(ngModel)]="selectedGames" multiple>
+                <mat-option *ngFor="let game of games" [value]="game" class="game-options" selected="true">{{game.name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
-      </div>
-    </mat-expansion-panel>
 
-    <mat-expansion-panel *ngFor="let gameParam of getAllShownParams()" @fadeInGames expanded="false"
-      (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{gameParam.title}}
-        </mat-panel-title>
-        <mat-panel-description>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="single-setting-container" *ngFor="let paramWithValue of gameParam.parametersWithValue">
-        <div *ngIf="paramWithValue.parameter.parameterType == 'string'">
-          <mat-form-field appearance="standard">
-            <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
-            <input matInput placeholder="Type your {{paramWithValue.parameter.parameterName}}"
-              [(ngModel)]="paramWithValue.value">
-          </mat-form-field>
-        </div>
-        <div *ngIf="paramWithValue.parameter.parameterType == 'int'">
-          <mat-form-field appearance="standard">
-            <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
-            <input matInput type="number" placeholder="Type your {{paramWithValue.parameter.parameterName}}"
-              [(ngModel)]="paramWithValue.value">
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </div>
-  <div id="searchbar-container-shadow-bottom" [class.show]="!isBottom"></div>
+        <mat-expansion-panel (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    General Information
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="single-setting-container">
+                <mat-form-field appearance="standard">
+                    <mat-label>Age</mat-label>
+                    <input matInput placeholder="Type the Age you are looking for">
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (afterCollapse)="changeShadows()" (afterExpand)="changeShadows()" *ngFor="let gameParam of getAllShownParams()"
+                             @fadeInGames expanded="false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{gameParam.title}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let paramWithValue of gameParam.parametersWithValue" class="single-setting-container">
+                <div *ngIf="paramWithValue.parameter.parameterType == 'string'">
+                    <mat-form-field appearance="standard">
+                        <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
+                        <input [(ngModel)]="paramWithValue.value" matInput
+                               placeholder="Type your {{paramWithValue.parameter.parameterName}}">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="paramWithValue.parameter.parameterType == 'int'">
+                    <mat-form-field appearance="standard">
+                        <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
+                        <input [(ngModel)]="paramWithValue.value" matInput placeholder="Type your {{paramWithValue.parameter.parameterName}}"
+                               type="number">
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </div>
+    <div [class.show]="!isBottom" id="searchbar-container-shadow-bottom"></div>
 </div>
 
 
 <div id="searchbar-buttons">
-  <button mat-button color="warn" style="margin-right: 10px;" (click)="resetParameters()">Reset Search
-    Parameters</button>
-  <button mat-raised-button color="primary" (click)="applyParameters()">Apply Parameters</button>
+    <button (click)="resetParameters()" color="warn" mat-button style="margin-right: 10px;">Reset Search
+        Parameters
+    </button>
+    <button (click)="applyParameters()" color="primary" mat-raised-button>Apply Parameters</button>
 </div>
 
 
 <div id="search-result-container">
-  <div id="search-result-header">Showing result for specified filters:</div>
-  <mat-spinner id="searchesLoading-spinner" *ngIf="showSearchSpinner"></mat-spinner>
-  <div class="searchResult-base" *ngFor="let test of foundActiveSearches" @fadeIn>
-    <div class="searchResult-top">
-      <div class="searchResult-matchPercent-base">
-        <div class="searchResult-matchPercent">NaN %</div>
-        <div class="searchResult-joinStatus almostFull">3/5</div>
-      </div>
-      <div class="searchResult-textBase">
-        <div class="searchResult-text">
-          Lorem ipsum dolor sit amet, consetetur sadipscing
+    <div id="search-result-header">Showing result for specified filters:</div>
+    <mat-spinner *ngIf="showSearchSpinner" id="searchesLoading-spinner"></mat-spinner>
+    <div *ngFor="let test of foundActiveSearches" @fadeIn class="searchResult-base">
+        <div class="searchResult-top">
+            <div class="searchResult-matchPercent-base">
+                <div class="searchResult-matchPercent">NaN %</div>
+                <div class="searchResult-joinStatus almostFull">3/5</div>
+            </div>
+            <div class="searchResult-textBase">
+                <div class="searchResult-text">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing
+                </div>
+                <div class="searchResult-text-readMore">More info</div>
+            </div>
         </div>
-        <div class="searchResult-text-readMore">More info</div>
-      </div>
+        <div class="searchResult-bottom">
+            <div class="searchResult-lobbyCreator-base">
+                <div class="userPic big"></div>
+            </div>
+            <div class="searchResult-joinees-base">
+                <div class="userPic"></div>
+                <div class="searchResult-joinees-join">Join</div>
+                <div class="searchResult-joinees-bg"></div>
+            </div>
+        </div>
     </div>
-    <div class="searchResult-bottom">
-      <div class="searchResult-lobbyCreator-base">
-        <div class="userPic big"></div>
-      </div>
-      <div class="searchResult-joinees-base">
-        <div class="userPic"></div>
-        <div class="searchResult-joinees-join">Join</div>
-        <div class="searchResult-joinees-bg"></div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<button mat-fab matTooltip="Create A New Lobby" matTooltipPosition="above"
-  id="create-new-lobby" color="accent" (click)="createLobby()">
-  <mat-icon>add</mat-icon>
+<button (click)="createLobby()" color="accent" id="create-new-lobby"
+        mat-fab matTooltip="Create A New Lobby" matTooltipPosition="above">
+    <mat-icon>add</mat-icon>
 </button>

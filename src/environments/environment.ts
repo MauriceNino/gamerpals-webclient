@@ -3,23 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  envName: 'TESTING',
-  shortEnvName: 'TEST',
-  connectionProtocol: 'http',
-  connectionEndpoint: 'localhost',
-  connectionPort: 53762,
-  useConnectionPort: true,
-  activeSearchEndpoint: 'api/ActiveSearch',
-  gameEndpoint: 'api/Game',
-  languageEndpoint: 'api/Language',
-  loginEndpoint: 'api/Login',
-  searchParameterEndpoint: 'api/SearchParameter',
-  userEndpoint: 'api/User',
-  countryEndpoint: 'api/Country',
-  roleEndpoint: 'api/Role',
-  imageEndpoint: 'api/Image',
-  matchmakingEndpoint: 'api/Matchmaking'
+    production: false,
+    envName: 'TESTING',
+    shortEnvName: 'TEST',
+    connectionProtocol: 'http',
+    connectionEndpoint: 'localhost',
+    connectionPort: 53762,
+    useConnectionPort: true,
+    activeSearchEndpoint: 'api/ActiveSearch',
+    gameEndpoint: 'api/Game',
+    languageEndpoint: 'api/Language',
+    loginEndpoint: 'api/Login',
+    searchParameterEndpoint: 'api/SearchParameter',
+    userEndpoint: 'api/User',
+    countryEndpoint: 'api/Country',
+    roleEndpoint: 'api/Role',
+    imageEndpoint: 'api/Image',
+    matchmakingEndpoint: 'api/Matchmaking'
 };
 
 /*

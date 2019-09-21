@@ -1,13 +1,12 @@
-
 <div id="header_bar">
-  <div id="nav-icon" *ngIf="platformInfo.isCurrentPlatformMobile()" (click)="onMobileMenuClick()" #mobileMenuButton>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div id="gp_main_header_items_wrapper" *ngIf="!platformInfo.isCurrentPlatformMobile()">
-    <app-navigation></app-navigation>
-  </div>
-  <app-profile-button></app-profile-button>
+    <div #mobileMenuButton (click)="onMobileMenuClick()" *ngIf="platformInfo.isCurrentPlatformMobile()" id="nav-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div *ngIf="!platformInfo.isCurrentPlatformMobile()" id="gp_main_header_items_wrapper">
+        <app-navigation></app-navigation>
+    </div>
+    <app-profile-button></app-profile-button>
 </div>
 <app-mobile-navigation #mobileMenu *ngIf="platformInfo.isCurrentPlatformMobile()"></app-mobile-navigation>

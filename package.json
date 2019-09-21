@@ -1,101 +1,101 @@
 {
-  "name": "gamer-pals-website",
-  "description": "A website for gamers made by gamers",
-  "version": "0.0.0",
-  "author": {
-    "name": "Maurice el-Banna",
-    "email": "mauricenino98@gmail.com"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "dir": "dist/GamerPalsWebsite",
-        "icon": "build",
-        "out": "electron",
-        "overwrite": true
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "certificateFile": "./cert.pfx",
-            "certificatePassword": "this-is-a-secret"
-          }
+    "name": "gamer-pals-website",
+    "description": "A website for gamers made by gamers",
+    "version": "0.0.0",
+    "author": {
+        "name": "Maurice el-Banna",
+        "email": "mauricenino98@gmail.com"
+    },
+    "config": {
+        "forge": {
+            "packagerConfig": {
+                "dir": "dist/GamerPalsWebsite",
+                "icon": "build",
+                "out": "electron",
+                "overwrite": true
+            },
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "certificateFile": "./cert.pfx",
+                        "certificatePassword": "this-is-a-secret"
+                    }
+                }
+            ]
         }
-      ]
+    },
+    "main": "main.js",
+    "scripts": {
+        "ng": "ng",
+        "start": "node server.js",
+        "build": "ng build",
+        "build:client": "ng build",
+        "build:client:prod": "build --aot --prod",
+        "build:electron": "ng build --aot --prod && electron-packager dist/GamerPalsWebsite GamerPals --out=dist/GamerPalsWebsite/assets/clientfiles --platform=win32 --arch=x64",
+        "build:electron:forge": "ng build --aot --prod && electron-forge make",
+        "heroku-postbuild": "ivy-ngcc && ng build --aot --prod",
+        "test": "ng test --browsers=ChromeHeadless",
+        "lint": "ng lint",
+        "e2e": "ng e2e",
+        "run:electron": "ng build --base-href ./ && electron .",
+        "run:electron:no-build": "electron .",
+        "postinstall": "ivy-ngcc && ng build --aot --prod"
+    },
+    "greenkeeper": {
+        "ignore": [
+            "core-js",
+            "typescript"
+        ]
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^8.0.0",
+        "@angular/cdk": "^8.0.0",
+        "@angular/cli": "^8.0.1",
+        "@angular/common": "^8.0.0",
+        "@angular/compiler": "^8.0.0",
+        "@angular/compiler-cli": "^8.0.0",
+        "@angular/core": "^8.0.0",
+        "@angular/forms": "^8.0.0",
+        "@angular/material": "^8.0.0",
+        "@angular/platform-browser": "^8.0.0",
+        "@angular/platform-browser-dynamic": "^8.0.0",
+        "@angular/router": "^8.0.0",
+        "core-js": "^2.5.4",
+        "express": "^4.16.4",
+        "hammerjs": "^2.0.8",
+        "intl": "^1.2.5",
+        "ngx-device-detector": "^1.3.9",
+        "path": "^0.12.7",
+        "rxjs": "~6.5.2",
+        "tslib": "^1.9.0",
+        "typescript": "~3.4.5",
+        "zone.js": "~0.9.1"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "^0.802.0",
+        "@angular/language-service": "^8.0.0",
+        "@electron-forge/cli": "^6.0.0-beta.43",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.43",
+        "@types/gapi": "0.0.37",
+        "@types/gapi.auth2": "0.0.50",
+        "@types/jasmine": "^3.3.13",
+        "@types/jasminewd2": "~2.0.3",
+        "@types/node": "~12.7.0",
+        "codelyzer": "~5.1.0",
+        "electron": "^6.0.0",
+        "electron-packager": "^14.0.3",
+        "jasmine-core": "~3.4.0",
+        "jasmine-spec-reporter": "~4.2.1",
+        "karma": "~4.2.0",
+        "karma-chrome-launcher": "~3.1.0",
+        "karma-coverage-istanbul-reporter": "~2.1.0",
+        "karma-jasmine": "~2.0.1",
+        "karma-jasmine-html-reporter": "^1.4.2",
+        "karma-phantomjs-launcher": "^1.0.4",
+        "protractor": "~5.4.0",
+        "ts-node": "~8.3.0",
+        "tslint": "~5.17.0"
     }
-  },
-  "main": "main.js",
-  "scripts": {
-    "ng": "ng",
-    "start": "node server.js",
-    "build": "ng build",
-    "build:client": "ng build",
-    "build:client:prod": "build --aot --prod",
-    "build:electron": "ng build --aot --prod && electron-packager dist/GamerPalsWebsite GamerPals --out=dist/GamerPalsWebsite/assets/clientfiles --platform=win32 --arch=x64",
-    "build:electron:forge": "ng build --aot --prod && electron-forge make",
-    "heroku-postbuild": "ivy-ngcc && ng build --aot --prod",
-    "test": "ng test --browsers=ChromeHeadless",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "run:electron": "ng build --base-href ./ && electron .",
-    "run:electron:no-build": "electron .",
-    "postinstall": "ivy-ngcc && ng build --aot --prod"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "core-js",
-      "typescript"
-    ]
-  },
-  "private": true,
-  "dependencies": {
-    "@angular/animations": "^8.0.0",
-    "@angular/cdk": "^8.0.0",
-    "@angular/cli": "^8.0.1",
-    "@angular/common": "^8.0.0",
-    "@angular/compiler": "^8.0.0",
-    "@angular/compiler-cli": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/forms": "^8.0.0",
-    "@angular/material": "^8.0.0",
-    "@angular/platform-browser": "^8.0.0",
-    "@angular/platform-browser-dynamic": "^8.0.0",
-    "@angular/router": "^8.0.0",
-    "core-js": "^2.5.4",
-    "express": "^4.16.4",
-    "hammerjs": "^2.0.8",
-    "intl": "^1.2.5",
-    "ngx-device-detector": "^1.3.9",
-    "path": "^0.12.7",
-    "rxjs": "~6.5.2",
-    "tslib": "^1.9.0",
-    "typescript": "~3.4.5",
-    "zone.js": "~0.9.1"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "^0.802.0",
-    "@angular/language-service": "^8.0.0",
-    "@electron-forge/cli": "^6.0.0-beta.43",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.43",
-    "@types/gapi": "0.0.37",
-    "@types/gapi.auth2": "0.0.50",
-    "@types/jasmine": "^3.3.13",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~12.7.0",
-    "codelyzer": "~5.1.0",
-    "electron": "^6.0.0",
-    "electron-packager": "^14.0.3",
-    "jasmine-core": "~3.4.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.2.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~2.1.0",
-    "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.2",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "protractor": "~5.4.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~5.17.0"
-  }
 }

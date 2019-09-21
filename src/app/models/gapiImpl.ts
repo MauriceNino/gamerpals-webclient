@@ -20,7 +20,7 @@ export interface IGoogleAuth {
      * Calls the onInit function when the GoogleAuth object is fully initialized, or calls the onFailure function if
      * initialization fails.
      */
-    then(onInit: (googleAuth: IGoogleAuth) => any, onFailure?: (reason: {error: string, details: string}) => any): any;
+    then(onInit: (googleAuth: IGoogleAuth) => any, onFailure?: (reason: { error: string, details: string }) => any): any;
 
     /**
      * Signs in the user using the specified options.
@@ -41,13 +41,13 @@ export interface IGoogleAuth {
     /**
      * Get permission from the user to access the specified scopes offline.
      */
-    grantOfflineAccess(options?: IOfflineAccessOptions): Promise<{code: string}>;
+    grantOfflineAccess(options?: IOfflineAccessOptions): Promise<{ code: string }>;
 
     /**
      * Attaches the sign-in flow to the specified container's click handler.
      */
     attachClickHandler(container: any, options: ISigninOptions,
-                        onsuccess: (googleUser: IGoogleUser) => any, onfailure: (reason: string) => any): any;
+                       onsuccess: (googleUser: IGoogleUser) => any, onfailure: (reason: string) => any): any;
 }
 
 export interface IIsSignedIn {
@@ -84,9 +84,9 @@ export interface ISigninOptions {
      */
     app_package_name?: string;
     /**
-     * 	Fetch users' basic profile information when they sign in.
-     * 	Adds 'profile', 'email' and 'openid' to the requested scopes.
-     * 	True if unspecified.
+     *    Fetch users' basic profile information when they sign in.
+     *    Adds 'profile', 'email' and 'openid' to the requested scopes.
+     *    True if unspecified.
      */
     fetch_basic_profile?: boolean;
     /**
@@ -104,9 +104,10 @@ export interface ISigninOptions {
      * The UX mode to use for the sign-in flow.
      * By default, it will open the consent flow in a popup.
      */
-    ux_mode?: "popup" | "redirect";
+    ux_mode?: 'popup' | 'redirect';
     /**
-     * If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow.
+     * If using ux_mode='redirect', this parameter allows you to override the default redirect_uri
+     * that will be used at the end of the consent flow.
      * The default redirect_uri is the current URL stripped of query parameters and hash fragment.
      */
     redirect_uri?: string;
@@ -119,7 +120,7 @@ export interface ISigninOptions {
  */
 export interface IOfflineAccessOptions {
     scope?: string;
-    prompt?: "select_account" | "consent";
+    prompt?: 'select_account' | 'consent';
     app_package_name?: string;
 }
 
@@ -166,10 +167,11 @@ export interface IClientConfig {
      * The UX mode to use for the sign-in flow.
      * By default, it will open the consent flow in a popup.
      */
-    ux_mode?: "popup" | "redirect";
+    ux_mode?: 'popup' | 'redirect';
 
     /**
-     * If using ux_mode='redirect', this parameter allows you to override the default redirect_uri that will be used at the end of the consent flow.
+     * If using ux_mode='redirect', this parameter allows you to override the default redirect_uri
+     * that will be used at the end of the consent flow.
      * The default redirect_uri is the current URL stripped of query parameters and hash fragment.
      */
     redirect_uri?: string;
@@ -177,17 +179,25 @@ export interface IClientConfig {
 
 export interface ISigninOptionsBuilder {
     setAppPackageName(name: string): any;
+
     setFetchBasicProfile(fetch: boolean): any;
+
     setPrompt(prompt: string): any;
+
     setScope(scope: string): any;
 }
 
 export interface IBasicProfile {
     getId(): string;
+
     getName(): string;
+
     getGivenName(): string;
+
     getFamilyName(): string;
+
     getImageUrl(): string;
+
     getEmail(): string;
 }
 

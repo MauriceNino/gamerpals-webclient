@@ -1,7 +1,7 @@
 const remote = require('electron').remote;
 
 (function () {
-        
+
     document.onreadystatechange = () => {
         if (document.readyState == "complete") {
             init();

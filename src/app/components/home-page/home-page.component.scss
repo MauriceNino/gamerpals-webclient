@@ -1,7 +1,7 @@
 @import "variables";
 @import "functions";
 
-:host{
+:host {
     display: block;
     width: 100%;
     height: 100%;
@@ -11,7 +11,7 @@
 }
 
 @keyframes scroll-bounce {
-	0%, 4%, 10%, 16%, 20% {
+    0%, 4%, 10%, 16%, 20% {
         bottom: 50px;
     }
     8% {
@@ -32,6 +32,7 @@
         transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes spin-animation {
     0% {
         -webkit-transform: rotate(0);
@@ -42,6 +43,7 @@
         transform: rotate(360deg);
     }
 }
+
 @keyframes spin-animation-reverse {
     0% {
         -webkit-transform: rotate(0);
@@ -52,6 +54,7 @@
         transform: rotate(-360deg);
     }
 }
+
 @-webkit-keyframes spin-animation-reverse {
     0% {
         -webkit-transform: rotate(0);
@@ -74,7 +77,7 @@
         top: 0;
         bottom: 0;
         width: 100%;
-        height: 100%; 
+        height: 100%;
         overflow: hidden;
         opacity: 0;
         transition: opacity 3s;
@@ -82,9 +85,11 @@
         &.show {
             opacity: 1;
         }
+
         &.dark {
             filter: brightness(20%) blur(5px);
         }
+
         &.bright {
             filter: brightness(200%) blur(5px);
         }
@@ -113,8 +118,8 @@
         height: 100%;
         z-index: 10;
         overflow: hidden;
-        
-        .gp-home-users-single-base{
+
+        .gp-home-users-single-base {
             z-index: 15;
             width: 25%;
             min-width: 250px;
@@ -123,9 +128,9 @@
             position: absolute;
             @include boxShadowLevel(2);
             transition: box-shadow 0.4s, transform 0.4s, width .3s, height .3s, left .3s, top .3s;
-    
+
             transform: scale(0);
-    
+
             :host-context(.mobile) & {
                 width: 90%;
                 min-width: unset;
@@ -135,102 +140,104 @@
                 &:nth-child(3) {
                     bottom: calc(50% - 25px);
                 }
-                
+
                 &:nth-child(5) {
                     bottom: 120px;
                 }
 
-                &.show{
+                &.show {
                     transform: unset;
                 }
-                
+
             }
-            
+
             &:nth-child(1) {
                 top: 50px;
                 left: $top-and-bottom-side-distance;
             }
-            
+
             &:nth-child(2) {
                 top: 50px;
                 right: $top-and-bottom-side-distance;
             }
-            
+
             &:nth-child(3) {
                 bottom: calc(50% - 50px);
                 left: $middle-side-distance;
             }
-            
+
             &:nth-child(4) {
                 bottom: calc(50% - 50px);
                 right: $middle-side-distance;
             }
-            
+
             &:nth-child(5) {
                 bottom: 50px;
                 left: $top-and-bottom-side-distance;
             }
-            
+
             &:nth-child(6) {
                 bottom: 50px;
                 right: $top-and-bottom-side-distance;
             }
-    
-            &.show{
+
+            &.show {
                 transform: scale(0.9);
             }
-            &:nth-child(odd):hover{
+
+            &:nth-child(odd):hover {
                 transform: translate(-3px, -3px) scale(1);
                 @include boxShadowLevel(3);
             }
-            &:nth-child(even):hover{
+
+            &:nth-child(even):hover {
                 transform: translate(3px, -3px) scale(1);
                 @include boxShadowLevel(3);
             }
-    
-            .gp-home-users-single-base-game{
+
+            .gp-home-users-single-base-game {
                 height: 40px;
                 width: 100%;
                 background-color: var(--background-color);
                 float: left;
                 color: var(--text-color);
-    
-                span{
+
+                span {
                     position: relative;
                     top: 15px;
                     left: 15px;
                     font-size: 18px;
                 }
             }
-    
-            .gp-home-users-single-base-game-img{
+
+            .gp-home-users-single-base-game-img {
                 height: calc(100% - 40px);
                 width: 80px;
                 background-color: var(--background-color);
                 border-bottom: var(--primary-color) 2px solid;
                 float: left;
-    
-                .gp-home-users-single-base-game-img-logo{
+
+                .gp-home-users-single-base-game-img-logo {
                     height: 50px;
                     width: 50px;
                     margin-top: 15px;
                     margin-left: 15px;
-    
+
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: contain;
                 }
             }
-    
-            .gp-home-users-single-base-stats{
+
+            .gp-home-users-single-base-stats {
                 position: relative;
                 z-index: 4;
                 height: calc(100% - 40px);
                 width: calc(100% - 80px);
                 float: left;
                 text-align: center;
-    
-                .gp-home-users-single-base-stats-online{
+
+                .gp-home-users-single-base-stats-online {
                     z-index: 4;
                     position: relative;
                     float: left;
@@ -241,8 +248,8 @@
                     justify-content: center;
                     align-items: center;
                 }
-    
-                .gp-home-users-single-base-stats-searching{
+
+                .gp-home-users-single-base-stats-searching {
                     z-index: 4;
                     position: relative;
                     float: left;
@@ -253,12 +260,12 @@
                     justify-content: center;
                     align-items: center;
                 }
-    
-                .gp-home-users-single-base-stats-bg{
+
+                .gp-home-users-single-base-stats-bg {
                     position: absolute;
                     z-index: 3;
-                    top: 0px;
-                    left: 0px;
+                    top: 0;
+                    left: 0;
                     height: 100%;
                     width: 100%;
                     background-color: var(--background-color);
@@ -270,6 +277,7 @@
     }
 
     $border-size: 8px;
+
     #gp-home-join-now-spinner {
         z-index: 10;
         position: absolute;
@@ -291,33 +299,33 @@
             right: -120%;
         }
 
-        &.align-right{
+        &.align-right {
             left: unset;
             right: 50px;
             top: 0;
             bottom: 0;
-            margin: unset unset unset unset;
+            margin: unset;
         }
 
         #gp-home-join-now-spinner-outerCircle {
             position: absolute;
             width: 80%;
             height: 80%;
-            top: calc(10% - $border-size);
-            left: calc(10% - $border-size);
+            top: calc(10% - #{$border-size});
+            left: calc(10% - #{$border-size});
             border-radius: 50%;
             border: $border-size solid var(--primary-color);
             border-color: var(--primary-color) transparent var(--primary-color) transparent;
             -webkit-animation: spin-animation 15s linear infinite;
             animation: spin-animation 15s linear infinite;
         }
-        
+
         #gp-home-join-now-spinner-innerCircle {
             position: absolute;
             width: 70%;
             height: 70%;
-            top: calc(15% - $border-size);
-            left: calc(15% - $border-size);
+            top: calc(15% - #{$border-size});
+            left: calc(15% - #{$border-size});
             border-radius: 50%;
             border: $border-size solid transparent;
             border-color: transparent var(--accent-color) transparent var(--accent-color);
@@ -325,7 +333,7 @@
             animation: spin-animation-reverse 15s linear infinite;
         }
 
-        #gp-join-now-text{
+        #gp-join-now-text {
             z-index: 10;
             cursor: pointer;
             font-weight: bold;
@@ -356,7 +364,7 @@
             transition: background-color 0.1s, transform 0.5s;
             animation: scroll-bounce 10s infinite linear;
 
-            &:hover{
+            &:hover {
                 background-color: rgba(255, 255, 255, 0.186);
                 animation: unset;
                 transform: translateY(7px);
@@ -388,14 +396,14 @@
     background-color: var(--text-color);
     z-index: 10;
 
-    #gp-home-real-content-top{
+    #gp-home-real-content-top {
         width: 0;
         height: 100px;
         padding-bottom: 10%;
         padding-left: 100%;
         overflow: hidden;
-    
-        &:after{
+
+        &:after {
             content: "";
             display: block;
             width: 0;
@@ -405,14 +413,15 @@
             border-left: 2000px solid var(--background-color);
         }
     }
-    #gp-home-real-content-bottom{
+
+    #gp-home-real-content-bottom {
         width: 0;
         height: 100px;
         padding-bottom: 3%;
         padding-left: 100%;
         overflow: hidden;
-    
-        &:after{
+
+        &:after {
             content: "";
             display: block;
             width: 0;
@@ -423,12 +432,12 @@
         }
     }
 
-    #gp-home-real-content{
+    #gp-home-real-content {
         width: 100%;
         padding-top: 40px;
         text-align: center;
-    
-        #gp-home-real-content-wrapper{
+
+        #gp-home-real-content-wrapper {
             display: inline-block;
             vertical-align: middle;
             position: relative;
@@ -438,38 +447,38 @@
             margin: 0 auto;
             text-align: left;
             color: var(--background-color);
-    
-            .gp-home-introduction-heading{
+
+            .gp-home-introduction-heading {
                 text-align: center;
                 font-size: 25px;
             }
-    
-            .gp-home-introduction-heading-spacer{
+
+            .gp-home-introduction-heading-spacer {
                 width: 80%;
                 height: 2px;
                 margin-left: 10%;
                 margin-top: 10px;
                 background-color: var(--background-color);
             }
-    
-            .gp-home-introduction-content{
+
+            .gp-home-introduction-content {
                 width: 100%;
                 margin-top: 60px;
                 margin-bottom: 120px;
                 text-align: center;
                 font-size: 20px;
-    
-                &#gp-home-introduction-services{
+
+                &#gp-home-introduction-services {
                     margin-bottom: 30px;
                 }
-    
+
                 .video-wrapper {
                     margin-top: 30px;
                     position: relative;
                     padding-bottom: 56.25%;
                     padding-top: 25px;
                     height: 0;
-    
+
                     iframe {
                         position: absolute;
                         top: 0;
@@ -479,14 +488,14 @@
                     }
                 }
             }
-    
-            #gp-home-introduction-services-wrapper{
+
+            #gp-home-introduction-services-wrapper {
                 position: relative;
                 float: left;
                 width: 100%;
                 margin-bottom: 120px;
-    
-                .gp-home-introduction-services-button{
+
+                .gp-home-introduction-services-button {
                     position: relative;
                     float: left;
                     margin-left: 3%;
@@ -495,18 +504,20 @@
                     cursor: pointer;
                     @include border-radius(3px);
                     @include boxShadowLevel(2);
-    
+
                     transition: box-shadow 0.4s, transform 0.4s;
-        
-                    &:nth-child(1):hover{
+
+                    &:nth-child(1):hover {
                         transform: translate(-3px, -3px);
                         @include boxShadowLevel(3);
                     }
-                    &:nth-child(2):hover{
+
+                    &:nth-child(2):hover {
                         transform: translate(0px, -3px);
                         @include boxShadowLevel(3);
                     }
-                    &:nth-child(3):hover{
+
+                    &:nth-child(3):hover {
                         transform: translate(3px, -3px);
                         @include boxShadowLevel(3);
                     }
@@ -531,8 +542,8 @@
             }
         }
     }
-    
-    #gp-home-footer{
+
+    #gp-home-footer {
         height: 500px;
         width: 100%;
         background-color: var(--background-color);

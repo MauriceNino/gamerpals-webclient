@@ -1,5 +1,4 @@
-
-<div id="gp_login" class="gp_main_header_item" (click)="loginProfileClick()">
-  <p>{{isUserSignedIn?'Profile':'Login'}}</p>
-  <div *ngIf="isUserSignedIn" class="profilePicture" [ngStyle]="{'background-image': 'url(' + userProfilePicUrl + ')'}"></div>
+<div (click)="loginProfileClick()" class="gp_main_header_item" id="gp_login">
+    <p>{{isUserSignedIn ? 'Profile' : 'Login'}}</p>
+    <div *ngIf="isUserSignedIn" [ngStyle]="{'background-image': 'url(' + userProfilePicUrl + ')'}" class="profilePicture"></div>
 </div>

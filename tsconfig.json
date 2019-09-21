@@ -1,34 +1,36 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "paths": {
-      "core-js/es6/*": ["node_modules/core-js/es"]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "paths": {
+            "core-js/es6/*": [
+                "node_modules/core-js/es"
+            ]
+        },
+        "baseUrl": "./",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "types": [
+            "gapi",
+            "gapi.auth2",
+            "jasmine"
+        ]
     },
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "types": [
-      "gapi",
-      "gapi.auth2",
-      "jasmine"
-    ]
-  },
-  "angularCompilerOptions": {
-    "enableIvy": true,
-    "allowEmptyCodegenFiles": true
-  }
+    "angularCompilerOptions": {
+        "enableIvy": true,
+        "allowEmptyCodegenFiles": true
+    }
 }

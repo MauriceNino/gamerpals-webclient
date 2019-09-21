@@ -1,18 +1,18 @@
 <app-split-pane>
     <div id="settings-button-container" split-left>
-        <button mat-button routerLink="basic" [routerLinkActive]="'active'" (click)="toggleMenu()">Basic</button>
-        <button mat-button routerLink="connections" [routerLinkActive]="'active'" (click)="toggleMenu()">Connection</button>
-        <button mat-raised-button color="primary" (click)="onLogout()">Logout</button>
+        <button (click)="toggleMenu()" [routerLinkActive]="'active'" mat-button routerLink="basic">Basic</button>
+        <button (click)="toggleMenu()" [routerLinkActive]="'active'" mat-button routerLink="connections">Connection</button>
+        <button (click)="onLogout()" color="primary" mat-raised-button>Logout</button>
     </div>
-    
+
     <div id="settings-container" split-right>
         <div id="settings-router-wrapper">
             <router-outlet></router-outlet>
         </div>
-                
-        <div id="settings-action-buttons" [class.show]="showButtons">
-            <button mat-stroked-button color="warn" (click)="undoChanges()">Undo</button>
-            <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
+
+        <div [class.show]="showButtons" id="settings-action-buttons">
+            <button (click)="undoChanges()" color="warn" mat-stroked-button>Undo</button>
+            <button (click)="saveChanges()" color="primary" mat-raised-button>Save</button>
         </div>
     </div>
 </app-split-pane>

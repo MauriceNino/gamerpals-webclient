@@ -1,8 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { LoginPageRoutingModule } from './login-page-routing.module';
-import { LoginPageComponent } from './login-page.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -13,27 +11,29 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { LoginPageRoutingModule } from './login-page-routing.module';
+import { LoginPageComponent } from './login-page.component';
 
 @NgModule({
-  declarations: [
-    LoginPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    LoginPageRoutingModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatIconModule,
-    MatListModule,
-    FormsModule,
-    MatSnackBarModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        LoginPageComponent,
+    ],
+    imports: [
+        CommonModule,
+        LoginPageRoutingModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatIconModule,
+        MatListModule,
+        FormsModule,
+        MatSnackBarModule,
+        ReactiveFormsModule
+    ]
 })
-export class LoginPageModule { }
+export class LoginPageModule {}

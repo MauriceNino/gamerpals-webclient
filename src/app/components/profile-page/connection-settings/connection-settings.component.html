@@ -2,26 +2,26 @@
     <span>Connection Settings</span>
 </mat-toolbar>
 <mat-accordion multi="true">
-  <mat-expansion-panel *ngFor="let c of mockConnections"  style="width: 90%; margin-left: 5%;" expanded hideToggle [disabled]="!c.enabled">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ c.serviceName }}
-      </mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <mat-list-item *ngIf="c.showInProfile!=undefined">
-        <p mat-line>Show this in your Profile</p>
-        <mat-slide-toggle class="setting-action" [checked]="c.enabled && c.showInProfile" [disabled]="!c.enabled"></mat-slide-toggle>
-      </mat-list-item>
-      <mat-list-item *ngIf="c.useForGames!=undefined">
-        <p mat-line>Use this for Searching in Games</p>
-        <mat-slide-toggle class="setting-action" [checked]="c.enabled && c.useForGames" [disabled]="!c.enabled"></mat-slide-toggle>
-      </mat-list-item>
-    </mat-list>
-    <mat-action-row>
-        <button mat-button color="{{ c.enabled? 'warn':'primary'}}">{{ c.enabled? 'Disable':'Connect' }}</button>
-    </mat-action-row>
-  </mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let c of mockConnections" [disabled]="!c.enabled" expanded hideToggle style="width: 90%; margin-left: 5%;">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ c.serviceName }}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+            <mat-list-item *ngIf="c.showInProfile!=undefined">
+                <p mat-line>Show this in your Profile</p>
+                <mat-slide-toggle [checked]="c.enabled && c.showInProfile" [disabled]="!c.enabled" class="setting-action"></mat-slide-toggle>
+            </mat-list-item>
+            <mat-list-item *ngIf="c.useForGames!=undefined">
+                <p mat-line>Use this for Searching in Games</p>
+                <mat-slide-toggle [checked]="c.enabled && c.useForGames" [disabled]="!c.enabled" class="setting-action"></mat-slide-toggle>
+            </mat-list-item>
+        </mat-list>
+        <mat-action-row>
+            <button color="{{ c.enabled? 'warn':'primary'}}" mat-button>{{ c.enabled ? 'Disable' : 'Connect' }}</button>
+        </mat-action-row>
+    </mat-expansion-panel>
 </mat-accordion>

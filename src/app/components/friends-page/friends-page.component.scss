@@ -1,7 +1,7 @@
 @import "variables";
 @import "functions";
 
-:host{
+:host {
     width: 100%;
     height: 100%;
 }
@@ -27,7 +27,7 @@
         &.finished-loading {
             opacity: 1 !important;
         }
-    
+
         .friend-button {
 
             .online {
@@ -63,7 +63,7 @@
             opacity: 1;
         }
     }
-    
+
     #friends-container-shadow-top {
         pointer-events: none;
         position: absolute;
@@ -81,14 +81,14 @@
     }
 }
 
-#friends-result-container{
+#friends-result-container {
     height: 100%;
     width: 100%;
-    
+
     position: relative;
     right: 0;
     top: 0;
-    
+
     float: left;
     text-align: center;
     overflow-y: scroll;
@@ -96,10 +96,10 @@
 
 #friendsLoading-spinner {
     position: absolute;
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 30%;
     z-index: 5;
     opacity: 1;

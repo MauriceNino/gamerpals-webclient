@@ -2,14 +2,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EnvironmentService } from '../EnvironmentService/environment.service';
 
 export class ServiceEndpoint<T> {
+    public static loggedInUserBearerToken: string;
     private static connectionProtocol = EnvironmentService.fileReference.connectionProtocol;
     private static connectionEndpoint = EnvironmentService.fileReference.connectionEndpoint;
     private static connectionPort = EnvironmentService.fileReference.connectionPort;
     private static usePort = EnvironmentService.fileReference.useConnectionPort;
 
-    public static loggedInUserBearerToken: string;
-
     constructor(public endpointUrl: string, public http: HttpClient) { }
+
+    // tslint:disable-next-line: member-ordering
+    public static getBaseConnectionUrl(): string {
+        return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}`
+               + `${ServiceEndpoint.usePort ? `:${ServiceEndpoint.connectionPort}` : ``}`;
+    }
 
     public async getAll(): Promise<T[]> {
         return this.http.get<T[]>(this.getEndpointUrl(), this.getRequestOptions()).toPromise();
@@ -21,7 +26,7 @@ export class ServiceEndpoint<T> {
         }
 
         return Promise.all(mongoIds.map(async (mongoId: string) => {
-          return this.get(mongoId);
+            return this.get(mongoId);
         }));
     }
 
@@ -71,14 +76,7 @@ export class ServiceEndpoint<T> {
         };
     }
 
-
     public getEndpointUrl(): string {
         return `${ServiceEndpoint.getBaseConnectionUrl()}/${this.endpointUrl}`;
-    }
-
-    // tslint:disable-next-line: member-ordering
-    public static getBaseConnectionUrl(): string {
-        return `${ServiceEndpoint.connectionProtocol}://${ServiceEndpoint.connectionEndpoint}`
-            + `${ServiceEndpoint.usePort ? `:${ServiceEndpoint.connectionPort}` : ``}`;
     }
 }

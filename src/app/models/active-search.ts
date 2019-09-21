@@ -1,5 +1,5 @@
-import { IUserSearchParameter } from './parameters';
 import { IChatMessage } from './chat-message';
+import { IUserSearchParameter } from './parameters';
 
 export interface IActiveSearch {
     _id: string; // ObjectId

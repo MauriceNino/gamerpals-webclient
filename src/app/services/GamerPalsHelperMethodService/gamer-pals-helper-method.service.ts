@@ -2,49 +2,51 @@ import { Injectable, NgZone } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GamerPalsHelperMethodService {
 
-  constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
+    constructor(private snackBar: MatSnackBar, private zone: NgZone) { }
 
-  public showErrorOnPage(): void {
-    this.showSnackbarOnPage('There seems to be a problem with our infrastructure!', 'Retry!', () => window.location.reload(), 60000);
-  }
+    public showErrorOnPage(): void {
+        this.showSnackbarOnPage('There seems to be a problem with our infrastructure!', 'Retry!', () => window.location.reload(), 60000);
+    }
 
-  // tslint:disable-next-line: ban-types
-  public showSnackbarOnPage(errorMsg: string, buttonMsg: string, buttonAction: Function, duration: number): void {
-    this.zone.run(() => {
-      this.snackBar.open(errorMsg, buttonMsg, {
-        duration
-      }).onAction().subscribe(() => {
-        buttonAction();
-      });
-    });
-  }
+    // tslint:disable-next-line: ban-types
+    public showSnackbarOnPage(errorMsg: string, buttonMsg: string, buttonAction: Function, duration: number): void {
+        this.zone.run(() => {
+            this.snackBar.open(errorMsg, buttonMsg, {
+                duration
+            }).onAction().subscribe(() => {
+                buttonAction();
+            });
+        });
+    }
 
-  // tslint:disable-next-line: ban-types
-  public callWhenPropertyAvailable(name: string, callback: Function): void {
-    const interval = 10;
+    // tslint:disable-next-line: ban-types
+    public callWhenPropertyAvailable(name: string, callback: Function): void {
+        const interval = 10;
 
-    window.setTimeout(() => {
-      if (window[name]) {
-        callback(window[name]);
-      } else {
-        window.setTimeout(() => this.callWhenPropertyAvailable(name, callback), interval);
-      }
-    }, interval);
-  }
+        window.setTimeout(() => {
+            if (window[name]) {
+                callback(window[name]);
+            }
+            else {
+                window.setTimeout(() => this.callWhenPropertyAvailable(name, callback), interval);
+            }
+        }, interval);
+    }
 
-  public callWhenObjectAvailable(obj: object, callback: () => void): void {
-    const interval = 10;
+    public callWhenObjectAvailable(obj: object, callback: () => void): void {
+        const interval = 10;
 
-    window.setTimeout(() => {
-      if (obj !== undefined) {
-        callback();
-      } else {
-        window.setTimeout(() => this.callWhenObjectAvailable(obj, callback), interval);
-      }
-    }, interval);
-  }
+        window.setTimeout(() => {
+            if (obj !== undefined) {
+                callback();
+            }
+            else {
+                window.setTimeout(() => this.callWhenObjectAvailable(obj, callback), interval);
+            }
+        }, interval);
+    }
 }

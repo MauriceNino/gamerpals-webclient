@@ -1,141 +1,144 @@
 @mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
 }
+
 @mixin no-select() {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
+
 @mixin blurfilter($fltr) {
-  -webkit-filter: blur($fltr);
-  -moz-filter: blur($fltr);
-  -o-filter: blur($fltr);
-  -ms-filter: blur($fltr);
-  filter: blur($fltr);
+    -webkit-filter: blur($fltr);
+    -moz-filter: blur($fltr);
+    -o-filter: blur($fltr);
+    -ms-filter: blur($fltr);
+    filter: blur($fltr);
 }
+
 @mixin rotate($deg) {
-  -webkit-transform: rotate($deg);
-  -moz-transform: rotate($deg);
-  -o-transform: rotate($deg);
-  -ms-transform: rotate($deg);
-  transform: rotate($deg);
+    -webkit-transform: rotate($deg);
+    -moz-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
 }
 
 @mixin insetBoxShadowLevel($level: 1) {
-  @if $level == 1 {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
-  @if $level == 2 {
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  }
-  @if $level == 3 {
-    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  @if $level == 4 {
-    box-shadow: inset 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-  @if $level == 5 {
-    box-shadow: inset 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  }
+    @if $level == 1 {
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    @if $level == 2 {
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+    @if $level == 3 {
+        box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+    @if $level == 4 {
+        box-shadow: inset 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+    @if $level == 5 {
+        box-shadow: inset 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    }
 }
 
 @mixin boxShadowLevel($level: 1) {
-  @if $level == 1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  }
-  @if $level == 2 {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  }
-  @if $level == 3 {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  @if $level == 4 {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-  @if $level == 5 {
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  }
+    @if $level == 1 {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+    @if $level == 2 {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    }
+    @if $level == 3 {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+    @if $level == 4 {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+    @if $level == 5 {
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    }
 }
 
 @mixin generate-theme-vars($theme) {
-  //default palette forground/background:
-  $foreground-palette: map-get($theme, foreground);
-  $background-palette: map-get($theme, background);
+    //default palette forground/background:
+    $foreground-palette: map-get($theme, foreground);
+    $background-palette: map-get($theme, background);
 
-  /////////////////////////////////////////////////
-  // SCSS VARS
-  /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    // SCSS VARS
+    /////////////////////////////////////////////////
 
-  $primary: mat-color(map-get($theme, primary));
-  $accent: mat-color(map-get($theme, accent));
-  $warn: mat-color(map-get($theme, warn));
+    $primary: mat-color(map-get($theme, primary));
+    $accent: mat-color(map-get($theme, accent));
+    $warn: mat-color(map-get($theme, warn));
 
-  $base: mat-color($foreground-palette, base);
-  $divider: mat-color($foreground-palette, divider);
-  $dividers: mat-color($foreground-palette, dividers);
-  $disabled: mat-color($foreground-palette, disabled);
-  $disabled-button: mat-color($foreground-palette, disabled-button);
-  $disabled-text: mat-color($foreground-palette, disabled-text);
-  $hint-text: mat-color($foreground-palette, hint-text);
-  $secondary-text: mat-color($foreground-palette, secondary-text);
-  $icon: mat-color($foreground-palette, icon);
-  $icons: mat-color($foreground-palette, icons);
-  $text: mat-color($foreground-palette, text);
-  $slider-off: mat-color($foreground-palette, slider-off);
-  $slider-off-active: mat-color($foreground-palette, slider-off-active);
-  
-  $status-bar: mat-color($background-palette, status-bar);
-  $app-bar: mat-color($background-palette, app-bar);
-  $background: mat-color($background-palette, background);
-  $hover: mat-color($background-palette, hover);
-  $card: mat-color($background-palette, card);
-  $dialog: mat-color($background-palette, dialog);
-  $disabled-button: mat-color($background-palette, disabled-button);
-  $raised-button: mat-color($background-palette, raised-button);
-  $focused-button: mat-color($background-palette, focused-button);
-  $selected-button: mat-color($background-palette, selected-button);
-  $selected-disabled-button: mat-color($background-palette, selected-disabled-button);
-  $disabled-button-toggle: mat-color($background-palette, disabled-button-toggle);
+    $base: mat-color($foreground-palette, base);
+    $divider: mat-color($foreground-palette, divider);
+    $dividers: mat-color($foreground-palette, dividers);
+    $disabled: mat-color($foreground-palette, disabled);
+    $disabled-button: mat-color($foreground-palette, disabled-button);
+    $disabled-text: mat-color($foreground-palette, disabled-text);
+    $hint-text: mat-color($foreground-palette, hint-text);
+    $secondary-text: mat-color($foreground-palette, secondary-text);
+    $icon: mat-color($foreground-palette, icon);
+    $icons: mat-color($foreground-palette, icons);
+    $text: mat-color($foreground-palette, text);
+    $slider-off: mat-color($foreground-palette, slider-off);
+    $slider-off-active: mat-color($foreground-palette, slider-off-active);
 
-  /////////////////////////////////////////////////
-  // CSS VARS
-  /////////////////////////////////////////////////
+    $status-bar: mat-color($background-palette, status-bar);
+    $app-bar: mat-color($background-palette, app-bar);
+    $background: mat-color($background-palette, background);
+    $hover: mat-color($background-palette, hover);
+    $card: mat-color($background-palette, card);
+    $dialog: mat-color($background-palette, dialog);
+    $disabled-button: mat-color($background-palette, disabled-button);
+    $raised-button: mat-color($background-palette, raised-button);
+    $focused-button: mat-color($background-palette, focused-button);
+    $selected-button: mat-color($background-palette, selected-button);
+    $selected-disabled-button: mat-color($background-palette, selected-disabled-button);
+    $disabled-button-toggle: mat-color($background-palette, disabled-button-toggle);
+
+    /////////////////////////////////////////////////
+    // CSS VARS
+    /////////////////////////////////////////////////
 
 
-  --primary-color-throwaway: #{$primary};
-  --primary-color: #{$primary};
-  --accent-color: #{$accent};
-  --warn-color: #{$warn};
+    --primary-color-throwaway: #{$primary};
+    --primary-color: #{$primary};
+    --accent-color: #{$accent};
+    --warn-color: #{$warn};
 
-  --base-color: #{$base};
-  --divider-color: #{$divider};
-  --dividers-color: #{$dividers};
-  --disabled-color: #{$disabled};
-  --disabled-button-color: #{$disabled-button};
-  --disabled-text-color: #{$disabled-text};
-  --hint-text-color: #{$hint-text};
-  --secondary-text-color: #{$secondary-text};
-  --icon-color: #{$icon};
-  --icons-color: #{$icons};
-  --text-color: #{$text};
-  --slider-off-color: #{$slider-off};
-  --slider-off-active-color: #{$slider-off-active};
+    --base-color: #{$base};
+    --divider-color: #{$divider};
+    --dividers-color: #{$dividers};
+    --disabled-color: #{$disabled};
+    --disabled-button-color: #{$disabled-button};
+    --disabled-text-color: #{$disabled-text};
+    --hint-text-color: #{$hint-text};
+    --secondary-text-color: #{$secondary-text};
+    --icon-color: #{$icon};
+    --icons-color: #{$icons};
+    --text-color: #{$text};
+    --slider-off-color: #{$slider-off};
+    --slider-off-active-color: #{$slider-off-active};
 
-  --status-bar-color: #{$status-bar};
-  --app-bar-color: #{$app-bar};
-  --background-color: #{$background};
-  --hover-color: #{$hover};
-  --card-color: #{$card};
-  --dialog-color: #{$dialog};
-  --disabled-button-color: #{$disabled-button};
-  --raised-button-color: #{$raised-button};
-  --focused-button-color: #{$focused-button};
-  --selected-button-color: #{$selected-button};
-  --selected-disabled-button-color: #{$selected-disabled-button};
-  --disabled-button-toggle-color: #{$disabled-button-toggle};
+    --status-bar-color: #{$status-bar};
+    --app-bar-color: #{$app-bar};
+    --background-color: #{$background};
+    --hover-color: #{$hover};
+    --card-color: #{$card};
+    --dialog-color: #{$dialog};
+    --disabled-button-color: #{$disabled-button};
+    --raised-button-color: #{$raised-button};
+    --focused-button-color: #{$focused-button};
+    --selected-button-color: #{$selected-button};
+    --selected-disabled-button-color: #{$selected-disabled-button};
+    --disabled-button-toggle-color: #{$disabled-button-toggle};
 }

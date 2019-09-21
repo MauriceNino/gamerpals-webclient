@@ -1,11 +1,11 @@
 @import "variables";
 @import "functions";
 
-:host{
+:host {
     display: inline-block;
 }
 
-.gp_main_header_item{
+.gp_main_header_item {
     display: block;
     height: 100%;
     position: relative;
@@ -23,7 +23,7 @@
         color: var(--text-color);
     }
 
-    .profilePicture{
+    .profilePicture {
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

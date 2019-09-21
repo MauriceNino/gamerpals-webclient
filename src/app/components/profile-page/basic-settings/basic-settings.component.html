@@ -2,31 +2,32 @@
     <span>Basic Settings</span>
 </mat-toolbar>
 <mat-list>
-  <mat-list-item>
-    <p mat-line class="setting-heading">Enable Dark-Theme</p>
-    <p mat-line class="setting-subheading">Do you want to burn your eyes or nah?</p> 
-    <mat-slide-toggle class="setting-action" [(ngModel)]="settings.isDarkThemeEnabled" (change)="settingChanged()"></mat-slide-toggle>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item>
-    <p mat-line class="setting-heading">Enable Sounds</p>
-    <p mat-line class="setting-subheading">Beep Boop Beep?</p>
-    <mat-slide-toggle class="setting-action" [(ngModel)]="settings.isSoundEnabled" (change)="settingChanged()"></mat-slide-toggle>
-  </mat-list-item>
-  <mat-list-item>
-    <p mat-line class="setting-heading">Volume</p>
-    <mat-slider thumbLabel [displayWith]="formatVolumeSlider" tickInterval="1" style="width: 100%" [(value)]="settings.soundVolume" (change)="settingChanged()"></mat-slider>
-  </mat-list-item>
-  <mat-list-item>
-    <p mat-line class="setting-heading">Site Language</p>
-    <p mat-line class="setting-subheading">Can you speak?</p>
-    
-    <mat-select (selectionChange)="settingChanged()" [(ngModel)]="settings.siteLanguage">
-      <mat-option *ngFor="let language of availableLanguages" [value]="language.code">
-        {{language.name}}
-      </mat-option>
-    </mat-select>
-  </mat-list-item>
-   
-  <mat-divider></mat-divider>
+    <mat-list-item>
+        <p class="setting-heading" mat-line>Enable Dark-Theme</p>
+        <p class="setting-subheading" mat-line>Do you want to burn your eyes or nah?</p>
+        <mat-slide-toggle (change)="settingChanged()" [(ngModel)]="settings.isDarkThemeEnabled" class="setting-action"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+        <p class="setting-heading" mat-line>Enable Sounds</p>
+        <p class="setting-subheading" mat-line>Beep Boop Beep?</p>
+        <mat-slide-toggle (change)="settingChanged()" [(ngModel)]="settings.isSoundEnabled" class="setting-action"></mat-slide-toggle>
+    </mat-list-item>
+    <mat-list-item>
+        <p class="setting-heading" mat-line>Volume</p>
+        <mat-slider (change)="settingChanged()" [(value)]="settings.soundVolume" [displayWith]="formatVolumeSlider" style="width: 100%" thumbLabel
+                    tickInterval="1"></mat-slider>
+    </mat-list-item>
+    <mat-list-item>
+        <p class="setting-heading" mat-line>Site Language</p>
+        <p class="setting-subheading" mat-line>Can you speak?</p>
+
+        <mat-select (selectionChange)="settingChanged()" [(ngModel)]="settings.siteLanguage">
+            <mat-option *ngFor="let language of availableLanguages" [value]="language.code">
+                {{language.name}}
+            </mat-option>
+        </mat-select>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
 </mat-list>

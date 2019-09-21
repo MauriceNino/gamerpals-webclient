@@ -1,16 +1,16 @@
 @import "variables";
 @import "functions";
 
-:host{
+:host {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
-    
+
     overflow: hidden;
 }
 
-#left-container{
+#left-container {
     position: relative;
     float: left;
     height: 100%;
@@ -26,11 +26,11 @@
 
         &.menuClosed {
             left: -100%;
-        }           
+        }
     }
 }
 
-#right-container{
+#right-container {
     position: relative;
     float: left;
     width: 100%;
@@ -54,7 +54,7 @@
             width: 100%;
         }
     }
-    
+
     #go-back-button {
         color: var(--primary-color);
         margin-top: 25px;

@@ -1,12 +1,12 @@
 @import "variables";
 @import "functions";
 
-:host{
+:host {
     display: block;
     height: 100%;
 }
 
-.gp_main_header_item{
+.gp_main_header_item {
     height: 100%;
     width: auto;
     margin-left: 15px;
@@ -25,27 +25,27 @@
         color: var(--text-color);
     }
 
-    &.active{
-        .gp_main_header_item_active{
+    &.active {
+        .gp_main_header_item_active {
             opacity: 1;
         }
     }
 
-    &:hover{
-        .gp_main_header_item_active{
+    &:hover {
+        .gp_main_header_item_active {
             opacity: 0.5;
 
         }
-        
-        &.active{
-            .gp_main_header_item_active{
+
+        &.active {
+            .gp_main_header_item_active {
                 opacity: 1;
-    
+
             }
         }
     }
 
-    .gp_main_header_item_active{
+    .gp_main_header_item_active {
         opacity: 0;
         position: absolute;
         bottom: 0;
