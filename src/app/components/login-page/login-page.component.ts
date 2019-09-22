@@ -37,6 +37,8 @@ export class LoginPageComponent implements OnInit {
     selLanguage: string = '';
     selLanguages: string[] = [];
 
+    imageUploadData: FormData;
+
     localUserObject: IUser;
 
     constructor(private formBuilder: FormBuilder, private gLoginService: GoogleLoginService,
@@ -116,19 +118,29 @@ export class LoginPageComponent implements OnInit {
     // TODO: Dont upload immediately, but on save
     public onImageUpload(files: FileList) {
         const formData: FormData = new FormData();
-        const file = files.item(0);
+        const file = files[files.length - 1];
 
         formData.append('upload', file, file.name);
 
-        this.backend.Images.create(formData).then((imageId) => {
-            this.imageUrl = `${this.backend.Images.getEndpointUrl()}/${imageId}`;
-        });
+        this.imageUploadData = formData;
+        this.imageUrl = URL.createObjectURL(file);
     }
 
-    public sendForm() {
-        console.log(this.formGroup1.controls);
-        console.log(this.formGroup2.controls);
-        console.log(this.formGroup3.controls);
+    public async sendForm() {
+        const imageId = await this.backend.Images.create(this.imageUploadData);
+        this.imageUrl = `${this.backend.Images.getEndpointUrl()}/${imageId}`;
+        this.localUserObject.profilePicture = imageId as unknown as string;
+
+        if (this.formGroup1.invalid || this.formGroup2.invalid || this.formGroup3.valid) {
+            // TODO: Send request
+
+            console.log(this.localUserObject);
+            console.log(this.formGroup1.controls);
+            console.log(this.formGroup2.controls);
+            console.log(this.formGroup3.controls);
+        } else {
+            // TODO: Show error
+        }
     }
 
     public getError(control: AbstractControl): string {

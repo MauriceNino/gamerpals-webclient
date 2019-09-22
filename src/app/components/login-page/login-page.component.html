@@ -9,13 +9,13 @@
                     <div class="leftSideOfForm" style="width: 65%">
                         <mat-form-field appearance="outline" color="primary" style="width: 60%">
                             <mat-label>Pick a Username</mat-label>
-                            <input formControlName="profileName" matInput placeholder=" ...">
+                            <input formControlName="profileName" matInput placeholder=" ..." [(ngModel)]="localUserObject.profileName">
                             <mat-error
                                 *ngIf="!formGroup1.controls['profileName'].valid">{{ getError(formGroup1.controls['profileName']) }}</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" color="primary">
                             <mat-label>Describe yourself</mat-label>
-                            <textarea formControlName="profileDescription" id="profileInfo" matInput placeholder=" ..." rows="6"></textarea>
+                            <textarea formControlName="profileDescription" id="profileInfo" matInput placeholder=" ..." rows="6" [(ngModel)]="localUserObject.profileDescription"></textarea>
                             <mat-error
                                 *ngIf="!formGroup1.controls['profileDescription'].valid">{{ getError(formGroup1.controls['profileDescription']) }}</mat-error>
                         </mat-form-field>
@@ -43,14 +43,14 @@
                     <div class="leftSideOfForm">
                         <mat-form-field>
                             <mat-label>Gender</mat-label>
-                            <mat-select [(value)]="selGender" formControlName="gender">
+                            <mat-select [(value)]="selGender" formControlName="gender" [(ngModel)]="localUserObject.gender">
                                 <mat-option *ngFor="let gender of genderList" [value]="gender">
                                     {{ gender }}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field>
-                            <input [matDatepicker]="picker" formControlName="birthday" matInput placeholder="Birthday">
+                            <input [matDatepicker]="picker" formControlName="birthday" matInput placeholder="Birthday" [(ngModel)]="localUserObject.birthday">
                             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
