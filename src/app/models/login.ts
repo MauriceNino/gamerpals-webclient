@@ -5,6 +5,7 @@ export interface ILogin {
 }
 
 export enum LoginType {
+    // noinspection JSUnusedGlobalSymbols
     Google = 1,
     Facebook = 2
 }

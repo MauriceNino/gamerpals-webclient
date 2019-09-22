@@ -64,17 +64,20 @@ export class AppComponent implements OnInit {
             this.loadScript('assets/js/electron-controls.js');
         }
 
+        // noinspection JSIgnoredPromiseFromCall
         this.settings.loadSettings(false);
 
         // Default redirect disabled, because it needs to wait for Google Login on mobile devices
         if (!this.platformInfo.isCurrentPlatformNativeMobile()) {
             this.zone.run(() => {
+                // noinspection JSIgnoredPromiseFromCall
                 this.router.navigateByUrl(window.location.pathname);
             });
         }
         else {
             this.gLoginService.initGoogleLogin().finally(() => {
                 this.zone.run(() => {
+                    // noinspection JSIgnoredPromiseFromCall
                     this.router.navigateByUrl(window.location.pathname);
                 });
             });
@@ -117,7 +120,7 @@ export class AppComponent implements OnInit {
         });
     }
 
-    getBarMode(): string {
+    getBarMode(): 'determinate' | 'indeterminate' | 'buffer' | 'query' {
         return ProgressBarService.progressBarMode;
     }
 

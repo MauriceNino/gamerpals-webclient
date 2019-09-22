@@ -3,7 +3,7 @@ const remote = require('electron').remote;
 (function () {
 
     document.onreadystatechange = () => {
-        if (document.readyState == "complete") {
+        if (document.readyState === "complete") {
             init();
         }
     };

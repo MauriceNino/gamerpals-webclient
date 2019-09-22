@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
     private mobileMenu: ElementRef<HTMLElement>;
 
     constructor(public platformInfo: PlatformInfoService, private router: Router) {
+        // noinspection JSIgnoredPromiseFromCall
         this.router.events.forEach((event) => {
             if (event instanceof NavigationStart) {
                 if (this.mobileMenuButton != null) {

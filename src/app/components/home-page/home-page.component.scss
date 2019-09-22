@@ -320,6 +320,7 @@
             animation: spin-animation 15s linear infinite;
         }
 
+        //noinspection CssOverwrittenProperties
         #gp-home-join-now-spinner-innerCircle {
             position: absolute;
             width: 70%;

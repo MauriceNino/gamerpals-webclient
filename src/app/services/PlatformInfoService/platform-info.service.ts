@@ -30,6 +30,7 @@ export class PlatformInfoService {
         return this.isCurrentPlatformNativeMobile() || (window.innerWidth * 1.5 < window.innerHeight) || (window.innerWidth < 800);
     }
 
+    // noinspection JSUnusedGlobalSymbols
     public getMobileChangedObservable(): Observable<MobileChangedState> {
         return this.mobileChanged.asObservable();
     }

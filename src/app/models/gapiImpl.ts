@@ -124,6 +124,7 @@ export interface IOfflineAccessOptions {
     app_package_name?: string;
 }
 
+// noinspection JSUnusedGlobalSymbols
 /**
  * export interface Ithat represents the different configuration parameters for the gapi.auth2.init method.
  * Reference: https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
@@ -214,6 +215,7 @@ export interface IAuthResponse {
     expires_at: number;
 }
 
+// noinspection JSUnusedGlobalSymbols
 /**
  * Reference: https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2authorizeconfig
  */
@@ -230,6 +232,7 @@ export interface IAuthorizeConfig {
     include_granted_scopes?: boolean;
 }
 
+// noinspection JSUnusedGlobalSymbols
 /**
  * Reference: https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2authorizeresponse
  */

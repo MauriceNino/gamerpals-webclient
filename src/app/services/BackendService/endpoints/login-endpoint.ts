@@ -79,6 +79,7 @@ export class LoginEndpoint extends ServiceEndpoint<ILogin> {
         });
     }
 
+    // noinspection JSUnusedGlobalSymbols
     public isUserSignedInHandler(): Observable<boolean> {
         return this.userSignedIn.asObservable();
     }

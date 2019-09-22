@@ -36,6 +36,7 @@ export class ProfileButtonComponent implements OnInit {
             if (isSignedIn) {
                 // TODO: If user has not completed his pofile yet -> send him to login
                 // this.router.navigateByUrl("/login");
+                // noinspection JSIgnoredPromiseFromCall
                 this.router.navigateByUrl('/profile');
             }
             else {

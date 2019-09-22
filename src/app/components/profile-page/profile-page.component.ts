@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/BackendService/backend.service';
 import { GoogleLoginService } from 'src/app/services/GoogleLoginService/google-login.service';
-import { PlatformInfoService } from 'src/app/services/PlatformInfoService/platform-info.service';
 import { SettingsChangedState, SettingsService } from 'src/app/services/SettingsService/settings.service';
 import { SplitPaneComponent } from '../_shared/split-pane/split-pane.component';
 import { IYesNoDialogResult, YesNoDialogComponent } from '../_shared/yes-no-dialog/yes-no-dialog.component';
@@ -21,7 +20,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit {
     @ViewChild(SplitPaneComponent, { static: false }) splitPane;
 
     constructor(private gLoginService: GoogleLoginService, private router: Router, private settings: SettingsService,
-                public dialog: MatDialog, public platformInfo: PlatformInfoService, private backend: BackendService) {
+                public dialog: MatDialog, private backend: BackendService) {
     }
 
     toggleMenu() {
@@ -33,9 +32,11 @@ export class ProfilePageComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
-            if (!isSignedIn) { this.router.navigateByUrl('/home'); }
+            if (!isSignedIn) { // noinspection JSIgnoredPromiseFromCall
+                this.router.navigateByUrl('/home'); }
         });
 
+        // noinspection JSIgnoredPromiseFromCall
         this.settings.loadSettings(false);
         this.settings.getObserver().subscribe((type: number) => {
             if (type === SettingsChangedState.UNSAVED) {
@@ -57,6 +58,7 @@ export class ProfilePageComponent implements OnInit, AfterViewInit {
             if (result === IYesNoDialogResult.YES) {
                 this.gLoginService.signOutCurrentUser().then(() => {
                     this.backend.Login.updateSignedIn(false);
+                    // noinspection JSIgnoredPromiseFromCall,JSIgnoredPromiseFromCall
                     this.router.navigateByUrl('/home');
                 });
             }
@@ -64,11 +66,13 @@ export class ProfilePageComponent implements OnInit, AfterViewInit {
     }
 
     public undoChanges(): void {
+        // noinspection JSIgnoredPromiseFromCall
         this.settings.resetSettings();
         this.showButtons = false;
     }
 
     public saveChanges(): void {
+        // noinspection JSIgnoredPromiseFromCall
         this.settings.saveSettings();
         this.showButtons = false;
     }

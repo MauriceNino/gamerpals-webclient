@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div id="searchbar-container">
     <div [class.show]="!isTop" id="searchbar-container-shadow-top"></div>
     <mat-spinner *ngIf="showGameSpinner" id="gamesLoading-spinner"></mat-spinner>
@@ -5,7 +6,7 @@
         <mat-form-field id="searchbar-games-select">
             <mat-label>Select Games you want to search:</mat-label>
             <mat-select (selectionChange)="gamesSelectionChanged($event)" [(ngModel)]="selectedGames" multiple>
-                <mat-option *ngFor="let game of games" [value]="game" class="game-options" selected="true">{{game.name}}
+                <mat-option *ngFor="let game of games" [value]="game" class="game-options">{{game.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

@@ -13,6 +13,7 @@ export class ProfileCompleteGuardService implements CanActivate {
     constructor(private backend: BackendService, private router: Router, private zone: NgZone, private dialog: MatDialog) { }
 
 
+    // noinspection JSUnusedLocalSymbols
     // tslint:disable-next-line: max-line-length
     canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         return new Promise<boolean>((resolve, reject) => {
@@ -26,6 +27,7 @@ export class ProfileCompleteGuardService implements CanActivate {
                             }
                         });
                         ref.afterClosed().subscribe(() => {
+                            // noinspection JSIgnoredPromiseFromCall
                             this.zone.run(() => this.router.navigateByUrl('/home'));
                         });
                     });
@@ -40,6 +42,7 @@ export class ProfileCompleteGuardService implements CanActivate {
                             }
                         });
                         ref.afterClosed().subscribe(() => {
+                            // noinspection JSIgnoredPromiseFromCall
                             this.zone.run(() => this.router.navigateByUrl('/login'));
                         });
                     });

@@ -172,6 +172,7 @@ export class ShortSearchPageComponent implements OnInit {
     }
 
     public createLobby(): void {
+        // noinspection JSIgnoredPromiseFromCall
         this.router.navigateByUrl('/createLobby');
         /* const dialogRef = this.dialog.open(CreateActiveSearchComponent, {data: []});
 

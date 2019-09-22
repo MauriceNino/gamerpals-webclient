@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProgressBarService {
     public static progressBarVisible: boolean = false;
-    public static progressBarMode: string = 'indeterminate';
+    public static progressBarMode: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'indeterminate';
 
     constructor() { }
 }

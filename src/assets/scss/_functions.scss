@@ -65,6 +65,7 @@
     }
 }
 
+@import "~@angular/material/theming";
 @mixin generate-theme-vars($theme) {
     //default palette forground/background:
     $foreground-palette: map-get($theme, foreground);
@@ -135,7 +136,6 @@
     --hover-color: #{$hover};
     --card-color: #{$card};
     --dialog-color: #{$dialog};
-    --disabled-button-color: #{$disabled-button};
     --raised-button-color: #{$raised-button};
     --focused-button-color: #{$focused-button};
     --selected-button-color: #{$selected-button};

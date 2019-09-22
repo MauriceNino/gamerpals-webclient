@@ -5,6 +5,7 @@ export interface IParticipant {
     joinDate: string;
 }
 
+// noinspection JSUnusedGlobalSymbols
 export interface IPrivateChat {
     _id: string; // ObjectId
     isGroupChat: boolean;

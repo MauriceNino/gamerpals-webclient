@@ -46,6 +46,7 @@ export class ServiceEndpoint<T> {
         return this.http.post<T>(this.getEndpointUrl(), createObj, this.getRequestOptions()).toPromise();
     }
 
+    // noinspection JSUnusedGlobalSymbols
     public async update(mongoId: string, updateObj: T): Promise<T> {
         if (mongoId == null || updateObj == null) {
             return null;
@@ -54,6 +55,7 @@ export class ServiceEndpoint<T> {
         return this.http.put<T>(`${this.getEndpointUrl()}/${mongoId}`, updateObj, this.getRequestOptions()).toPromise();
     }
 
+    // noinspection JSUnusedGlobalSymbols
     public async delete(mongoId: string): Promise<T> {
         if (mongoId == null) {
             return null;

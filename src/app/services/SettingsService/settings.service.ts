@@ -32,22 +32,22 @@ export class SettingsService {
             if (this.settingsLoaded && !force) { resolve(this); }
 
             const isDarkThemeEnabled = localStorage.getItem('isDarkThemeEnabled');
-            if (!this.isSettingUndefinedOrEmpty(isDarkThemeEnabled)) {
+            if (!SettingsService.isSettingUndefinedOrEmpty(isDarkThemeEnabled)) {
                 this.isDarkThemeEnabled = JSON.parse(isDarkThemeEnabled);
             }
 
             const isSoundEnabled = localStorage.getItem('isSoundEnabled');
-            if (!this.isSettingUndefinedOrEmpty(isSoundEnabled)) {
+            if (!SettingsService.isSettingUndefinedOrEmpty(isSoundEnabled)) {
                 this.isSoundEnabled = JSON.parse(isSoundEnabled);
             }
 
             const soundVolume = localStorage.getItem('soundVolume');
-            if (!this.isSettingUndefinedOrEmpty(soundVolume)) {
+            if (!SettingsService.isSettingUndefinedOrEmpty(soundVolume)) {
                 this.soundVolume = JSON.parse(soundVolume);
             }
 
             const siteLanguage = localStorage.getItem('siteLanguage');
-            if (!this.isSettingUndefinedOrEmpty(siteLanguage)) {
+            if (!SettingsService.isSettingUndefinedOrEmpty(siteLanguage)) {
                 this.siteLanguage = siteLanguage;
             }
 
@@ -90,7 +90,7 @@ export class SettingsService {
         this.settingsChanged.next(SettingsChangedState.UNSAVED);
     }
 
-    private isSettingUndefinedOrEmpty(setting: string): boolean {
+    private static isSettingUndefinedOrEmpty(setting: string): boolean {
         return setting == null || setting === '' || setting === 'null';
     }
 

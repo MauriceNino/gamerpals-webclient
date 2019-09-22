@@ -26,6 +26,7 @@ export class AuthGuardService implements CanActivate {
                             }
                         });
                         ref.afterClosed().subscribe(() => {
+                            // noinspection JSIgnoredPromiseFromCall
                             this.zone.run(() => this.router.navigateByUrl('/home'));
                         });
                     });

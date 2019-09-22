@@ -22,18 +22,18 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial;
+    font-family: Arial, serif;
 }
 
 html {
-    margin: 0px;
+    margin: 0;
     height: 100%;
     width: 100%;
     overflow: auto;
 }
 
 body {
-    margin: 0px;
+    margin: 0;
     height: 100%;
     width: 100%;
 
@@ -43,7 +43,7 @@ body {
 
 app-root {
     display: block;
-    margin: 0px;
+    margin: 0;
     height: 100%;
     width: 100%;
 }

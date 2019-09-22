@@ -19,8 +19,6 @@ export class SplitPaneComponent implements OnInit {
     @ViewChild('rightContainer', { static: false })
     rightContainer: ElementRef<HTMLElement>;
 
-    public showButtons = false;
-
     constructor(public platformInfo: PlatformInfoService) {
     }
 
