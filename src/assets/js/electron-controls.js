@@ -15,18 +15,18 @@ const remote = require('electron').remote;
             restoreButton = document.getElementById('restore-button'),
             closeButton = document.getElementById('close-button');
 
-        minButton.addEventListener("click", event => {
+        minButton.addEventListener("click", () => {
             window = remote.getCurrentWindow();
             window.minimize();
         });
 
-        maxButton.addEventListener("click", event => {
+        maxButton.addEventListener("click", () => {
             window = remote.getCurrentWindow();
             window.maximize();
             toggleMaxRestoreButtons();
         });
 
-        restoreButton.addEventListener("click", event => {
+        restoreButton.addEventListener("click", () => {
             window = remote.getCurrentWindow();
             window.unmaximize();
             toggleMaxRestoreButtons();
@@ -39,7 +39,7 @@ const remote = require('electron').remote;
         window.on('maximize', toggleMaxRestoreButtons);
         window.on('unmaximize', toggleMaxRestoreButtons);
 
-        closeButton.addEventListener("click", event => {
+        closeButton.addEventListener("click", () => {
             window = remote.getCurrentWindow();
             window.close();
         });

@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { OkDialogComponent } from 'src/app/components/_shared/ok-dialog/ok-dialog.component';
 import { BackendService } from 'src/app/services/BackendService/backend.service';
@@ -14,7 +14,7 @@ export class ProfileCompleteGuardService implements CanActivate {
 
 
     // tslint:disable-next-line: max-line-length
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         return new Promise<boolean>((resolve, reject) => {
             this.backend.Login.waitForLoginAsync().then(() => {
                 if (!this.backend.Login.isUserSignedIn()) {

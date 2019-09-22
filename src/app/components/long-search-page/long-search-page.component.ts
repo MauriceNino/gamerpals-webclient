@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMethodService/gamer-pals-helper-method.service';
 
 @Component({
     selector: 'app-long-search-page',
@@ -8,7 +7,7 @@ import { GamerPalsHelperMethodService } from 'src/app/services/GamerPalsHelperMe
 })
 export class LongSearchPageComponent implements OnInit {
 
-    constructor(private helpers: GamerPalsHelperMethodService) { }
+    constructor() { }
 
     ngOnInit() {
     }

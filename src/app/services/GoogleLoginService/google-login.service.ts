@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IGoogleAuth, IGoogleUser, IIsSignedIn, ISigninOptions } from 'src/app/models/gapiImpl';
 import { GamerPalsHelperMethodService } from '../GamerPalsHelperMethodService/gamer-pals-helper-method.service';
-import { PlatformInfoService } from '../PlatformInfoService/platform-info.service';
 
 declare var gapi: any;
 
@@ -12,11 +11,10 @@ export class GoogleLoginService {
     public static googleAuth: IGoogleAuth;
     private static clientId = '533079699939-156l7gmrnfnqhbrsjpm5n6gjcvccp147.apps.googleusercontent.com';
 
-    constructor(private gpHelperMethods: GamerPalsHelperMethodService,
-                private platformInfo: PlatformInfoService) { }
+    constructor(private gpHelperMethods: GamerPalsHelperMethodService) { }
 
     public async initGoogleLogin(): Promise<any> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             if (GoogleLoginService.googleAuth != null) {
                 resolve(GoogleLoginService.googleAuth);
             }
@@ -48,7 +46,7 @@ export class GoogleLoginService {
     public async isUserSignedInListener(): Promise<IIsSignedIn> {
         await this.initGoogleLogin();
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(GoogleLoginService.googleAuth.isSignedIn);
         });
     }
@@ -56,7 +54,7 @@ export class GoogleLoginService {
     public async isUserSignedIn(): Promise<boolean> {
         await this.initGoogleLogin();
 
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<boolean>((resolve) => {
             resolve(GoogleLoginService.googleAuth.isSignedIn.get());
         });
     }

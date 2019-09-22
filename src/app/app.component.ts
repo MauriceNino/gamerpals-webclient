@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
                 private router: Router, private backend: BackendService,
                 private zone: NgZone, private snackBar: MatSnackBar, private settings: SettingsService,
                 private gpHelper: GamerPalsHelperMethodService) {
-        this.onResize(undefined);
+        this.onResize();
     }
 
     public loadScript(url: string) {
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
     }
 
     @HostListener('window:resize', [ '$event' ])
-    private onResize(event): void {
+    private onResize(): void {
         const htmlNode = document.documentElement;
         const currentPlatformMobile = this.platformInfo.isCurrentPlatformMobile();
 

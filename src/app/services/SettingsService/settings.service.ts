@@ -27,7 +27,7 @@ export class SettingsService {
     }
 
     public loadSettings(force: boolean): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve, reject) => {
+        return new Promise<SettingsService>((resolve) => {
 
             if (this.settingsLoaded && !force) { resolve(this); }
 
@@ -68,13 +68,13 @@ export class SettingsService {
     }
 
     public resetSettings(): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve, reject) => {
+        return new Promise<SettingsService>((resolve) => {
             this.loadSettings(true).then(() => resolve(this));
         });
     }
 
     public saveSettings(): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve, reject) => {
+        return new Promise<SettingsService>((resolve) => {
             localStorage.setItem('isDarkThemeEnabled', `${this.isDarkThemeEnabled}`);
             localStorage.setItem('isSoundEnabled', `${this.isSoundEnabled}`);
             localStorage.setItem('soundVolume', `${this.soundVolume}`);
