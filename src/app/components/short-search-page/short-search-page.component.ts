@@ -39,7 +39,7 @@ export class ShortSearchPageComponent implements OnInit {
     games: IGame[] = [];
     selectedGamesParameters: ISearchGameParameters[] = [];
 
-    // Scrollstatus for the shadow indicators of the searchbar
+    // Scroll-status for the shadow indicators of the search-bar
     isTop = true;
     isBottom = true;
 
@@ -79,7 +79,7 @@ export class ShortSearchPageComponent implements OnInit {
             }
         });
 
-        // Small Timeout to hide the fadeIn effect beeing ugly and only show it after that thing is over
+        // Small Timeout to hide the fadeIn effect being ugly and only show it after that thing is over
         setTimeout(() => {
             this.showGameSpinner = false;
             this.mainContent.nativeElement.classList.add('finished-loading');

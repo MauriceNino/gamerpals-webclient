@@ -113,7 +113,7 @@ export class LoginPageComponent implements OnInit {
         document.getElementById('image-upload').click();
     }
 
-    // TODO: Dont upload imidiatly, but on save
+    // TODO: Dont upload immediately, but on save
     public onImageUpload(files: FileList) {
         const formData: FormData = new FormData();
         const file = files.item(0);

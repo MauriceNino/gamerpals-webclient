@@ -17,7 +17,7 @@ export interface IUser {
     passiveSearches: string[]; // ObjectId
     Role: string; // ObjectId
     friendsList: any[];
-    recievedFriendRequests: IRecievedFriendsRequest[];
+    receivedFriendRequests: IReceivedFriendsRequest[];
     sentFriendRequests: ISentFriendRequest[];
     privateChats: string[]; // ObjectId
     notifications: INotification[];
@@ -47,7 +47,7 @@ export interface ISentFriendRequest {
     accepted: boolean;
 }
 
-export interface IRecievedFriendsRequest {
+export interface IReceivedFriendsRequest {
     requestFrom: string; // ObjectId
     accepted: boolean;
 }

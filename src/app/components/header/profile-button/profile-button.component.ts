@@ -34,7 +34,7 @@ export class ProfileButtonComponent implements OnInit {
     public loginProfileClick(): void {
         this.gLoginService.isUserSignedIn().then((isSignedIn: boolean) => {
             if (isSignedIn) {
-                // TODO: If user has not completed his pofile yet -> send him to login
+                // TODO: If user has not completed his profile yet -> send him to login
                 // this.router.navigateByUrl("/login");
                 // noinspection JSIgnoredPromiseFromCall
                 this.router.navigateByUrl('/profile');
