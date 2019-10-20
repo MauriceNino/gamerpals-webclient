@@ -23,12 +23,12 @@ const routes: Routes = [
         canActivate: [ ProfileCompleteGuardService ]
     },
 
-    {
+    /*{
         path: 'long-search',
         loadChildren: () => import('./components/long-search-page/long-search-page.module').then(m => m.LongSearchPageModule),
         data: { animation: 'long-search' },
         canActivate: [ ProfileCompleteGuardService ]
-    },
+    },*/
 
     {
         path: 'friends',
