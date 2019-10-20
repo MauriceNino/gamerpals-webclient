@@ -5,7 +5,7 @@
         <mat-spinner *ngIf="showFriendsSpinner" id="friendsLoading-spinner"></mat-spinner>
         <div (scroll)="changeShadows()" [class.finished-loading]="showFriends" id="friends-content">
             <mat-list>
-                <mat-list-item *ngFor="let friend of friends" class="friend-button">
+                <mat-list-item *ngFor="let friend of friends" class="friend-button" (click)="toggleMenu()" [routerLinkActive]="'active'"  [routerLink]="['chat', friend._id]">
                     <img alt="Profile Picture" matListAvatar src="{{ friend.profilePicture }}">
                     <h3 matLine> {{ friend.profileName }} </h3>
                     <p matLine>
@@ -17,8 +17,8 @@
         <div [class.show]="!isBottom" id="friends-container-shadow-bottom"></div>
     </div>
 
-    <div id="single-friend-container" split-right>
-
+    <div id="single-friend-container" split-right>>
+        <router-outlet></router-outlet>
     </div>
 </app-split-pane>
 

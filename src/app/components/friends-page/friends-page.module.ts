@@ -7,11 +7,13 @@ import { SplitPaneComponent } from '../_shared/split-pane/split-pane.component';
 
 import { FriendsPageRoutingModule } from './friends-page-routing.module';
 import { FriendsPageComponent } from './friends-page.component';
+import { FriendChatComponent } from './friend-chat/friend-chat.component';
 
 @NgModule({
     declarations: [
         FriendsPageComponent,
-        SplitPaneComponent
+        SplitPaneComponent,
+        FriendChatComponent
     ],
     imports: [
         CommonModule,
