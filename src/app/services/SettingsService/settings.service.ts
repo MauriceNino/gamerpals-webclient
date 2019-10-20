@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 
 
 export enum SettingsChangedState {
+    NO_CHANGE,
     SAVED,
     UNSAVED
 }
@@ -26,64 +27,53 @@ export class SettingsService {
         return this.settingsChanged.asObservable();
     }
 
-    public loadSettings(force: boolean): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve) => {
+    public async loadSettings(force: boolean): Promise<void> {
+        if (this.settingsLoaded && !force) { return; }
 
-            if (this.settingsLoaded && !force) { resolve(this); }
+        const isDarkThemeEnabled = localStorage.getItem('isDarkThemeEnabled');
+        if (!SettingsService.isSettingUndefinedOrEmpty(isDarkThemeEnabled)) {
+            this.isDarkThemeEnabled = JSON.parse(isDarkThemeEnabled);
+        }
 
-            const isDarkThemeEnabled = localStorage.getItem('isDarkThemeEnabled');
-            if (!SettingsService.isSettingUndefinedOrEmpty(isDarkThemeEnabled)) {
-                this.isDarkThemeEnabled = JSON.parse(isDarkThemeEnabled);
-            }
+        const isSoundEnabled = localStorage.getItem('isSoundEnabled');
+        if (!SettingsService.isSettingUndefinedOrEmpty(isSoundEnabled)) {
+            this.isSoundEnabled = JSON.parse(isSoundEnabled);
+        }
 
-            const isSoundEnabled = localStorage.getItem('isSoundEnabled');
-            if (!SettingsService.isSettingUndefinedOrEmpty(isSoundEnabled)) {
-                this.isSoundEnabled = JSON.parse(isSoundEnabled);
-            }
+        const soundVolume = localStorage.getItem('soundVolume');
+        if (!SettingsService.isSettingUndefinedOrEmpty(soundVolume)) {
+            this.soundVolume = JSON.parse(soundVolume);
+        }
 
-            const soundVolume = localStorage.getItem('soundVolume');
-            if (!SettingsService.isSettingUndefinedOrEmpty(soundVolume)) {
-                this.soundVolume = JSON.parse(soundVolume);
-            }
+        const siteLanguage = localStorage.getItem('siteLanguage');
+        if (!SettingsService.isSettingUndefinedOrEmpty(siteLanguage)) {
+            this.siteLanguage = siteLanguage;
+        }
 
-            const siteLanguage = localStorage.getItem('siteLanguage');
-            if (!SettingsService.isSettingUndefinedOrEmpty(siteLanguage)) {
-                this.siteLanguage = siteLanguage;
-            }
+        // If its the first load, initialize siteSpecific settings
+        if (!this.settingsLoaded) {
+            this.settingsChanged.subscribe((type: SettingsChangedState) => {
+                if (type === SettingsChangedState.UNSAVED) {
+                    this.applySiteSpecificSettings();
+                }
+            });
+        }
 
-            // If its the first load, initialize siteSpecific settings
-            if (!this.settingsLoaded) {
-                this.settingsChanged.subscribe((type: number) => {
-                    if (type === 1) {
-                        this.applySiteSpecificSettings();
-                    }
-                });
-            }
-
-            this.settingsLoaded = true;
-            this.settingsChanged.next(1);
-
-            resolve(this);
-        });
+        this.settingsLoaded = true;
+        this.settingsChanged.next(SettingsChangedState.UNSAVED);
     }
 
-    public resetSettings(): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve) => {
-            this.loadSettings(true).then(() => resolve(this));
-        });
+    public async resetSettings(): Promise<void> {
+        await this.loadSettings(true);
     }
 
-    public saveSettings(): Promise<SettingsService> {
-        return new Promise<SettingsService>((resolve) => {
-            localStorage.setItem('isDarkThemeEnabled', `${this.isDarkThemeEnabled}`);
-            localStorage.setItem('isSoundEnabled', `${this.isSoundEnabled}`);
-            localStorage.setItem('soundVolume', `${this.soundVolume}`);
-            localStorage.setItem('siteLanguage', `${this.siteLanguage}`);
+    public async saveSettings(): Promise<void> {
+        localStorage.setItem('isDarkThemeEnabled', `${this.isDarkThemeEnabled}`);
+        localStorage.setItem('isSoundEnabled', `${this.isSoundEnabled}`);
+        localStorage.setItem('soundVolume', `${this.soundVolume}`);
+        localStorage.setItem('siteLanguage', `${this.siteLanguage}`);
 
-            this.settingsChanged.next(SettingsChangedState.SAVED);
-
-            resolve(this);
-        });
+        this.settingsChanged.next(SettingsChangedState.SAVED);
     }
 
     public notifyUnsavedChanges(): void {
