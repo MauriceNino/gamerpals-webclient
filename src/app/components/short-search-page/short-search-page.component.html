@@ -44,11 +44,21 @@
                                placeholder="Type your {{paramWithValue.parameter.parameterName}}">
                     </mat-form-field>
                 </div>
-                <div *ngIf="paramWithValue.parameter.parameterType == 'int'">
+                <div *ngIf="paramWithValue.parameter.parameterType == 'number'">
                     <mat-form-field appearance="standard">
                         <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
                         <input [(ngModel)]="paramWithValue.value" matInput placeholder="Type your {{paramWithValue.parameter.parameterName}}"
                                type="number">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="paramWithValue.parameter.parameterType == 'select'">
+                    <mat-form-field appearance="standard">
+                        <mat-label>{{paramWithValue.parameter.parameterName}}</mat-label>
+                        <mat-select [(ngModel)]="paramWithValue.value">
+                            <mat-option *ngFor="let parameterPossibility of paramWithValue.parameter.parameterPossibilities" [value]="parameterPossibility.possibilityValue">
+                                {{parameterPossibility.possibilityName}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>

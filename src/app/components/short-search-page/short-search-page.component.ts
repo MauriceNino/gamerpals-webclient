@@ -71,13 +71,16 @@ export class ShortSearchPageComponent implements OnInit {
             // > else disable it in the array of parameters
             const paramIndex = this.games.map(g => g._id).indexOf(searchGame.game._id);
             if (paramIndex === - 1) {
-                searchGame.canDisable = true;
                 searchGame.show = false;
             }
             else {
                 this.selectedGames.push(this.games[paramIndex]);
             }
         });
+
+        // TODO: Check if locally saved parameters are still the same as online params:
+        /*console.log(JSON.stringify(realParameters));
+        console.log(JSON.stringify(this.selectedGamesParameters.map(s => s.parametersWithValue.map(p => p.parameter))));*/
 
         // Small Timeout to hide the fadeIn effect being ugly and only show it after that thing is over
         setTimeout(() => {
@@ -89,24 +92,28 @@ export class ShortSearchPageComponent implements OnInit {
     }
 
     public gamesSelectionChanged(event: MatSelectChange): void {
-        const selectedGames: IGame[] = event.value;
+        const selectedGames: IGame[] = (event && event.value) || this.selectedGames;
 
         // Add all elements that are not yet in the list
         selectedGames.forEach(async (game: IGame) => {
+
+            const realParameters: ISearchParameter[] = await this.backend.SearchParameters.getByGame(game);
+
+            // Position of the parameter in the games array
             const paramIndex: number = this.selectedGamesParameters
-                                           .map((param: ISearchGameParameters) => param.game._id).indexOf(game._id);
+                                           .map(param => param.game._id)
+                                           .indexOf(game._id);
+
+            // If the parameter is not in the games array
             if (paramIndex === - 1) {
-                const parameters: ISearchParameter[] = await this.backend.SearchParameters.getByGame(game);
-                console.log(parameters);
-                const parametersWithValue: ISearchParameterWithValue[] = parameters.map((parameter: ISearchParameter) => {
+                const parametersWithValue: ISearchParameterWithValue[] = realParameters.map((parameter: ISearchParameter) => {
                     return { parameter, value: null };
                 });
                 this.selectedGamesParameters.push({
                     parametersWithValue,
                     game,
                     title: game.name,
-                    show: true,
-                    canDisable: true
+                    show: true
                 });
             }
             else if (this.selectedGamesParameters[paramIndex].show === false) {
@@ -116,7 +123,7 @@ export class ShortSearchPageComponent implements OnInit {
 
         // Disable all elements that are not shown anymore
         this.selectedGamesParameters.forEach(async (param: ISearchGameParameters) => {
-            if (selectedGames.map(s => s._id).indexOf(param.game._id) === - 1 && param.canDisable) {
+            if (selectedGames.map(s => s._id).indexOf(param.game._id) === - 1) {
                 param.show = false;
             }
         });
@@ -167,6 +174,7 @@ export class ShortSearchPageComponent implements OnInit {
     }
 
     public applyParameters(): void {
+        console.log(this.getAllShownParams());
         this.saveParametersToLocalStorage(this.getAllShownParams());
         this.loadActiveSearches();
     }
@@ -191,6 +199,5 @@ interface ISearchGameParameters {
     parametersWithValue: ISearchParameterWithValue[];
     game: IGame;
     title: string;
-    canDisable: boolean;
     show: boolean;
 }
