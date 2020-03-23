@@ -80,7 +80,7 @@
         "@electron-forge/maker-squirrel": "^6.0.0-beta.43",
         "@types/gapi": "0.0.37",
         "@types/gapi.auth2": "0.0.50",
-        "@types/jasmine": "^3.3.13",
+        "@types/jasmine": "^3.5.10",
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "~12.7.0",
         "codelyzer": "~5.1.0",
